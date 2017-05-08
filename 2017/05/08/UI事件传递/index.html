@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/LouisShark">
-  <title>LosuisShark的博客</title>
+  <title>UI事件传递 | LosuisShark的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="UI–事件传递 title: UI事件传递date: 2017-05-08 11:46:30tags:   - UI事件传递  - android开发艺术探索 comment: true  ##一些事件传递机制的结论事件传递伪代码：123456789public boolean dispatchTouchEvent(MotionEvent ev) &amp;#123;    boolean consume">
-<meta name="keywords">
+  <meta name="description" content="一些事件传递机制的结论事件传递伪代码：123456789public boolean dispatchTouchEvent(MotionEvent ev) &amp;#123;    boolean consume = false;    if (onInterceptTouchEvent(ev)) &amp;#123;        consume = onTouchEvent(ev);    &amp;#125; e">
+<meta name="keywords" content="UI事件传递,android开发艺术探索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LosuisShark的博客">
+<meta property="og:title" content="UI事件传递">
 <meta property="og:url" content="https://github.com/LouisShark/2017/05/08/UI事件传递/index.html">
 <meta property="og:site_name" content="LosuisShark的博客">
-<meta property="og:description" content="UI–事件传递 title: UI事件传递date: 2017-05-08 11:46:30tags:   - UI事件传递  - android开发艺术探索 comment: true  ##一些事件传递机制的结论事件传递伪代码：123456789public boolean dispatchTouchEvent(MotionEvent ev) &amp;#123;    boolean consume">
-<meta property="og:updated_time" content="2017-05-08T03:57:59.775Z">
+<meta property="og:description" content="一些事件传递机制的结论事件传递伪代码：123456789public boolean dispatchTouchEvent(MotionEvent ev) &amp;#123;    boolean consume = false;    if (onInterceptTouchEvent(ev)) &amp;#123;        consume = onTouchEvent(ev);    &amp;#125; e">
+<meta property="og:updated_time" content="2017-05-08T04:02:17.087Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LosuisShark的博客">
-<meta name="twitter:description" content="UI–事件传递 title: UI事件传递date: 2017-05-08 11:46:30tags:   - UI事件传递  - android开发艺术探索 comment: true  ##一些事件传递机制的结论事件传递伪代码：123456789public boolean dispatchTouchEvent(MotionEvent ev) &amp;#123;    boolean consume">
+<meta name="twitter:title" content="UI事件传递">
+<meta name="twitter:description" content="一些事件传递机制的结论事件传递伪代码：123456789public boolean dispatchTouchEvent(MotionEvent ev) &amp;#123;    boolean consume = false;    if (onInterceptTouchEvent(ev)) &amp;#123;        consume = onTouchEvent(ev);    &amp;#125; e">
   
   
     <link rel="icon" href="/favicon.png">
@@ -155,15 +155,24 @@
             <article id="post-UI事件传递" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UI事件传递
+    </h1>
+  
+
+        
+        <a href="/2017/05/08/UI事件传递/" class="archive-article-date">
+  	<time datetime="2017-05-08T03:46:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-08</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="UI–事件传递"><a href="#UI–事件传递" class="headerlink" title="UI–事件传递"></a>UI–事件传递</h1><hr>
-<p>title: UI事件传递<br>date: 2017-05-08 11:46:30<br>tags:  </p>
-<pre><code>- UI事件传递 
-- android开发艺术探索
-comment: true
-</code></pre><hr>
-<p>##一些事件传递机制的结论<br>事件传递伪代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">    <span class="keyword">boolean</span> consume = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">if</span> (onInterceptTouchEvent(ev)) &#123;</div><div class="line">        consume = onTouchEvent(ev);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        consume = child.dispatchTouchEvent(ev);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> consume;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h2 id="一些事件传递机制的结论"><a href="#一些事件传递机制的结论" class="headerlink" title="一些事件传递机制的结论"></a>一些事件传递机制的结论</h2><p>事件传递伪代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">    <span class="keyword">boolean</span> consume = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">if</span> (onInterceptTouchEvent(ev)) &#123;</div><div class="line">        consume = onTouchEvent(ev);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        consume = child.dispatchTouchEvent(ev);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> consume;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <ol>
 <li>一个时间序列是指从手指接触屏幕的那一刻起，到手指离开屏幕的那一刻结束。</li>
@@ -207,6 +216,21 @@ comment: true
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">UI事件传递</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">android开发艺术探索</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -290,7 +314,7 @@ comment: true
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="UI事件传递" data-title="" data-url="https://github.com/LouisShark/2017/05/08/UI事件传递/"></div>
+	<div class="ds-thread" data-thread-key="UI事件传递" data-title="UI事件传递" data-url="https://github.com/LouisShark/2017/05/08/UI事件传递/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -451,6 +475,14 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
               </li>
             
             <div class="clearfix"></div>
