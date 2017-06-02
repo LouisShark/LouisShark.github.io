@@ -152,6 +152,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-使用SVG来实现复杂的自定义View" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/02/使用SVG来实现复杂的自定义View/">使用SVG来实现复杂的自定义View</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/02/使用SVG来实现复杂的自定义View/" class="archive-article-date">
+  	<time datetime="2017-06-02T01:48:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近发现可以用SVG来实习非常复杂的自定义View，可以说是非常的厉害了。只要你看到不想做的很复杂的设计图，你就让美工妹子给你来一张SVG吧，还可以趁机和她聊下天。</p>
+<p>我们就来画一个<strong>可交互</strong>的中国台湾地图吧，首先我们来理一下做这种自定义View的步骤。</p>
+<blockquote>
+<ol>
+<li>下载含有中国地图的  SVG </li>
+<li>用<strong><a href="http://inloop.github.io/svg2android/">此</a> </strong>网站 将svg资源转换成相应的 Android代码</li>
+<li>利用Xml解析SVG的代码  封装成javaBean   最重要的得到Path</li>
+<li>重写OnDraw方法  利用Path绘制中国地图</li>
+<li>重写OnTouchEvent方法，记录手指触摸位置，判断这个位置是否坐落在某个省份上</li>
+</ol>
+</blockquote>
+<p>对了，地图资源可以在<strong><a href="https://www.amcharts.com/dl/javascript-maps/">这里</a> </strong>下载。开始写代码吧。</p>
+<p><a href="https://github.com/LouisShark/LouisMap">项目地址</a>点这里可以看源码。</p>
+<p>前两步不需要我如何说了吧，可以把转化后的android代码，放入res/raw目录下，接下来开始第三步：</p>
+        
+          <a class="article-more-a" href="/2017/06/02/使用SVG来实现复杂的自定义View/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVG</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/02/使用SVG来实现复杂的自定义View/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-UI事件传递" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -558,14 +636,6 @@ public boolean add(E object){
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
              
@@ -574,11 +644,27 @@ public boolean add(E object){
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
               </li>
             
             <div class="clearfix"></div>
