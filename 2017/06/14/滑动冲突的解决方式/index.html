@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/LouisShark/2017/06/14/滑动冲突的解决方式/index.html">
 <meta property="og:site_name" content="Paris">
 <meta property="og:description" content="外部拦截法 即指点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要此事件就不拦截，这样就可以解决滑动冲突的问题，这种方法比较符合点击事件的分发机制。外部拦截法要重写父容器的onInterceptTouchEvent方法，并在内部做相应的拦截。伪代码如下：">
-<meta property="og:updated_time" content="2017-06-14T03:16:16.962Z">
+<meta property="og:updated_time" content="2017-06-14T05:18:03.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="滑动冲突的解决方式">
 <meta name="twitter:description" content="外部拦截法 即指点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要此事件就不拦截，这样就可以解决滑动冲突的问题，这种方法比较符合点击事件的分发机制。外部拦截法要重写父容器的onInterceptTouchEvent方法，并在内部做相应的拦截。伪代码如下：">
@@ -179,11 +179,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">    <span class="keyword">boolean</span> intercepted = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">int</span> x = (<span class="keyword">int</span>) ev.getX();</div><div class="line">    <span class="keyword">int</span> y = (<span class="keyword">int</span>) ev.getY();</div><div class="line">    <span class="keyword">switch</span> (ev.getAction()) &#123;</div><div class="line">        <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">            intercepted = <span class="keyword">false</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">            <span class="keyword">if</span> (父容器需要当前点击事件)&#123;</div><div class="line">                intercepted = <span class="keyword">true</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                intercepted = <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">            intercepted = <span class="keyword">false</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    mLastXIntercept = x;</div><div class="line">    mLastYIntercept = y;</div><div class="line">    <span class="keyword">return</span> intercepted;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述代码是外部拦截法的典型逻辑，针对不同的滑动冲突，只需要修改父容器需要当前点击事件这个条件即可，其他均不需并且也不能修改。</p>
 <p>对上述代码进行讲解：</p>
-<pre><code>&gt; **ACTION_DOWN**事件返回false，因为父容器拦截了down事件，后续的action_move和action_up事件都会直接交由父容器处理，事件无法传递给子元素.
-&gt;
-&gt; **ACTION_MOVE**事件，可以根据需要来决定是否拦截，如果父容器拦截就返回true，不拦截就返回false。
-&gt;
-&gt; **ACTION_UP**事件，必须返回false，因为up事件本身并没有多大的意义。
+<pre><code>ACTION_DOWN事件返回false，因为父容器拦截了down事件，后续的action_move和action_up事件都会直接交由父容器处理，事件无法传递给子元素.
+ACTION_MOVE事件，可以根据需要来决定是否拦截，如果父容器拦截就返回true，不拦截就返回false。
+ACTION_UP事件，必须返回false，因为up事件本身并没有多大的意义。
 </code></pre><p>考虑一种情况，假设事件交由子元素处理，如果父容器在ACTION_UP时返回了true，就会导致子元素无法接收到ACTION_UP事件，这个时候子元素中的onclick事件就无法触发，但是父容器比较特殊，一旦它开始拦截任何一个事件，那么后续的事件都会交由它来处理，而ACTION_UP作为最后一个事件也必定可以传递给父容器，即使父容器的onInterceptTouchEvent方法在ACTION_UP时返回了false.</p>
 </li>
 <li><p><strong>内部拦截法</strong></p>
@@ -475,19 +473,19 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,19 +497,19 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
             
             <div class="clearfix"></div>
