@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/LouisShark">
-  <title>ffmpeg知识点 | Paris</title>
+  <title>AppCompatActivity的作用分析 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
-<meta name="keywords" content="源码分析,android">
+<meta name="keywords" content="android,源码分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ffmpeg知识点">
+<meta property="og:title" content="AppCompatActivity的作用分析">
 <meta property="og:url" content="https://github.com/LouisShark/2017/06/23/AppCompatActivity的作用分析/index.html">
 <meta property="og:site_name" content="Paris">
 <meta property="og:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
 <meta property="og:image" content="https://github.com/LouisShark/2017/06/23/asset/img/delegate的类继承图.png">
-<meta property="og:updated_time" content="2017-06-24T05:57:24.869Z">
+<meta property="og:updated_time" content="2017-06-24T06:00:15.725Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ffmpeg知识点">
+<meta name="twitter:title" content="AppCompatActivity的作用分析">
 <meta name="twitter:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
 <meta name="twitter:image" content="https://github.com/LouisShark/2017/06/23/asset/img/delegate的类继承图.png">
   
@@ -161,7 +161,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ffmpeg知识点
+      AppCompatActivity的作用分析
     </h1>
   
 
@@ -246,11 +246,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
         		</li>
       		
 		</ul>
@@ -339,7 +339,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="AppCompatActivity的作用分析" data-title="ffmpeg知识点" data-url="https://github.com/LouisShark/2017/06/23/AppCompatActivity的作用分析/"></div>
+	<div class="ds-thread" data-thread-key="AppCompatActivity的作用分析" data-title="AppCompatActivity的作用分析" data-url="https://github.com/LouisShark/2017/06/23/AppCompatActivity的作用分析/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -487,14 +487,6 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
               </li>
              
@@ -503,11 +495,15 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,15 +515,19 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
             
             <div class="clearfix"></div>

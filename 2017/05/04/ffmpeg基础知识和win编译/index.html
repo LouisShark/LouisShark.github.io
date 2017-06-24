@@ -9,7 +9,7 @@
   <title>ffmpeg知识点 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="libavcodec: 用于各种类型声音/图像编解码 libavutil:  包含一些公共的工具函数 libavformat:  包含多种多媒体容器格式的封装丶解封装工具 libswscale:  用于视频场景的比例缩放丶色彩映射转换 libpostproc:  用于后期效果处理 libavdevice:  用于音视频数据采集和渲染等功能的设备相关 ibswresample:  用于音频重采样和">
-<meta name="keywords" content="android,ffmpeg">
+<meta name="keywords" content="ffmpeg,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ffmpeg知识点">
 <meta property="og:url" content="https://github.com/LouisShark/2017/05/04/ffmpeg基础知识和win编译/index.html">
@@ -247,7 +247,7 @@
 </ol>
 <hr>
 <ol>
-<li><strong>新建build_android.sh文件</strong><br><em>注意</em>：要根据环境配置的前四项，且每行末尾不能有空格。export TMPDIR,NDK,SYSROOT,TOOLCHAIN-cross-prefix 一定有<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></div><div class="line">export TMPDIR="D:\ffmpeg\tmp"</div><div class="line">NDK=D:\/sdk\/ndk-bundle</div><div class="line">SYSROOT=$NDK/platforms\/android-24\/arch-arm/</div><div class="line">TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64</div><div class="line">function build_one &#123; </div><div class="line">./configure \</div><div class="line">     --prefix=$PREFIX \</div><div class="line">     --enable-shared \</div><div class="line">     --disable-static \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-ffmpeg \</div><div class="line">     --disable-ffplay \</div><div class="line">     --disable-ffprobe \</div><div class="line">     --disable-ffserver \</div><div class="line">     --disable-avdevice \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-symver \</div><div class="line">     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</div><div class="line">     --target-os=linux \</div><div class="line">     --arch=arm \</div><div class="line">     --enable-cross-compile \</div><div class="line">     --sysroot=$SYSROOT \</div><div class="line">     --extra-cflags="-Os -fpic $ADDI_CFLAGS" \</div><div class="line">     --extra-ldflags="$ADDI_LDFLAGS" \</div><div class="line">     $ADDITIONAL_CONFIGURE_FLAG</div><div class="line">     make clean</div><div class="line">     make</div><div class="line">     make install</div><div class="line"> &#125;</div><div class="line"> CPU=arm</div><div class="line"> PREFIX=$(pwd)/android/$CPU</div><div class="line"> ADDI_CFLAGS="-marm"</div><div class="line"> build_one</div></pre></td></tr></table></figure>
+<li><strong>新建build_android.sh文件</strong><br><em>注意</em>：要根据环境配置的前四项，且每行末尾不能有空格。export TMPDIR,NDK,SYSROOT,TOOLCHAIN-cross-prefix 一定有<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line">export TMPDIR="D:\ffmpeg\tmp"</div><div class="line">NDK=D:\/sdk\/ndk-bundle</div><div class="line">SYSROOT=$NDK/platforms\/android-24\/arch-arm/</div><div class="line">TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64</div><div class="line">function build_one &#123; </div><div class="line">./configure \</div><div class="line">     --prefix=$PREFIX \</div><div class="line">     --enable-shared \</div><div class="line">     --disable-static \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-ffmpeg \</div><div class="line">     --disable-ffplay \</div><div class="line">     --disable-ffprobe \</div><div class="line">     --disable-ffserver \</div><div class="line">     --disable-avdevice \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-symver \</div><div class="line">     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</div><div class="line">     --target-os=linux \</div><div class="line">     --arch=arm \</div><div class="line">     --enable-cross-compile \</div><div class="line">     --sysroot=$SYSROOT \</div><div class="line">     --extra-cflags="-Os -fpic $ADDI_CFLAGS" \</div><div class="line">     --extra-ldflags="$ADDI_LDFLAGS" \</div><div class="line">     $ADDITIONAL_CONFIGURE_FLAG</div><div class="line">     make clean</div><div class="line">     make</div><div class="line">     make install</div><div class="line"> &#125;</div><div class="line"> CPU=arm</div><div class="line"> PREFIX=$(pwd)/android/$CPU</div><div class="line"> ADDI_CFLAGS="-marm"</div><div class="line"> build_one</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>然后在MinGW中cd进ffmpeg目录。<br>命令：</p>
@@ -289,11 +289,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ffmpeg</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ffmpeg</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		
 		</ul>
@@ -535,14 +535,6 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
               </li>
              
@@ -551,11 +543,15 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,15 +563,19 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
             
             <div class="clearfix"></div>
