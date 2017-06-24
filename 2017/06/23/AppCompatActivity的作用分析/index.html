@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Paris">
 <meta property="og:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
 <meta property="og:image" content="https://github.com/LouisShark/2017/06/23/asset/img/delegate的类继承图.png">
-<meta property="og:updated_time" content="2017-06-24T05:40:19.935Z">
+<meta property="og:updated_time" content="2017-06-24T05:57:24.869Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ffmpeg知识点">
 <meta name="twitter:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
@@ -177,6 +177,7 @@
         <h1 id="AppCompatActivity的作用分析"><a href="#AppCompatActivity的作用分析" class="headerlink" title="AppCompatActivity的作用分析"></a>AppCompatActivity的作用分析</h1><hr>
 <p>对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)</p>
 <p>一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。</p>
+<a id="more"></a>
 <blockquote>
 <p>从AppCompatActivity源码的onCreate看到这个类初始化的第一步就调用了getDelegate获得了一个代理，并且你会发现下面所有的生命周期的方法都交由这个代理类来实现了，那么这个东西是什么呢？其实就是AppCompatDelegate这个抽象类。</p>
 </blockquote>
@@ -502,7 +503,11 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,19 +519,15 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
             
             <div class="clearfix"></div>
