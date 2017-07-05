@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/LouisShark/2017/07/05/Mrak-message-parts-that-should-not-be-translated/index.html">
 <meta property="og:site_name" content="Paris">
 <meta property="og:description" content="好久没写博客了，最佳一直在看官网的training啊，突然看到一个奇怪的东西，没错就是标题的那个东西，官网是这样子介绍的：  Often strings contain contain text that should not be translated into other languages. Common examples might be a piece of code, a placeh">
-<meta property="og:updated_time" content="2017-07-05T07:21:23.417Z">
+<meta property="og:updated_time" content="2017-07-05T07:25:54.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mrak message parts that should not be translated">
 <meta name="twitter:description" content="好久没写博客了，最佳一直在看官网的training啊，突然看到一个奇怪的东西，没错就是标题的那个东西，官网是这样子介绍的：  Often strings contain contain text that should not be translated into other languages. Common examples might be a piece of code, a placeh">
@@ -177,6 +177,7 @@
 <p>Often strings contain contain text that should not be translated into other languages. Common examples might be a piece of code, a placeholder for a value, a special symbol, or a name. As you prepare your strings for translation, look for and mark text that should remain as-is, without translation, so that the translator doesn’t change it.</p>
 </blockquote>
 <p>这几句话大家应该都能看得懂，大概意思就是不让字符串中的代码，占位符，特殊标识或者名字什么的被翻译，而你就要控制他们不被改变。我其实看完有点无语，意思很明显，但是我看不懂啊，于是我把它的示例的string资源打印了一下看看是什么效果(我也是很无聊的)：</p>
+<a id="more"></a>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;string name="countdown"&gt;</div><div class="line">  &lt;xliff:g id="time" example="5 days&gt;%2$8s&lt;/xliff:g&gt; until holiday</div><div class="line">&lt;/string&gt;</div></pre></td></tr></table></figure>
 <p>就是上面这段资源，粘贴到string.xml里面，然后在java中代码动态改变值:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tv.text(resources.getString(R.string.countdown, <span class="string">"shark"</span>, <span class="string">"louis"</span>))</div></pre></td></tr></table></figure>
@@ -494,6 +495,14 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
               </li>
              
@@ -506,10 +515,6 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
               </li>
              
@@ -518,7 +523,11 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,14 +536,6 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
               </li>
              
               <li class="article-tag-list-item">
