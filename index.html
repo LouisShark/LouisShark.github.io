@@ -156,6 +156,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C++编程风格笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/C++编程风格笔记/">C++编程风格笔笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/11/C++编程风格笔记/" class="archive-article-date">
+  	<time datetime="2017-09-11T06:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>C</em>++编程风格笔记</p>
+<blockquote>
+<p><strong>定义函数时，参数顺序为：输入参数在前，输出参数在后。</strong></p>
+</blockquote>
+<p>C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为<em>非常数指针</em>(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。</p>
+<hr>
+<blockquote>
+<p>包含文件的名称及次序</p>
+</blockquote>
+<p>将包含次序标准化可增强可读性丶避免隐藏依赖(<em>hidden dependencies， 隐藏依赖主要指包含的文件中编译时</em>)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。</p>
+<p>项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"base/logging.h"</span></span></div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/09/11/C++编程风格笔记/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/11/C++编程风格笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Mrak-message-parts-that-should-not-be-translated" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -854,6 +930,14 @@ public boolean add(E object){
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
