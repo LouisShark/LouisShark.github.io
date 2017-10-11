@@ -156,6 +156,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-搭建ngnix" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/11/搭建ngnix/">搭建nginx</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/11/搭建ngnix/" class="archive-article-date">
+  	<time datetime="2017-10-11T07:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。</p>
+<p>##第一部分：准备工作</p>
+<p>先在/root/下新建一个目录存放这些文件。</p>
+<blockquote>
+<p><code>mkdir nginx</code><br><code>cd nginx</code></p>
+</blockquote>
+<p>然后在执行下面三条命令。</p>
+<p>###下载Nginx</p>
+<p><code>wget http://nginx.org/download/nginx-1.12.1.tar.gz</code></p>
+<h4 id="下载OpenSSL-因为Nginx依赖于OpenSSL"><a href="#下载OpenSSL-因为Nginx依赖于OpenSSL" class="headerlink" title="下载OpenSSL(因为Nginx依赖于OpenSSL)"></a>下载OpenSSL(因为Nginx依赖于OpenSSL)</h4><p><code>wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_0f.tar.gz</code></p>
+<h4 id="下载Rtmp"><a href="#下载Rtmp" class="headerlink" title="下载Rtmp"></a>下载Rtmp</h4><p><code>wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.0.tar.gz</code></p>
+        
+          <a class="article-more-a" href="/2017/10/11/搭建ngnix/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">流媒体服务器 ubuntu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/11/搭建ngnix/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-C++编程风格笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -933,19 +1004,19 @@ public boolean add(E object){
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -958,6 +1029,10 @@ public boolean add(E object){
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
               </li>
              
               <li class="article-tag-list-item">

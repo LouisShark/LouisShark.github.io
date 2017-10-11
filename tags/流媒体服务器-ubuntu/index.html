@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/LouisShark">
-  <title>C++编程风格笔记 | Paris</title>
+  <title>Tag: 流媒体服务器 ubuntu | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C++编程风格笔记  定义函数时，参数顺序为：输入参数在前，输出参数在后。  C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。   包含文件的">
-<meta name="keywords" content="C++,笔记">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C++编程风格笔记">
-<meta property="og:url" content="https://github.com/LouisShark/2017/09/11/C++编程风格笔记/index.html">
+  <meta name="description" content="咸鱼一枚，自学java和android中。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paris">
+<meta property="og:url" content="https://github.com/LouisShark/tags/流媒体服务器-ubuntu/index.html">
 <meta property="og:site_name" content="Paris">
-<meta property="og:description" content="C++编程风格笔记  定义函数时，参数顺序为：输入参数在前，输出参数在后。  C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。   包含文件的">
-<meta property="og:updated_time" content="2017-09-11T06:25:51.678Z">
+<meta property="og:description" content="咸鱼一枚，自学java和android中。。。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++编程风格笔记">
-<meta name="twitter:description" content="C++编程风格笔记  定义函数时，参数顺序为：输入参数在前，输出参数在后。  C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。   包含文件的">
+<meta name="twitter:title" content="Paris">
+<meta name="twitter:description" content="咸鱼一枚，自学java和android中。。。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -156,402 +154,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C++编程风格笔记" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      C++编程风格笔记
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/10/11/搭建ngnix/" class="archive-article-date">
+  	<time datetime="2017-10-11T07:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/11/搭建ngnix/">搭建nginx</a>
     </h1>
   
 
-        
-        <a href="/2017/09/11/C++编程风格笔记/" class="archive-article-date">
-  	<time datetime="2017-09-11T06:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>C</em>++编程风格笔记</p>
-<blockquote>
-<p><strong>定义函数时，参数顺序为：输入参数在前，输出参数在后。</strong></p>
-</blockquote>
-<p>C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为<em>非常数指针</em>(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。</p>
-<hr>
-<blockquote>
-<p>包含文件的名称及次序</p>
-</blockquote>
-<p>将包含次序标准化可增强可读性丶避免隐藏依赖(<em>hidden dependencies， 隐藏依赖主要指包含的文件中编译时</em>)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。</p>
-<p>项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"base/logging.h"</span></span></div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>dir/foo.cc的主要作用是执行或测试dir2/foo2.h的功能，foo.cc中包含头文件的次序如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dir2/foo2.h</div><div class="line">C系统文件</div><div class="line">C++系统文件</div><div class="line">其他库头文件</div><div class="line">本项目内头文件</div></pre></td></tr></table></figure>
-<p>这种排序方式可有效减少隐藏依赖，我们希望每一个头文件都独立编译。最简单的实现方式是将其作为第一个.h文件包含在对应的.cc中。</p>
-<p>dir/foo.cc和 dir2/foo2.h通常位于相同目录下（像base/basictypes_unittest.cc和base/basictypes.h），但也可在不同的目录下。</p>
-<p><strong>相同目录下头文件按字母排序是不错的选择。</strong></p>
-<p>举例来说，“google-awesome-project/src/foo/internal/fooserver.cc”的包含次序如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#include &quot;foo/public/fooserver.h&quot;   //优先位置</div><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;hash_map&gt;</div><div class="line">#include &lt;vector&gt;</div><div class="line">#include &quot;base/basictypes.h&quot;</div><div class="line">#include &quot;base/commandlineflags.h&quot;</div><div class="line">#include &quot;foo/public/bar.h&quot;</div></pre></td></tr></table></figure>
-<h3 id="总结以上："><a href="#总结以上：" class="headerlink" title="总结以上："></a>总结以上：</h3><ol>
-<li>避免多重包含是学编程时最基本的要求。</li>
-<li>前置声明是为了降低编译依赖，防止修改一个头文件引发多米诺效应。</li>
-<li>内联函数的合理使用可提高代码执行效率。</li>
-<li>-inl.h 可提高代码可读性。</li>
-<li>标准化函数参数顺序可以提高可读性和以易维护性(对函数参数的堆栈空间有轻微影响)</li>
-<li>包含文件的名称使用.和..虽然方便却易混乱，使用比较完整的项目路径看上去很清晰丶很条理，包含文件的次序除了美观之外，最重要的是可以减少隐藏依赖，使每个头文件在“最需要编译”的地方编译(对应源文件处)，有人提出库文件放在最后，这样出错先是项目内的文件，头文件都放在对应源文件的最前面，这一点足以保证内部错误的即时发现了。</li>
-</ol>
-<hr>
-<h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><hr>
-<p>将函数尽可能置于最小作用域内，在声明变量时将其初始化。</p>
-<p>C++允许在函数的任何位置声明变量。提倡在尽可能小的作用域内声明变量，离第一次使用越近越好。这使得代码易于阅读，易于定位变量的声明位置丶变量类型和初始值。特别是，应使用初始化代替声明+赋值的方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int i;</div><div class="line">i = f();     //坏 ---- 初始化和声明分离</div><div class="line">int j = g()；  //好------初始化时声明</div></pre></td></tr></table></figure>
-<p><strong>注意：gcc可正确执行<em>for(int i =0; i &lt; 10 ;++i)(i的作用域仅限for循环)</em>,因此其他for循环可重用i。if和 while 等语句中，作用域声明同样是正确的。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">while(const char* p= strchr(str, &apos;/&apos;)) str = p +1;</div></pre></td></tr></table></figure>
-<p><strong>注意：如果变量是一个对象，每次进入作用域都要调用其构造函数，每次退出都要调用其析构函数。</strong></p>
-<p>//低效的实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for(int i = 0; i &lt; 1000000; ++i) &#123;</div><div class="line">  Foo f;</div><div class="line">  f.DoSomething();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>类似变量要放到循环作用域外面声明要高效的多：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Foo f;</div><div class="line">for (int i = 0; i &lt; 1000000; ++i) &#123;</div><div class="line">  f.DoSomething();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><hr>
-<p>class类型的全局变量是被禁止的，内建类型的全局变量是允许的，当然多线程代码中非常数全局变量也是被禁止的。永远不要使用函数返回值初始化全局变量。如果一定要使用class类型的全局变量，请使用单例模式(singleton pattern)。</p>
-<p>对于全局的字符串常量，使用C风格的字符串，而不要使用STL的字符串：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const char kFrogSays[] = &quot;ribbet&quot;;</div></pre></td></tr></table></figure>
-<p>虽然允许在全局作用域使用全局变量，但请三思。大多数全局变量应该是类的静态数据成员，或者当其只在.cc文件中使用时，将其定义到不具名命名空间中，或者使用静态关联以限制变量的作用域。</p>
-<p><strong>记住，静态成员变量视作全局变量，所以也不能是class类型！！</strong></p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ol>
-<li>.cc文件中的不具名空间可避免命名冲突丶限定作用域，避免直接使用<strong>using</strong>提示符污染命名空间。</li>
-<li>嵌套类符合局部使用原则，只是不能在其他头文件中前置声明，尽量不要<strong>public</strong>。</li>
-<li>尽量不用全局函数和全局变量，考虑作用域和命名空间限制，尽量单独形成编译单元。</li>
-<li>多线程中的全局变量(含静态成员变量)不要使用<strong>class</strong>类型(含<strong>STL</strong>容器)，避免不明确行为导致的<strong>bugs</strong>。</li>
-<li>作用域的使用，除了考虑名称污染可读性之外，主要是为降低耦合度，提高编译丶执行效率。</li>
-</ol>
-<hr>
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><hr>
-<p>介绍类该做声明，不该做什么。</p>
-<p>explicit: 明确的</p>
-<p>implicit: 隐含的</p>
-<p>trivial: 没有意义的</p>
-<p>non-trivial: 有意义的</p>
-<hr>
-<p>#<strong>1.构造函数的职责</strong></p>
-<p>构造函数中只进行那些没有实际意义的初始化(<strong>trivial，简单初始化对于程序执行没有实际的逻辑意义，因为成员变量的“有意义”的值大多不在构造函数中确定</strong>)，可能的话，使用Init()方法集中初始化为<strong>有意义的数据(non-trivial).</strong></p>
-<p>定义：在构造函数中执行初始化操作。</p>
-<p>优点：排版方便，无需担心类是否初始化。</p>
-<p>缺点：在构造函数中执行操作引起的问题有：</p>
-<ol>
-<li>构造函数不易报告错误，不能使用异常</li>
-<li>操作失败会造成对象初始化失败，引起不确定状态</li>
-<li>构造函数内调用虚函数，调用不会派发到子类实现中，即时当前没有子类化实现，将来仍是隐患</li>
-<li>如果有人创建该类型的全局变量，构造函数将在main()之前被调用，有可能破坏构造函数中暗含的假设条件</li>
-</ol>
-<p><strong>结论：如果对象需要有意义的(non-trivial)初始化，考虑使用另外的Init()方法并增加一个成员标志用于指示对象是否初始化成功。</strong></p>
-<p>###2.默认构造函数</p>
-<p>如果一个类定义了若干成员变量又没有其他构造函数，需要定义一个默认构造函数，否则编译器将自动生产默认构造函数。</p>
-<blockquote>
-<p><strong>定义：</strong>新建一个没有参数的对象时，默认构造函数被调用，当调用new[]（为数组）时，默认构造函数总是被调用。</p>
-<p><strong>优点：</strong>默认将结构体初始化为“不可能的值。”，使调试更加容易。</p>
-<p><strong>缺点：</strong>对代码编写者来说是多余的工作。</p>
-</blockquote>
-<p><strong>结论：</strong></p>
-<p>如果类中定义了成员变量，没有提供其他构造函数，你需要定义一个默认构造函数(无参数)。默认构造函数更适合初始化对象，使对象内部状态(internal state)一致，有效。</p>
-<p>提供默认构造函数的原因是：如果倪没有提供其他构造函数，又没有定义默认构造函数。编译器会自动生成一个，但编译器生成的构造函数不会对对象进行初始化。</p>
-<p><strong>如果你定义的类继承现有类，而你又没有增加新的成员变量，则不需要为新类定义默认构造函数。</strong></p>
-<p>###3.明确的构造函数(Explicit Constructors)</p>
-<p>对单参数构造函数使用C++关键字explicit。</p>
-<blockquote>
-<p><strong>定义：</strong>只有一个参数的构造函数可被用于转换(只要指隐式转换)。例如，定义了Foo::Foo(string name),当向需要传入一个Foo对象的函数传入一个字符串时，构造函数Foo::Foo(string name)被调用并将该字符串转换为一个Foo临时对象传给调用函数。看上去方便，但是如果你并不希望通过转换生成一个新对象的话，麻烦也随着而来，为避免构造函数被调用造成隐式转换，可以将其声明为explicit。</p>
-<p><strong>优点：</strong>避免不合时宜的转换</p>
-<p><strong>缺点：</strong>无</p>
-</blockquote>
-<p><strong>结论</strong></p>
-<p>所有单参数构造函数必须是明确的(explicit)。在类定义中，将关键字explicit加到单参数构造函数前：</p>
-<p><code>explicit Foo(string name)</code></p>
-<p><strong>例外：</strong>在少数情况下，拷贝构造函数可以不声明为explicit；特意作为其他类的透明包装器的类。</p>
-<h3 id="4-拷贝构造函数"><a href="#4-拷贝构造函数" class="headerlink" title="4.拷贝构造函数"></a>4.拷贝构造函数</h3><p>仅在代码中需要拷贝一个类对象的时候使用拷贝构造函数；不需要拷贝时应使用DISALLOW_COPY_AND_ASSIGN。</p>
-<blockquote>
-<p><strong>定义：</strong>通过拷贝新建对象时可使用拷贝构造函数(特别是对象的传值时).</p>
-<p><strong>优点：</strong>拷贝构造函数使得拷贝对象更加容易，STL容器要求所有内容可拷贝丶可赋值。</p>
-<p><strong>缺点：</strong>C++中对象的隐式拷贝是导致很多性能问题和bugs的根源。拷贝构造函数降低了代码可读性，相比于按引用传递，跟踪按值传递的对象更加困难，对象修改的地方变得难以琢磨。</p>
-</blockquote>
-<p><strong>结论：</strong></p>
-<p>大量的类并不需要可拷贝，也不需要一个拷贝构造函数或赋值操作。但不幸的是，你不主动声明他们，编译器会为你自动生成，而且是public。</p>
-<p><strong>可以考虑在类的private中添加空的(dummy)拷贝构造函数和赋值操作，只有声明，没有定义。由于这些空程序声明为private，当其他代码视图使用他们时，编译器将报错，为了方便，可以使用宏定义DISALLOW_COPY_AND_ASSIGN。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//禁止使用拷贝构造函数和赋值操作的宏</div><div class="line">//应在类的private:中使用</div><div class="line">#define DISALLOW_COPY_AND_ASSIGN(TypeName) \</div><div class="line">	TypeName(const TypeName&amp;);             \</div><div class="line">	void operator = (const TypeName&amp;)</div><div class="line">class Foo &#123;</div><div class="line">  public:</div><div class="line">  	Foo(int f);</div><div class="line">  	~Foo();</div><div class="line">  private:</div><div class="line">  	DISALLOW_COPY_AND_ASSIGN(Foo);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>如上所述，绝大多数情况应使用DISALLOW_COPY_AND_ASSIGN,如果类确实需要拷贝，应在该类的头文件中说明原由，并适当定义拷贝构造函数和赋值操作，注意在operator中检测自赋值(self-assignment)情况。</p>
-<p>在将类作为STL容器值的时候，你可能有使类可拷贝的冲动。类似情况下，真正该做的是使用指针指向STL容器中的对象，可以考虑使用 <code>std::tr1::shared_ptr</code>.</p>
-<h3 id="5-结构体和类（struct-vs-Classes）"><a href="#5-结构体和类（struct-vs-Classes）" class="headerlink" title="5.结构体和类（struct vs Classes）"></a>5.结构体和类（struct vs Classes）</h3><p>仅当只有数据时使用struct，其他一律使用class。</p>
-<p>在C++中，关键字<strong>struct</strong>和<strong>class</strong>几乎含义等同，我们为其认为添加语义，以便为定义的数据类型合理选择使用哪个关键字。</p>
-<p><strong>struct</strong>被用在仅包含数据的消极对象(passive objetcts)上，可能包括有关联的常量，但没有存取数据成员之外的函数功能，而存取功能通过直接访问实现而无需方法调用，这提到的方法是只用于处理数据成员的，如构造函数丶析构函数丶Initialize()丶Reset()丶Validate().</p>
-<p>如果需要更多的函数功能，class更适合，<strong>如果不确定，直接使用class。</strong></p>
-<p>如果与STL结合，对于仿函数(functors)和特性(traits)可以不用class而是使用struct。</p>
-<h3 id="6-继承-inheritance"><a href="#6-继承-inheritance" class="headerlink" title="6.继承(inheritance)"></a>6.继承(inheritance)</h3><p>使用组合(composition)通常比继承更适宜，如果使用继承的话，只是用公共继承。</p>
-<blockquote>
-<p><strong>定义：</strong>当子类继承基类时，子类包含了父基类所有数据及操作的定义。C++中，继承主要用于两个场合：1.<strong>实现继承，子类继承父类的实现代码</strong>。2.<strong>接口继承，子类仅继承父类的方法名称</strong>。</p>
-<p><strong>优点：</strong>实现继承通过原封不动的重用基类代码减少了代码量。由于继承是编译时声明，编码者和编译器都可以理解相应操作并发现错误。接口继承可用于程序上增强类的特定API的功能，在类没有定义API的必要实现时，编译器同样可以甄错。</p>
-<p><strong>缺点：</strong>对于实现继承，由于实现子类的代码在父类和子类间延展，要理解其实现变得更加困难。子类不能重写父类的非虚函数，当然也就不能修改其实现。基类也可能定义一些数据成员，还要区分基类的物理轮廓(physical layout)。</p>
-</blockquote>
-<p><strong>结论：</strong></p>
-<p>所有继承必须是public的，如果想私有继承的话，应该采取包含基类实例作为成员的方式作为替代。</p>
-<p>不要过多实现继承，组合通常更合适一些。努力做到只在“是一个”的情况下使用继承；如果Bar的确是一种Foo，才令Bar是Foo的子类。</p>
-<p><strong>必要的话，析构函数必须是virtual，必要是指，如果该类具有虚函数，其析构函数应该为虚函数。</strong></p>
-<p>至于子类没有额外数据成员，父类也没有任何数据成员的特殊情况下，析构函数的调用是否必要是语义争论，从编程设计规范的角度看，在含有虚函数的父类中，定义虚函数绝对必要。</p>
-<p>限定仅在子类访问的成员函数为protected，需要注意数据成员应该始终为私有。</p>
-<p>当重定义派生的虚函数时，在派生类中明确声明其为virtual。根本原因：如果遗漏virtual，阅读者需要检索其所有祖先以确定该函数是否为虚函数。</p>
-<h3 id="7-多重继承"><a href="#7-多重继承" class="headerlink" title="7.多重继承"></a>7.多重继承</h3><p>真正需要多重实现继承的时候非常少，只有当最多一个基类中含有实现，其他基类都是以Interface为后缀的纯接口类时才会使用多继承。</p>
-<blockquote>
-<p><strong>定义：</strong>多重继承允许子类拥有多个基类，要将作为纯接口的基类和具有实现的基类区别开来。</p>
-<p><strong>优点：</strong>相比于单继承，多重实现继承可令你重用更多代码</p>
-<p><strong>缺点：</strong>真正需要用到多重实现继承的时候非常少，多重实现继承看上去是不错的解决方案，通常可以找到更加明确丶清晰丶不同的解决方案</p>
-</blockquote>
-<p><strong>结论：</strong></p>
-<p>只有当所有超类除第一个外都是纯接口时才能使用多重继承。为确保它们是纯接口，这些类必须以Interface为后缀。</p>
-<h3 id="8-接口"><a href="#8-接口" class="headerlink" title="8.接口"></a>8.接口</h3><p>接口是指满足指定特定条件的类，这些类以interface为后缀(非必须)。</p>
-<blockquote>
-<p>当一个类满足以下条件时，称为纯接口：</p>
-<ol>
-<li>只有纯虚函数(“=0”)和静态函数(下文提到的析构函数除外)。</li>
-<li>没有非静态数据成员。</li>
-<li>没有定义任何构造函数。如果有也不含参数，并且为protected。</li>
-<li>如果是子类，也只能继承满足以上条件并以interface为后缀的类。</li>
-</ol>
-</blockquote>
-<p>接口类不能被直接实例化，因为它声明了纯虚函数。为确保接口类的所有实现可被正确销毁，必须为之声明虚析构函数(作为第一条的例外，析构函数不可能为纯虚函数)。</p>
-<blockquote>
-<p><strong>优点：</strong>以interface为后缀可令他人知道不能为该接口类增加实现函数或非静态数据成员，这一点对多重继承尤其重要</p>
-<p><strong>缺点：</strong>interface后缀增加了类名长度，为阅读和理解带来不变，接口特性作为实现细节不应暴露给客户。</p>
-</blockquote>
-<p><strong>结论：</strong></p>
-<p>只有在满足上述需要时，类才以interface结尾，但反过来满足上述需要的类未必一定以interface结尾。</p>
-<h3 id="9-操作符重载"><a href="#9-操作符重载" class="headerlink" title="9.操作符重载"></a>9.操作符重载</h3><p><strong>除少数特定环境外，不要重载操作符。</strong></p>
-<blockquote>
-<p><strong>定义：</strong>一个类可以定义诸如 + 丶/等操作符，使其可以像内建类型一样直接使用。</p>
-<p><strong>优点：</strong>是代码看上去更加直观，就像内建类型(如<strong>int</strong>)那样，重载操作符使那些equal丶add等暗淡无关的函数名好玩多了。为了使一些模板函数正确工作，可能需要定义操作符。</p>
-<p><strong>缺点：</strong>虽然操作符重载令代码更加直观，但也有一些不足。</p>
-<ol>
-<li>混淆直觉，让你误以为一些耗时操作像内建操作那样轻巧</li>
-<li>查找重载操作符的调用处更加困难，查找equal显然比同等调用==容易的多。</li>
-<li>有的操作符可以对指针进行操作，容易导致bugs丶Foo+4 做的是一件事，而&amp;Foo+4 可能做的是完全不同的另一件事，对于二者，编译器都不会报错，使其很难调试。</li>
-<li>重载还有令你吃惊的副作用，比如重载操作符<strong>&amp;</strong>的类不能被前置声明。</li>
-</ol>
-</blockquote>
-<p><strong>结论：</strong></p>
-<p>一般不要重载操作符，尤其是赋值操作(operator==)比较阴险，应避免重载，需要的话可以定义类似equal丶copyFrom等函数。</p>
-<p>然而，极少数情况下需要重载操作符以便与模板或“标准”C++类衔接(operator&lt;&lt;(ostream&amp;,const T&amp;)),如果被证明是正当的尚可接受，但你要尽可能避免这样做尤其是不要仅仅为了在STL容器中作为key使用就重载operator==或operator&lt;，取而代之，你应该在声明容器的时候，创建相等判断和大小比较的仿函数类型。</p>
-<p>有些STL算法确实需要重载operator==时可以这么做，不要忘了提供文档说明原因。</p>
-<p>参考拷贝构造函数和函数重载。</p>
-<h3 id="10-存取控制"><a href="#10-存取控制" class="headerlink" title="10.存取控制"></a>10.存取控制</h3><p>将数据成员私有化，并提供相关存取函数，如定义变量foo_及取值函数foo()丶赋值函数set_foo().</p>
-<p>存取函数的定义一般内联在头文件中。</p>
-<p>参考继承和函数命名。</p>
-<h3 id="11-声明次序"><a href="#11-声明次序" class="headerlink" title="11.声明次序"></a>11.声明次序</h3><p>在类中使用特定的声明次序：public:在private:之前，成员函数在数据成员(变量)前。</p>
-<p><strong>定义次序如下：public:丶protected:丶private:.</strong></p>
-<p>每一块中，声明次序一般如下：</p>
-<ol>
-<li>typedefs和enums；</li>
-<li>常量</li>
-<li>构造函数</li>
-<li>析构函数</li>
-<li>成员函数，含静态函数</li>
-<li>数据成员，含静态数据成员</li>
-</ol>
-<p>宏DISALLOW_COPY_AND_ASSIGN置于private:块之后，作为类的最后部分。参考拷贝构造函数。</p>
-<p>.cc文件中函数的定义应尽可能和声明次序一致。</p>
-<p>不要将大型函数内联到类的定义中，只有那些没有特定意义的或者性能要求高的，并且是比较短小的函数才能被定义为内联函数。</p>
-<h2 id="关于类的结论"><a href="#关于类的结论" class="headerlink" title="关于类的结论"></a>关于类的结论</h2><ul>
-<li>不在构造函数内做太多关于逻辑的初始化</li>
-<li>编译器提供的默认构造函数不会对变量进行初始化，如果定义了其他构造函数，编译器不再提供，需要编码者自行提供默认构造函数</li>
-<li>为避免隐式转换，须将单参数构造函数声明为explicit</li>
-<li>为避免拷贝构造函数丶赋值操作的滥用和编译器自动生成，可目前声明其为<strong>private</strong>且无需实现</li>
-<li>仅在作为数据集合时使用struct</li>
-<li>组合 &gt; 实现继承 &gt; 接口继承 &gt;私有继承，子类重载的虚函数也要声明virtual关键字，虽然编译器允许不这样做</li>
-<li>避免使用多重继承，使用时，除一个基类含有实现外，其他基类均为纯接口</li>
-<li>接口类类名以interface为后缀，除提供带实现的虚析构函数丶静态成员函数外，其他均为纯虚函数，不定义非静态数据成员，不提供构造函数，提供的话，声明为protected</li>
-<li>为降低复杂性，尽量不重载操作符，模板丶标准类中使用时提供文档说明</li>
-<li>存取函数一般内联在头文件中</li>
-<li>声明次序：<strong>public-&gt;protected-&gt;private</strong></li>
-<li>函数体尽量短小丶紧凑，功能单一</li>
-</ul>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>暂不支持，我开心再加<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">流媒体服务器 ubuntu</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/LouisShark/2017/09/11/C++编程风格笔记/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mrak message parts that should not be translated
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/10/11/搭建ngnix/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">搭建nginx</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-  
-  
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-<script>
-var cloudTieConfig = {
-  url: document.location.href, 
-  sourceId: "",
-  productKey: "18b72bdca05e4f87b6034ce794f880a7",
-  target: "cloud-tie-wrapper"
-};
-var yunManualLoad = true;
-Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
-</script>
+    </div></section>
   
 
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "https://github.com/LouisShark/2017/09/11/C++编程风格笔记/", 
-    sourceId: "C++编程风格笔记",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-  
-
-  
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'true'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </section>
-  
+    
 
 
           </div>
@@ -575,9 +231,9 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
