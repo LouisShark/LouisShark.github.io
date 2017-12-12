@@ -156,6 +156,128 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-手动实现arraylist和hashmap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/02/手动实现arraylist和hashmap/">手动实现arraylist和hashmap</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/02/手动实现arraylist和hashmap/" class="archive-article-date">
+  	<time datetime="2017-05-02T08:37:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>这是第一篇博客，我准备先将最近学习的笔记记录下来，数据结构最基础也最难吧，大佬就别看了。。。
+</code></pre><hr>
+<ol>
+<li>Arraylist</li>
+</ol>
+<pre><code>public class LouisArraylist&lt;E&gt; {
+int size;
+Object[] array;
+private static final int MIN_CAPACITY_INCREMENT = 12;
+public LouisArraylist(int capacity){
+    if(capacity&lt;0){
+    throw new IllegalArgumentException();
+}
+    array = new Object[capacity];
+}
+
+public LouisArraylist(){
+    array = new Object[0];
+}
+
+public LouisArraylist(Collection&lt;? extends E&gt; collection){
+    Object[] a = collection.toArray();
+    if(a.getClass()!=Object[].class){
+        Object[] newArray = new Object[a.length];
+        System.arraycopy(a, 0, newArray, 0, a.length);
+        a = newArray;
+    }
+    array = a;
+    size = a.length;
+}
+
+/**
+ * 扩容
+* 
+*/
+private static int newCapacity(int currentCapacity){
+    int increment =   (currentCapacity&lt;MIN_CAPACITY_INCREMENT/2)?MIN_CAPACITY_INCREMENT
+            :currentCapacity&gt;&gt;1;
+    return currentCapacity+increment;
+}
+
+/**
+* 增加
+*/
+public boolean add(E object){
+    Object[] a = array;
+    int s = size;
+    if(s == a.length){
+        //需要扩容了
+        Object[] newArray = new Object[newCapacity(s)];
+        System.arraycopy(a, 0, newArray, 0, s);
+        array = a = newArray;
+    }
+    a[s] = object;
+    size = s + 1;
+    return true;
+}
+</code></pre>
+        
+          <a class="article-more-a" href="/2017/05/02/手动实现arraylist和hashmap/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/02/手动实现arraylist和hashmap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -307,15 +429,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -331,11 +445,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -347,15 +465,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">UI事件传递</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
+                <a href="javascript:void(0)" class="js-tag color4">android开发艺术探索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
+                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -363,11 +481,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
+                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
               </li>
             
             <div class="clearfix"></div>

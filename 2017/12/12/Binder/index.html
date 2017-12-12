@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/LouisShark">
-  <title>搭建nginx | Paris</title>
+  <title>Binder随意记录 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。 第一部分：准备工作先在/root/下新建一个目录存放这些文件。  mkdir nginxcd nginx  然后在执行下面三条命令。 下载Nginxwget http://nginx.org/download/nginx-1.12.1.tar.gz 下载OpenSSL(因为">
-<meta name="keywords" content="流媒体服务器 ubuntu">
+  <meta name="description" content="#Binder @(android)[学习笔记] [TOC] ###为何选择BinderLinux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。 ####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。  socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间">
+<meta name="keywords" content="Binder,android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建nginx">
-<meta property="og:url" content="https://github.com/LouisShark/2017/10/11/搭建ngnix/index.html">
+<meta property="og:title" content="Binder随意记录">
+<meta property="og:url" content="https://github.com/LouisShark/2017/12/12/Binder/index.html">
 <meta property="og:site_name" content="Paris">
-<meta property="og:description" content="最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。 第一部分：准备工作先在/root/下新建一个目录存放这些文件。  mkdir nginxcd nginx  然后在执行下面三条命令。 下载Nginxwget http://nginx.org/download/nginx-1.12.1.tar.gz 下载OpenSSL(因为">
-<meta property="og:updated_time" content="2017-10-11T08:08:11.686Z">
+<meta property="og:description" content="#Binder @(android)[学习笔记] [TOC] ###为何选择BinderLinux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。 ####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。  socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间">
+<meta property="og:updated_time" content="2017-12-12T09:28:04.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搭建nginx">
-<meta name="twitter:description" content="最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。 第一部分：准备工作先在/root/下新建一个目录存放这些文件。  mkdir nginxcd nginx  然后在执行下面三条命令。 下载Nginxwget http://nginx.org/download/nginx-1.12.1.tar.gz 下载OpenSSL(因为">
+<meta name="twitter:title" content="Binder随意记录">
+<meta name="twitter:description" content="#Binder @(android)[学习笔记] [TOC] ###为何选择BinderLinux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。 ####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。  socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间">
   
   
     <link rel="icon" href="/favicon.png">
@@ -156,78 +156,151 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-搭建ngnix" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Binder" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      搭建nginx
+      Binder随意记录
     </h1>
   
 
         
-        <a href="/2017/10/11/搭建ngnix/" class="archive-article-date">
-  	<time datetime="2017-10-11T07:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
+        <a href="/2017/12/12/Binder/" class="archive-article-date">
+  	<time datetime="2017-12-12T09:42:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。</p>
-<h2 id="第一部分：准备工作"><a href="#第一部分：准备工作" class="headerlink" title="第一部分：准备工作"></a>第一部分：准备工作</h2><p>先在/root/下新建一个目录存放这些文件。</p>
+        <p>#Binder</p>
+<p>@(android)[学习笔记]</p>
+<p>[TOC]</p>
+<h2 id="为何选择Binder"><a href="#为何选择Binder" class="headerlink" title="###为何选择Binder"></a>###为何选择Binder</h2><p>Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。</p>
+<p>####传输性能好<br>Binder的优点之一就是，复杂数据类型传递可以复用内存。</p>
+<ul>
+<li>socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。</li>
+<li>管道和消息队列：因为采用存储转发方式，所以至少需要拷贝2次数据，效率低。</li>
+<li>共享内存：虽然在传输时没有拷贝数据，但其控制机制复杂。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">IPC</th>
+<th style="text-align:right">数据拷贝次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">共享内存</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">Binder</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Socket/管道/消息队列</td>
+<td style="text-align:right">2</td>
+</tr>
+</tbody>
+</table>
+<p>####安全性高<br>传统IPC没有任何安全措施，完全以来上层协议来确保。首先传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。</p>
+<p>Android为每个安装好的应用程序分配了自己的UID，故进程的UID是鉴别进程身份的重要标志。可靠的身份标识只有IPC机制本身在内核中添加。</p>
+<p>传统IPC访问接入点是开放的，无法建立私有通道，Binder可以使用匿名Binder建立私密通道，别的进程就无法通过穷举或猜测等任何方式获得该Binder的引用，向该Binder发送请求。</p>
+<h4 id="易用性"><a href="#易用性" class="headerlink" title="易用性"></a>易用性</h4><hr>
+<p>Binder使用的是C/S通信方式，一个进程可以开启服务专门负责处理某个模块的业务，多个进程可以作为Client同时向Server发起请求。</p>
+<p>使用了面向对象的设计，发起一次binder call 就像在调用本地方法一样简单。</p>
+<p><strong>一次拷贝？</strong></p>
+<p>当Client向Server发送数据时，Client会先从自己的进程空间把通信数据拷贝到内核空间，因为Server和内核共享数据，所以不在需要重新拷贝数据，而是直接通过内存地址的偏移量直接获取到数据地址。总体来说拷贝了一次。</p>
+<p>Server和内核空间之所以能够共享一块空间数据主要是通过<code>binder_mmap</code>来实现的。它的主要功能是在内核的虚拟地址空间申请一块和用户虚拟内存相同大小的内存，然后在申请一个page大小的内存，将它映射到内核虚拟地址空间和用户虚拟内存空间，从而实现了用户空间缓存和内核空间缓冲同步的功能。</p>
+<h4 id="Binder总体架构"><a href="#Binder总体架构" class="headerlink" title="Binder总体架构"></a>Binder总体架构</h4><hr>
+<p>在Android系统中，运行在内核空间的，负责各个用户进程通过Binder通信的内核模块叫做Binder驱动，Binder驱动虽然默默无闻，确是通信的核心，尽管叫“驱动”，实际上和硬件设备没有任何关系，只是实现方式和设备驱动程序是一样的。</p>
 <blockquote>
-<p><code>mkdir nginx</code><br><code>cd nginx</code></p>
+<p>面向对象思想的引入将进程间通信转化为通过对某个Binder对象的引用调用该对象的方法，而其独特之处在与Binder对象是一个可以跨进程引用的对象，他的实体位于一个进程中，而他的引用确遍布系统的各个进程中。最诱人的是这个引用和java里引用一样既可以是强类型，也可以是弱类型，而且从一个进程传给其他进程，让大家都能访问同一个server，就像讲一个对象或引用赋值给另一个引用一样。Binder模糊了进程边界，淡化了进程间通信过程。整个系统仿佛运行于同一个面向对象的程序之中。形形色色的Binder对象以及星罗棋布的引用仿佛粘连各个应用程序的胶水。</p>
 </blockquote>
-<p>然后在执行下面三条命令。</p>
-<h4 id="下载Nginx"><a href="#下载Nginx" class="headerlink" title="下载Nginx"></a>下载Nginx</h4><p><code>wget http://nginx.org/download/nginx-1.12.1.tar.gz</code></p>
-<h4 id="下载OpenSSL-因为Nginx依赖于OpenSSL"><a href="#下载OpenSSL-因为Nginx依赖于OpenSSL" class="headerlink" title="下载OpenSSL(因为Nginx依赖于OpenSSL)"></a>下载OpenSSL(因为Nginx依赖于OpenSSL)</h4><p><code>wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_0f.tar.gz</code></p>
-<h4 id="下载Rtmp"><a href="#下载Rtmp" class="headerlink" title="下载Rtmp"></a>下载Rtmp</h4><p><code>wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.0.tar.gz</code></p>
-<a id="more"></a>
-<h2 id="第二部分-编译"><a href="#第二部分-编译" class="headerlink" title="第二部分 编译"></a>第二部分 编译</h2><blockquote>
-<p><code>cd openssl-OpenSSL_1_1_0f/</code></p>
-<p><code>mkdir bin</code></p>
-<p>./config –prefix=`pwd`/bin</p>
-</blockquote>
-<p>上面这条执行完之后会出现Makefile文件，接下来正式编译</p>
+<p><strong>首先Binder分为Binder对象和Binder驱动</strong>，即Binder驱动就是主要的内核模块，而这个Binder对象是通讯的载体，可以自由的通过Bidner驱动自由穿梭任意进程。所以客户端或者服务器就可以把数据放入Binder对象里，然后进行调用和通讯。类似胞吞胞吐。</p>
+<p><strong>Binder框架定义了四个角色：</strong>Server，Client，ServiceManager以及Binder驱动。</p>
 <blockquote>
-<p>make install</p>
+<p>Server进程里的Binder对象指的是Binder本地对象，Client里面的对象指的是Binder代理对象；在Binder对象进行跨进程传递的时候，Binder驱动会自动完成这两种类型的转换；因此Binder驱动必然保存每一个跨进程的Binder对象的相关信息；在驱动中，Binder本地对象的代表是一个是一个叫做<code>binder_node</code>的数据结构，Binder代理对象 是用<code>binder_ref</code>代表的；有得地方把Binder本地对象直接称作Binder实体，把Binder代理对象直接称作 Binder引用（句柄）。</p>
 </blockquote>
-<p>然后回到Nginx目录下</p>
+<h4 id="ServiceManager与实名Binder"><a href="#ServiceManager与实名Binder" class="headerlink" title="ServiceManager与实名Binder"></a>ServiceManager与实名Binder</h4><hr>
 <blockquote>
-<p> cd nginx-1.12.1/</p>
-<p> cd auto/lib/openssl/</p>
+<p>ServiceManager是一个进程，Server是另一个进程，Server向SM中注册Binder必然会涉及到进程间通信。当前实现的是进程间通信却又要用到进程间通信，就好像蛋孵出鸡的前提却是鸡孵蛋。Binder的实现比较巧妙，预先创造一只鸡来孵蛋：SM和其他进程间同样采用Binder通信，SM是Server端，有自己的Binder对象（实体），其他进程都是Client，需要通过这个Binder的引用来实现Binder的注册，查询和获取。SM提供的Binder比较特殊，他没有名字也不需要注册，当一个进程使用<code>BINDER_SET_CONTEXT_MGR</code>命令将自己注册在SM时Binder驱动会自动为他创建Binder实体（这就是预先造好的鸡）。其次这个Binder的引用在所有Client中都固定为0而无须通过其他手段获得。也就是说，一个Server若要向SM注册自己Binder就必需通过0这个引用号和SM的Binder通信。类比网络通信，0号引用就好比域名服务器的地址，你必须预先手工或动态配置好。</p>
 </blockquote>
-<p>然后修改conf文件</p>
+<ul>
+<li>首先，Server在自己的进程中向Binder驱动申请创建一个Server的Binder实体。</li>
+<li>Binder驱动为这个Server创建位于内核中的Binder实体节点以及Binder的引用。（在Binder驱动中创建一块内存）</li>
+<li>然后Server通过<strong>0</strong>这个引用号和SM的的Binder通信 将名字和新建的引用打包传递给SM（实体没有传给SM），通知SM注册一个名叫XXX的Server。</li>
+<li>SM收到数据包后，从中取出Server名字和引用，填入一张查找表中。</li>
+</ul>
+<p>Server初始化的时候，SM做了以下操作：</p>
+<ol>
+<li>为binder分配128k的内存</li>
+<li>通知binder驱动，使自身成为binder驱动的“DNS”</li>
+<li>维护一个监听Server的死循环，并且维护持有所有Server句柄的svclist</li>
+<li>添加Server的时候，进行权限，内存（充足）进行判断，如果没有添加过则将Server添加至svclist。</li>
+</ol>
+<h4 id="Client获得实名Binder的引用"><a href="#Client获得实名Binder的引用" class="headerlink" title="Client获得实名Binder的引用"></a>Client获得实名Binder的引用</h4><hr>
 <blockquote>
-<p>vim conf</p>
+<p>Server向SM注册了Binder引用及其名字后，Client就可以通过名字获取该Binder的引用了。Client也利用保留的0号引用向SM请求访问某个Binder：我申请获得名字叫张三的Binder的引用。SM收到这个连接请求，从请求数据包里获得Binder的名字，在查找表里找到该名字对应的条目，从条目中取出Binder的引用，将该引用作为回复发送给发起请求的Client。从面向对象的角度，这个Binder对象 现在有两个引用：一个位于SM中，一个位于发送请求的Client中。如果接下来有更多的Client请求该binder，系统中就会有更多的引用指向该Binder，就像Java里一个对象存在多个引用一样。而且类似的这些指向Binder的引用是强类型，从而确保只要有引用Binder实体就不会被释放掉。</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">      if [ $ngx_found = no ]; then</div><div class="line"></div><div class="line">      	# MacPorts</div><div class="line"></div><div class="line">          ngx_feature="OpenSSL library in /opt/local/"</div><div class="line">          ngx_feature_path="/opt/local/include"</div><div class="line"></div><div class="line">          if [ $NGX_RPATH = YES ]; then</div><div class="line">              ngx_feature_libs="-R/opt/local/lib -L/opt/local/lib -lssl -lcrypto $NGX_LIBDL"</div><div class="line">          else</div><div class="line">              ngx_feature_libs="-L/opt/local/lib -lssl -lcrypto $NGX_LIBDL"</div><div class="line">          fi</div><div class="line"></div><div class="line">          . auto/feature</div><div class="line">      fi</div><div class="line">if [ $ngx_found = no ]; then</div><div class="line"></div><div class="line">          # 自己添加的一个判断</div><div class="line"></div><div class="line">          ngx_feature="OpenSSL library in /root/nginx/openssl-OpenSSL_1_1_0f/bin/"</div><div class="line">          ngx_feature_path="/root/nginx/openssl-OpenSSL_1_1_0f/bin/include"</div><div class="line"></div><div class="line">          if [ $NGX_RPATH = YES ]; then</div><div class="line">              ngx_feature_libs="-R/root/nginx/openssl-OpenSSL_1_1_0f/bin/lib -L/root/nginx/openssl-OpenSSL_1_1_0f/bin/lib -lssl -lcrypto $NGX_LIBDL"</div><div class="line">          else</div><div class="line">              ngx_feature_libs="-L/root/nginx/openssl-OpenSSL_1_1_0f/bin/lib -lssl -lcrypto $NGX_LIBDL"</div><div class="line">          fi</div><div class="line"></div><div class="line">          . auto/feature</div><div class="line">      fi</div></pre></td></tr></table></figure>
-<p>回到nginx目录下，开始编译nginx。</p>
+<h4 id="Client与Server通讯"><a href="#Client与Server通讯" class="headerlink" title="Client与Server通讯"></a>Client与Server通讯</h4><hr>
 <blockquote>
-<p>cd /root/nginx/nginx-1.12.1/</p>
-<p>./configure –prefix=`pwd`/bin –add-module=/root/nginx/nginx-rtmp-module-1.2.0</p>
-<p>make install</p>
+<p>client向SM发送申请服务Server的请求，那么SM就可以在查找表中找到该Service的Binder引用。并把Binder引用（BpBinder）返回给Client，此时Client便可以通过这个引用向Server（间接）发起调用，Binder引用将参数包装然后交给驱动并获取Server的调用结果。</p>
 </blockquote>
-<p>之后会多一个bin目录就代表成功了，来到这个目录执行</p>
-<blockquote>
-<p>./nginx</p>
-</blockquote>
-<p>如果碰到错误</p>
-<blockquote>
-<p>error while loading shared libraries:<br>libssl.so.1.1: cannot open shared object file: No such file or directory</p>
-</blockquote>
-<p>可以</p>
-<blockquote>
-<p>vim /etc/ld.so.conf</p>
-<p>在其中加入</p>
-<p>/root/nginx/openssl-OpenSSL_1_1_0f/bin/lib</p>
-</blockquote>
-<p>然后执行 <code>Ldconfig</code>保存设置，在去配置一下服务器的入端口 1935 8080.</p>
-<p>然后关闭nginx服务器，将nginx-rtmp-module/test/下的nginx.conf 复制到 nginx/bin/conf下面</p>
-<p>修改一下 将路径都改为自己的rtmp-module的路径在重启就OK了。</p>
+<h4 id="Binder的线程管理"><a href="#Binder的线程管理" class="headerlink" title="Binder的线程管理"></a>Binder的线程管理</h4><hr>
+<p>每个binder的Server进程会创建很多线程来处理Binder请求，可以简单的理解为创建了一个Binder的线程池（虽然实际上并不完全是这样简单的线程管理方式），而真正管理这些线程并不是由这个Server端来管理的，而是由Binder驱动进行管理的。</p>
+<p>一个进程的Binder线程数默认最大是16，超过的请求会被阻塞等待空闲的Binder线程。你做进程间通信时处理并发问题就会有一个底，比如使用<code>ContentProvider</code>时，你就很清楚他的CRUD方法只能同时有16个线程在跑。（应用与ContentProvider为不同进程时）。</p>
+<h4 id="四大组件中常见的2个binder服务是？"><a href="#四大组件中常见的2个binder服务是？" class="headerlink" title="四大组件中常见的2个binder服务是？"></a>四大组件中常见的2个binder服务是？</h4><p>一个是实现了IActivityManager接口的ActivityManagerNative，ActivityManagerService是他的子类，提供了AMS中的所有服务，从APP调用binder call到AMS都是同步的，APP需要阻塞等待AMS执行完毕。</p>
+<p>一个是实现了IApplicationThread接口的ApplicationThreadNative，ActivityThread中的内部类ApplicationThread是他的子类，AMS可以发起异步请求到APP，不需要等待APP执行完成。</p>
+<ul>
+<li>BpBinder：Binder的代理对象，内部有一个成员变量mHandle，记录着远侧滑盖服务对象的handle</li>
+<li>BBinder：Binder本地服务对象</li>
+</ul>
+<h5 id="binder-ref与binder-node有什么区别"><a href="#binder-ref与binder-node有什么区别" class="headerlink" title="binder_ref与binder_node有什么区别"></a>binder_ref与binder_node有什么区别</h5><ul>
+<li>binder_ref与binder_node都存在于内核空间</li>
+<li>binder_node是实体对象、binder_ref是引用对象</li>
+<li>binder_node被binder_ref引用，binder_ref被BpBinder引用</li>
+</ul>
+<h5 id="应用如何获取和添加Binder服务"><a href="#应用如何获取和添加Binder服务" class="headerlink" title="应用如何获取和添加Binder服务"></a>应用如何获取和添加Binder服务</h5><p>获取与添加Binder服务的操作是交给大管家<code>ServiceManager</code>实现的；ServiceManager进程启动后会通过binder_loop睡眠等待客户端的请求，如果进程被客户端唤醒就会调用svcmgr_handler来处理获取或者添加服务的请求</p>
+<p>ServiceManager也是一种Binder服务，当应用获取ServiceManager服务的代理时，它的handle句柄固定为0，所以才不需要去查找，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> IServiceManager <span class="title">getIServiceManager</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (sServiceManager != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span> sServiceManager;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// Find the service manager</span></div><div class="line">    sServiceManager = ServiceManagerNative.asInterface(BinderInternal.getContextObject());</div><div class="line">    <span class="keyword">return</span> sServiceManager;</div><div class="line">&#125;</div><div class="line">sp&lt;IBinder&gt; ProcessState::getContextObject(<span class="keyword">const</span> sp&lt;IBinder&gt;&amp; <span class="comment">/*caller*/</span>)</div><div class="line">&#123;</div><div class="line"> <span class="keyword">return</span> getStrongProxyForHandle(<span class="number">0</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="Binder协议中BC与BR开头的协议都有什么区别？"><a href="#Binder协议中BC与BR开头的协议都有什么区别？" class="headerlink" title="Binder协议中BC与BR开头的协议都有什么区别？"></a>Binder协议中BC<em>与BR</em>开头的协议都有什么区别？</h5><ul>
+<li>BC_：全称Binder Command，进程发送给Binder驱动数据时携带的协议</li>
+<li>BR_：全程Binder Return，Binder驱动发送给进程数据时携带的协议</li>
+</ul>
+<h5 id="Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗"><a href="#Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗" class="headerlink" title="Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗"></a>Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗</h5><p>服务端不会Crash，RuntimeException被Binder服务端线程捕捉，随后将异常信息写入到reply中，发回Binder客户端进程，最后客户端binder线程会抛出这个异常，如果没有捕捉到这个RuntimeException，那么Binder客户端进程会Crash。</p>
+<h5 id="客户端调用Binder接口后抛出的DeadObjectException是什么意思？"><a href="#客户端调用Binder接口后抛出的DeadObjectException是什么意思？" class="headerlink" title="客户端调用Binder接口后抛出的DeadObjectException是什么意思？"></a>客户端调用Binder接口后抛出的DeadObjectException是什么意思？</h5><p>之所以抛出DeadObjectException最常见的原因是Binder服务端进程已经死亡。客户端进行binder调用时，Binder驱动发现服务端进程不能回应请求，那么就会抛出异常给客户端。</p>
+<p>还有一些比较生僻的原因，比如服务端此时的缓存内存空间（1016k）已经被占满了，Binder驱动就认为服务端此时并不能处理这个调用，那么就会在C++层抛出DeadObjectException到Java层。</p>
+<h5 id="Binder驱动加载过程中有哪些重要的步骤？"><a href="#Binder驱动加载过程中有哪些重要的步骤？" class="headerlink" title="Binder驱动加载过程中有哪些重要的步骤？"></a>Binder驱动加载过程中有哪些重要的步骤？</h5><ul>
+<li>binder_init：初始化Binder驱动环境，内核工作队列、文件系统节点、misc设备等</li>
+<li>binder_open：打开Binder设备，获取Binder驱动的文件描述符（fd）</li>
+<li>binder_mmap：将用户进程地址空间映射到Binder驱动设备内存。这也是Binder能够实现一次拷贝以来的根本。</li>
+<li>binder_ioctl：Binder的驱动的核心功能，用来进行数据读写操作</li>
+</ul>
+<h5 id="Binder的死亡通知机制的作用是什么，如何实现？"><a href="#Binder的死亡通知机制的作用是什么，如何实现？" class="headerlink" title="Binder的死亡通知机制的作用是什么，如何实现？"></a>Binder的死亡通知机制的作用是什么，如何实现？</h5><p>Binder服务端进程死亡后，依赖着Binder实体对象的客户端代理对象也会失效。当Binder服务无效时，驱动程序会发送死亡通知给各个已注册服务的客户端进程，以方便客户端做些销毁之类的操作。</p>
+<p>思维通知机制最常用在APP和AMS服务，是典型的C/S架构，当APP端的进程死亡后，其ApplicationThreadNative会被销毁，随后Binder驱动会发出死亡通知给AMS，方便清理已经失效的四大组件及应用进程信息。</p>
+<p>binder驱动的加载阶段会打开/dev/driver文件，当服务端的进程死亡后，系统会进入清理阶段，关闭所有与进程相关联的资源，这其中就包含了关闭/dev/driver文件描述符的操作，随后就会调用到Binder驱动的binder_release方法，结果层层调用最后会调用到binderDied这个回调方法。如果APP进程之前注册并实现过DeathRecipient这个接口，此时APP就能对Server进程的死亡做出处理。</p>
+<h5 id="bindService所绑定的“服务概念和Binder中的服务Server有什么区别”"><a href="#bindService所绑定的“服务概念和Binder中的服务Server有什么区别”" class="headerlink" title="bindService所绑定的“服务概念和Binder中的服务Server有什么区别”"></a>bindService所绑定的“服务概念和Binder中的服务Server有什么区别”</h5><p>bindService绑定的服务所指的是四大组件中的Service；调用context.bindService方法可以让Activity与Service形成一种“绑定”的概念。这个概念是在Android Framework定义，形成“绑定”的关系之后，Activity除了能够和Service进行通信之外，他们所在的进程存活状态也会相关联。<strong>注意，这个Service不确定是运行在本地还是远端，大部分情况下我们调用<code>startService</code>只是用来启动一个在本地定义的Service组件。当使用<code>bindService</code>时，一般是需要调用Service通过onBind返回的Binder服务接口，以此实现Activity与Service之间的通信。</strong></p>
+<p>Binder服务则是一个真正的C/S架构中的服务端角色。这个服务需要继承Binder类并实现一套服务接口才能生效。我们常见的ActivityManagerService正是一个继承了Binder类并运行在system_server的服务，用来提供四大组件以及进程方面的服务。</p>
+<p>注意，调用bindService后，Service.onBind方法会返回Binder服务Stub对象，然后APP会在AMS进行登记，然后经过层层调用才会在Binder客户端调用<code>onConnected</code>方法，如果Binder客户端和其服务端在同一个进程，客户端拿到的应该还是Stub对象，如果不在同一进程中，客户端拿到的应该是Binder服务的Proxy对象。</p>
+<p>本质上，bindService锁绑定的服务和Binder的服务属于同一类，他们实现进程间通信的原理都是借助了Binder这一套机制。</p>
+<h5 id="writeStrongBinder与readStrongBinder的作用和原理"><a href="#writeStrongBinder与readStrongBinder的作用和原理" class="headerlink" title="writeStrongBinder与readStrongBinder的作用和原理"></a>writeStrongBinder与readStrongBinder的作用和原理</h5><p>主要作用是实现两个进程之间的双工通信。还是以APP客户端的ApplicationThread和system_server服务端的ActivityManagerService这两个Binder服务来举例子，这两个服务的接口的大致模式都相同。</p>
+<h5 id="每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？"><a href="#每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？" class="headerlink" title="每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？"></a>每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// --frameworks/nativebs/binder/ProcessState.cpp</div><div class="line">#define DEFAULT_MAX_BINDER_THREADS 15</div><div class="line">static int open_driver()</div><div class="line">&#123;</div><div class="line">    int fd = open("/dev/binder", O_RDWR);</div><div class="line">    if (fd &gt;= 0) &#123;</div><div class="line">...</div><div class="line">        size_t maxThreads = DEFAULT_MAX_BINDER_THREADS;</div><div class="line">        result = ioctl(fd, BINDER_SET_MAX_THREADS, &amp;maxThreads);</div><div class="line">    &#125;</div><div class="line">    return fd;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Binder线程池中的线程数量是在Binder驱动初始化时被定义的，进程池中的线程个数上限为15个，加上主Binder线程，一共最大能存在16个binder线程；</p>
+<p>当binder线程都在执行工作时，也就是当出现线程饥饿的时候，从别的进程调用的binder请求如果是同步的话，会在todo队列中阻塞等待，直到线程池中有空闲的binder进程来处理请求。</p>
+<h5 id="binder传输数据的最大限制是多少，占满后会导致什么问题"><a href="#binder传输数据的最大限制是多少，占满后会导致什么问题" class="headerlink" title="binder传输数据的最大限制是多少，占满后会导致什么问题"></a>binder传输数据的最大限制是多少，占满后会导致什么问题</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// --frameworks/nativebs/binder/ProcessState.cpp</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BINDER_VM_SIZE ((1*1024*1024) - (4096 *2))</span></div><div class="line">ProcessState::ProcessState()</div><div class="line">    : mDriverFD(open_driver())</div><div class="line">    , mVMStart(MAP_FAILED)</div><div class="line">    , mThreadCountLock(PTHREAD_MUTEX_INITIALIZER)</div><div class="line">    , mThreadCountDecrement(PTHREAD_COND_INITIALIZER)</div><div class="line">    , mExecutingThreadsCount(<span class="number">0</span>)</div><div class="line">    , mMaxThreads(DEFAULT_MAX_BINDER_THREADS)</div><div class="line">    , mManagesContexts(<span class="literal">false</span>)</div><div class="line">    , mBinderContextCheckFunc(<span class="literal">NULL</span>)</div><div class="line">    , mBinderContextUserData(<span class="literal">NULL</span>)</div><div class="line">    , mThreadPoolStarted(<span class="literal">false</span>)</div><div class="line">    , mThreadPoolSeq(<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line">    <span class="comment">// mmap the binder, providing a chunk of virtual address space to receive transactions.</span></div><div class="line">    mVMStart = mmap(<span class="number">0</span>, BINDER_VM_SIZE, PROT_READ, MAP_PRIVATE | MAP_NORESERVE, mDriverFD, <span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在调用mmap时会指定Binder内存缓冲区的大小为1016k；当服务端的内存缓冲区被Binder进程占用满后，Binder驱动不会在处理binder调用并在c++层抛出DeadObjectException到binder客户端。<br><strong>同步空间是1016k，异步空间只有他的一半，也就是508k</strong>。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// --kernel/msm-3.18/drivers/staging/android/binder_alloc.c</span></div><div class="line"><span class="function">struct binder_buffer *<span class="title">binder_alloc_new_buf</span><span class="params">(struct binder_alloc *alloc,</span></span></div><div class="line">                    <span class="keyword">size_t</span> data_size,</div><div class="line">                    <span class="keyword">size_t</span> offsets_size,</div><div class="line">                    <span class="keyword">size_t</span> extra_buffers_size,</div><div class="line">                    <span class="keyword">int</span> is_async)</div><div class="line">&#123;</div><div class="line">...</div><div class="line"><span class="keyword">if</span> (is_async &amp;&amp;</div><div class="line">    <span class="comment">// 当Binder缓存空间不足时将会出现异常，Binder驱动不再会派发这个binder请求</span></div><div class="line">    alloc-&gt;free_async_space &lt; size + <span class="keyword">sizeof</span>(struct binder_buffer)) &#123;</div><div class="line">    binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,</div><div class="line">             <span class="string">"%d: binder_alloc_buf size %zd failed, no async space left\n"</span>,</div><div class="line">              alloc-&gt;pid, size);</div><div class="line">    eret = ERR_PTR(-ENOSPC);</div><div class="line">    <span class="keyword">goto</span> error_unlock;</div><div class="line">&#125;</div><div class="line">error_unlock:</div><div class="line">mutex_unlock(&amp;alloc-&gt;mutex);</div><div class="line"><span class="keyword">return</span> eret;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="Binder驱动什么时候释放缓冲区的内存"><a href="#Binder驱动什么时候释放缓冲区的内存" class="headerlink" title="Binder驱动什么时候释放缓冲区的内存"></a>Binder驱动什么时候释放缓冲区的内存</h5><p>是在binder call之后，调用Parcel.recycle来完成释放内存的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">startActivity</span><span class="params">(IApplicationThread caller, String callingPackage, Intent intent,</span></span></div><div class="line">        String resolvedType, IBinder resultTo, String resultWho, <span class="keyword">int</span> requestCode,</div><div class="line">        <span class="keyword">int</span> startFlags, ProfilerInfo profilerInfo, Bundle options) <span class="keyword">throws</span> RemoteException &#123;</div><div class="line">    Parcel data = Parcel.obtain();</div><div class="line">    Parcel reply = Parcel.obtain();</div><div class="line">    mRemote.transact(START_ACTIVITY_TRANSACTION, data, reply, <span class="number">0</span>);</div><div class="line">    reply.recycle();</div><div class="line">    data.recycle();</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？"><a href="#为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？" class="headerlink" title="为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？"></a>为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？</h5><p>通过Binder直接传输Bitmap，如果bitmap的大小大于128k，那么传输Bitmap内容的方式就会使用ashmem，Binder只需要负责传输ashmem的fd到服务端即可。这种Binder+ashmem的方式在Android中很常见，比如四大组件的ContentProvider.query方法，从Provider中查找的数据通常会超过1016k这个限制，使用ashmem不仅能突破这个限制，还有提高大量数据传输的效率</p>
+<p>使用广播来传输跨进程传输数据的话则不一样，bitmap是被填入到Bundle中，随后以Parcelable的序列化方式传输到AMS的，如果Bundle数据量大于800k，就会抛出TrasnactionTooLargeException的异常</p>
+<p>依据Bitmap是否过大来使用ashmem还是Binder的方式传输内容的逻辑在native层的Bitmap_createFromParcel。</p>
+<h5 id="应用程序为什么支持Binder通信，直接可以使用四大组件呢"><a href="#应用程序为什么支持Binder通信，直接可以使用四大组件呢" class="headerlink" title="应用程序为什么支持Binder通信，直接可以使用四大组件呢?"></a>应用程序为什么支持Binder通信，直接可以使用四大组件呢?</h5><p>所有应用的进程都是通过调用AMS.startProcessLocked方法来fork Zygote进程创建的；Zygote在启动时会在preloadClasses中预先加载上千个类，而在fork子进程时，这些操作就不需要在做了，大大节约了子进程的启动时间。</p>
+<p>应用进程的Binder驱动初始化的操作正是在zygote fork自身之后做的。system_server与zygote的通信使用socket，之所以不使用binder的原因很简单，socket的使用对于写这个功能的工程师来说更简单。</p>
+<p>在zygote进程的初始化操作完成后，zygote会通过socket返回给system_server pid，随后AMS会将pid和应用的Application进行绑定。也就是说在应用调用Application.onCreate之前，binder驱动的初始化就已经完成了，所以直接就可以使用Binder来通信。</p>
 
       
 
@@ -262,7 +335,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">流媒体服务器 ubuntu</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Binder</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		
 		</ul>
@@ -318,7 +395,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/LouisShark/2017/10/11/搭建ngnix/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/LouisShark/2017/12/12/Binder/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -332,20 +409,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/11/C++编程风格笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/11/07/几分钟手写一个双向链表/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          C++编程风格笔记
+          几分钟手写一个双向链表
         
       </div>
     </a>
   
-  
-    <a href="/2017/11/07/几分钟手写一个双向链表/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">几分钟手写一个双向链表</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
@@ -374,8 +446,8 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "https://github.com/LouisShark/2017/10/11/搭建ngnix/", 
-    sourceId: "搭建ngnix",
+    url: "https://github.com/LouisShark/2017/12/12/Binder/", 
+    sourceId: "Binder",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
