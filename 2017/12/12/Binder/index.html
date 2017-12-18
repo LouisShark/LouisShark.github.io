@@ -9,7 +9,7 @@
   <title>Binder随意记录 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="[TOC] ###为何选择Binder  Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。 ####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。  socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。 管道和消息队列">
-<meta name="keywords" content="android,Binder">
+<meta name="keywords" content="Binder,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binder随意记录">
 <meta property="og:url" content="https://github.com/LouisShark/2017/12/12/Binder/index.html">
@@ -209,6 +209,7 @@
 </tbody>
 </table>
 <p>####安全性高<br>传统IPC没有任何安全措施，完全以来上层协议来确保。首先传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。</p>
+<a id="more"></a>
 <p>Android为每个安装好的应用程序分配了自己的UID，故进程的UID是鉴别进程身份的重要标志。可靠的身份标识只有IPC机制本身在内核中添加。</p>
 <p>传统IPC访问接入点是开放的，无法建立私有通道，Binder可以使用匿名Binder建立私密通道，别的进程就无法通过穷举或猜测等任何方式获得该Binder的引用，向该Binder发送请求。</p>
 <h4 id="易用性"><a href="#易用性" class="headerlink" title="易用性"></a>易用性</h4><hr>
@@ -335,11 +336,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Binder</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Binder</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		
 		</ul>
@@ -564,7 +565,7 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,15 +573,7 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,6 +582,14 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,15 +613,15 @@ Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true)
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SVG</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
               </li>
              
               <li class="article-tag-list-item">
