@@ -9,7 +9,7 @@
   <title>Binder随意记录 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="[TOC] ###为何选择Binder  Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。 ####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。  socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。 管道和消息队列">
-<meta name="keywords" content="android,Binder">
+<meta name="keywords" content="Binder,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binder随意记录">
 <meta property="og:url" content="https://github.com/LouisShark/2017/12/12/Binder/index.html">
@@ -336,11 +336,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Binder</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Binder</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		
 		</ul>
@@ -435,21 +435,25 @@
   
 
   
-  <link rel="stylesheet" href="../../gitalk/gitalk.css">
-<script src="../../gitalk/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        id: location.pathname,
-        clientID: '2e0ac0d0b4b56fb035c5',
-        clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
-        repo: 'blog_comment',
-        owner: 'LouisShark',
-        admin: 'LouisShark',
-        distractionFreeMode: 'true',
-    })
-    gitalk.render('gitalk-container')
-</script>
+  
+    
+        <link rel="stylesheet" href="../../gitalk/gitalk.css">
+        <script src="../../gitalk/gitalk.min.js"></script>
+        <div id="gitalk-container"></div>
+        <script type="text/javascript">
+            var gitalk = new Gitalk({
+                id: location.pathname,
+                clientID: '2e0ac0d0b4b56fb035c5',
+                clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
+                repo: 'blog_comment',
+                owner: 'LouisShark',
+                admin: 'LouisShark',
+                distractionFreeMode: 'true',
+            })
+            gitalk.render('gitalk-container')
+        </script>
+    
+
     
 
   
@@ -545,15 +549,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
+                <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Binder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,14 +570,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,11 +585,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,6 +594,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
               </li>
              
               <li class="article-tag-list-item">

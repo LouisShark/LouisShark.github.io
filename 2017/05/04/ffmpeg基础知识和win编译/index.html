@@ -251,7 +251,7 @@
 </ol>
 <hr>
 <ol>
-<li><strong>新建build_android.sh文件</strong><br><em>注意</em>：要根据环境配置的前四项，且每行末尾不能有空格。export TMPDIR,NDK,SYSROOT,TOOLCHAIN-cross-prefix 一定有<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/bash</div><div class="line">export TMPDIR="D:\ffmpeg\tmp"</div><div class="line">NDK=D:\/sdk\/ndk-bundle</div><div class="line">SYSROOT=$NDK/platforms\/android-24\/arch-arm/</div><div class="line">TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64</div><div class="line">function build_one &#123; </div><div class="line">./configure \</div><div class="line">     --prefix=$PREFIX \</div><div class="line">     --enable-shared \</div><div class="line">     --disable-static \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-ffmpeg \</div><div class="line">     --disable-ffplay \</div><div class="line">     --disable-ffprobe \</div><div class="line">     --disable-ffserver \</div><div class="line">     --disable-avdevice \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-symver \</div><div class="line">     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</div><div class="line">     --target-os=linux \</div><div class="line">     --arch=arm \</div><div class="line">     --enable-cross-compile \</div><div class="line">     --sysroot=$SYSROOT \</div><div class="line">     --extra-cflags="-Os -fpic $ADDI_CFLAGS" \</div><div class="line">     --extra-ldflags="$ADDI_LDFLAGS" \</div><div class="line">     $ADDITIONAL_CONFIGURE_FLAG</div><div class="line">     make clean</div><div class="line">     make</div><div class="line">     make install</div><div class="line"> &#125;</div><div class="line"> CPU=arm</div><div class="line"> PREFIX=$(pwd)/android/$CPU</div><div class="line"> ADDI_CFLAGS="-marm"</div><div class="line"> build_one</div></pre></td></tr></table></figure>
+<li><strong>新建build_android.sh文件</strong><br><em>注意</em>：要根据环境配置的前四项，且每行末尾不能有空格。export TMPDIR,NDK,SYSROOT,TOOLCHAIN-cross-prefix 一定有<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></div><div class="line">export TMPDIR="D:\ffmpeg\tmp"</div><div class="line">NDK=D:\/sdk\/ndk-bundle</div><div class="line">SYSROOT=$NDK/platforms\/android-24\/arch-arm/</div><div class="line">TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64</div><div class="line">function build_one &#123; </div><div class="line">./configure \</div><div class="line">     --prefix=$PREFIX \</div><div class="line">     --enable-shared \</div><div class="line">     --disable-static \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-ffmpeg \</div><div class="line">     --disable-ffplay \</div><div class="line">     --disable-ffprobe \</div><div class="line">     --disable-ffserver \</div><div class="line">     --disable-avdevice \</div><div class="line">     --disable-doc \</div><div class="line">     --disable-symver \</div><div class="line">     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</div><div class="line">     --target-os=linux \</div><div class="line">     --arch=arm \</div><div class="line">     --enable-cross-compile \</div><div class="line">     --sysroot=$SYSROOT \</div><div class="line">     --extra-cflags="-Os -fpic $ADDI_CFLAGS" \</div><div class="line">     --extra-ldflags="$ADDI_LDFLAGS" \</div><div class="line">     $ADDITIONAL_CONFIGURE_FLAG</div><div class="line">     make clean</div><div class="line">     make</div><div class="line">     make install</div><div class="line"> &#125;</div><div class="line"> CPU=arm</div><div class="line"> PREFIX=$(pwd)/android/$CPU</div><div class="line"> ADDI_CFLAGS="-marm"</div><div class="line"> build_one</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>然后在MinGW中cd进ffmpeg目录。<br>命令：</p>
@@ -397,21 +397,25 @@
   
 
   
-  <link rel="stylesheet" href="../../gitalk/gitalk.css">
-<script src="../../gitalk/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        id: location.pathname,
-        clientID: '2e0ac0d0b4b56fb035c5',
-        clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
-        repo: 'blog_comment',
-        owner: 'LouisShark',
-        admin: 'LouisShark',
-        distractionFreeMode: 'true',
-    })
-    gitalk.render('gitalk-container')
-</script>
+  
+    
+        <link rel="stylesheet" href="../../gitalk/gitalk.css">
+        <script src="../../gitalk/gitalk.min.js"></script>
+        <div id="gitalk-container"></div>
+        <script type="text/javascript">
+            var gitalk = new Gitalk({
+                id: location.pathname,
+                clientID: '2e0ac0d0b4b56fb035c5',
+                clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
+                repo: 'blog_comment',
+                owner: 'LouisShark',
+                admin: 'LouisShark',
+                distractionFreeMode: 'true',
+            })
+            gitalk.render('gitalk-container')
+        </script>
+    
+
     
 
   
@@ -507,15 +511,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
+                <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Binder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,14 +532,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">官网Guide</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,11 +547,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,6 +556,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自定义view</a>
               </li>
              
               <li class="article-tag-list-item">
