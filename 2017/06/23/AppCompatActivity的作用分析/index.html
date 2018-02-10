@@ -5,22 +5,22 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://github.com/LouisShark">
+  <link rel="dns-prefetch" href="//ilouis.me">
   <title>AppCompatActivity的作用分析 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
 <meta name="keywords" content="android,源码分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AppCompatActivity的作用分析">
-<meta property="og:url" content="https://github.com/LouisShark/2017/06/23/AppCompatActivity的作用分析/index.html">
+<meta property="og:url" content="//ilouis.me/2017/06/23/AppCompatActivity的作用分析/index.html">
 <meta property="og:site_name" content="Paris">
 <meta property="og:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
-<meta property="og:image" content="https://github.com/LouisShark/asset/img/delegate的类继承图.png">
+<meta property="og:image" content="//ilouis.me/asset/img/delegate的类继承图.png">
 <meta property="og:updated_time" content="2017-06-24T06:04:14.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AppCompatActivity的作用分析">
 <meta name="twitter:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
-<meta name="twitter:image" content="https://github.com/LouisShark/asset/img/delegate的类继承图.png">
+<meta name="twitter:image" content="//ilouis.me/asset/img/delegate的类继承图.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -46,11 +46,11 @@
 <div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="null" class="profilepic">
+		<a href="/" class="profilepic">
 			<img src="/img/me1.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="null">LouisShark</a></h1>
+		  <h1 class="header-author"><a href="/">LouisShark</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">博客不定期更新</p>
@@ -318,7 +318,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/LouisShark/2017/06/23/AppCompatActivity的作用分析/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ilouis.me/2017/06/23/AppCompatActivity的作用分析/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -408,7 +408,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "https://github.com/LouisShark/2017/06/23/AppCompatActivity的作用分析/",
+  id: "//ilouis.me/2017/06/23/AppCompatActivity的作用分析/",
   owner: 'LouisShark',
   repo: 'blog_comment',
   oauth: {
