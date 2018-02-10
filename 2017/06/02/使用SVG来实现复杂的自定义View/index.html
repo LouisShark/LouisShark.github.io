@@ -9,7 +9,7 @@
   <title>使用SVG来实现复杂的自定义View | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最近发现可以用SVG来实习非常复杂的自定义View，可以说是非常的厉害了。只要你看到不想做的很复杂的设计图，你就让美工妹子给你来一张SVG吧，还可以趁机和她聊下天。 我们就来画一个可交互的中国台湾地图吧，首先我们来理一下做这种自定义View的步骤。   下载含有中国地图的  SVG  用此 网站 将svg资源转换成相应的 Android代码 利用Xml解析SVG的代码  封装成javaBean">
-<meta name="keywords" content="SVG,自定义view">
+<meta name="keywords" content="自定义view,SVG">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用SVG来实现复杂的自定义View">
 <meta property="og:url" content="https://github.com/LouisShark/2017/06/02/使用SVG来实现复杂的自定义View/index.html">
@@ -44,11 +44,11 @@
 <div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
+		<a href="null" class="profilepic">
 			<img src="/img/me1.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">LouisShark</a></h1>
+		  <h1 class="header-author"><a href="null">LouisShark</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">博客不定期更新</p>
@@ -87,7 +87,13 @@
 		        
 					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/louisshark" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
+					<a class="qq" target="_blank" href="/1034232096" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/18731855/#/" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
 					<a class="mail" target="_blank" href="mailto:mshark.louis@gmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/shark_louis" title="twitter"><i class="icon-twitter"></i></a>
 		        
 			</div>
 		</nav>
@@ -130,7 +136,13 @@
 			        
 						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/louisshark" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
+						<a class="qq" target="_blank" href="/1034232096" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/18731855/#/" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
 						<a class="mail" target="_blank" href="mailto:mshark.louis@gmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/shark_louis" title="twitter"><i class="icon-twitter"></i></a>
 			        
 				</div>
 			</nav>
@@ -254,11 +266,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVG</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVG</a>
         		</li>
       		
 		</ul>
@@ -510,15 +522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
+                <a href="javascript:void(0)" class="js-tag color2">kotlin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,7 +534,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,7 +550,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,7 +570,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
+                <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,19 +578,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVG</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
               </li>
              
               <li class="article-tag-list-item">

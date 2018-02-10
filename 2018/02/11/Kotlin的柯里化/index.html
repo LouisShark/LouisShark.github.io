@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/LouisShark">
-  <title>Archives: 2017 | Paris</title>
+  <title>Kotlin的柯里化 | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="相看两厌">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Paris">
-<meta property="og:url" content="https://github.com/LouisShark/archives/2017/index.html">
+  <meta name="description" content="难得今天休息了一天，就一直在睡觉，突然看到群里有人说到Kotlin的柯里化，正好最近在学习Kotlin，就想要记录一下。想到自己很久没动的博客(懒..不是忙)，垂死病中惊坐起，意识到自己不能继续颓废下去了，赶紧爬起来写了这篇博客，也算是新年有个好开始吧。以后尽量把博客捡起来。。。  Koltin是什么语言我也不想多说了，google的推荐让这个东西着实火了一把，我也就怀着好奇心去学了下，因为以前">
+<meta name="keywords" content="kotlin,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin的柯里化">
+<meta property="og:url" content="https://github.com/LouisShark/2018/02/11/Kotlin的柯里化/index.html">
 <meta property="og:site_name" content="Paris">
-<meta property="og:description" content="相看两厌">
+<meta property="og:description" content="难得今天休息了一天，就一直在睡觉，突然看到群里有人说到Kotlin的柯里化，正好最近在学习Kotlin，就想要记录一下。想到自己很久没动的博客(懒..不是忙)，垂死病中惊坐起，意识到自己不能继续颓废下去了，赶紧爬起来写了这篇博客，也算是新年有个好开始吧。以后尽量把博客捡起来。。。  Koltin是什么语言我也不想多说了，google的推荐让这个东西着实火了一把，我也就怀着好奇心去学了下，因为以前">
+<meta property="og:updated_time" content="2018-02-10T17:00:40.583Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Paris">
-<meta name="twitter:description" content="相看两厌">
+<meta name="twitter:title" content="Kotlin的柯里化">
+<meta name="twitter:description" content="难得今天休息了一天，就一直在睡觉，突然看到群里有人说到Kotlin的柯里化，正好最近在学习Kotlin，就想要记录一下。想到自己很久没动的博客(懒..不是忙)，垂死病中惊坐起，意识到自己不能继续颓废下去了，赶紧爬起来写了这篇博客，也算是新年有个好开始吧。以后尽量把博客捡起来。。。  Koltin是什么语言我也不想多说了，google的推荐让这个东西着实火了一把，我也就怀着好奇心去学了下，因为以前">
   
   
     <link rel="icon" href="/favicon.png">
@@ -166,507 +168,239 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Kotlin的柯里化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/12/Binder/" class="archive-article-date">
-  	<time datetime="2017-12-12T09:42:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/12/Binder/">Binder随意记录</a>
+    <h1 class="article-title" itemprop="name">
+      Kotlin的柯里化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/02/11/Kotlin的柯里化/" class="archive-article-date">
+  	<time datetime="2018-02-10T16:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>难得今天休息了一天，就一直在睡觉，突然看到群里有人说到Kotlin的柯里化，正好最近在学习Kotlin，就想要记录一下。想到自己很久没动的博客(懒..不是忙)，垂死病中惊坐起，意识到自己不能继续颓废下去了，赶紧爬起来写了这篇博客，也算是新年有个好开始吧。以后尽量把博客捡起来。。。</p>
+</blockquote>
+<p>Koltin是什么语言我也不想多说了，google的推荐让这个东西着实火了一把，我也就怀着好奇心去学了下，因为以前一直写Java(写的时间也不久)，确实被Kotlin的扩展函数，重载操作符，空安全给吸引到了，说实话，写了Kotlin，我真的觉得Java在这个时代有点过去式的感觉。。不多说了，看标题就知道我今天要说的是什么了。</p>
+<p>###柯里化</p>
+<p>这是一个神奇的东西，Java未曾出现过，起码在java8之前(即使是8我觉得也不是标准的Curry，只是像而已)，虽然Kotlin没有这个语法糖，但对于可以<code>FP</code>的Kotlin来说，这都不是事。<br><a id="more"></a></p>
+<blockquote>
+<p>维基百科这样说道：<br>在计算机科学中，柯里化（英语：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术.  </p>
+</blockquote>
+<p> 可能有些人觉得很困惑，确实，对没接触过fp的语言的人来说确实有点难懂。没事，<strong>Talk is cheap, show you code.</strong></p>
+<p>####举个栗子：<br>有时候我们想要打印一些东西，于是我们如是写道<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>:</div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">log</span><span class="params">(tag: <span class="type">String</span>, target: <span class="type">OutputStream</span>, message: <span class="type">Any</span>?)</span></span> &#123;</div><div class="line">    target.write(<span class="string">"<span class="subst">$tag</span> <span class="subst">$message</span>\n"</span>.toByteArray())</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    log(<span class="string">"louis"</span>, System.<span class="keyword">out</span>, <span class="string">"what f**k"</span>)</div><div class="line">&#125;</div><div class="line">output:</div><div class="line">louis what f**k</div></pre></td></tr></table></figure></p>
+<p>一个简单的实现就完成了，但是我们看着不爽啊，这方法调着有点烦人啊(只是个例子，不要较真)，于是我们想到了柯里化。</p>
+<p><strong>初次修改后：</strong><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>:</div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">logCurry</span><span class="params">(tag: <span class="type">String</span>)</span></span>: (target: OutputStream) -&gt; (message: Any?)-&gt; <span class="built_in">Unit</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="title">fun</span> <span class="params">(target: <span class="type">OutputStream</span>)</span></span>: (message: Any?) -&gt; <span class="built_in">Unit</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="title">fun</span> <span class="params">(message: <span class="type">Any</span>?)</span></span> &#123;</div><div class="line">            <span class="keyword">return</span> target.write(<span class="string">"<span class="subst">$tag</span> <span class="subst">$message</span>\n"</span>.toByteArray())</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    logCurry(<span class="string">"louis"</span>)(System.<span class="keyword">out</span>)(<span class="string">"what f**k"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line">output:</div><div class="line">louis what f**k</div></pre></td></tr></table></figure></p>
+<p>简单的柯里化函数就完成了，但是这代码，喔吼，不是变得很麻烦了吗，看起来也不简单啊，没事我再改一下。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>:</div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">log</span><span class="params">(tag: <span class="type">String</span>)</span></span></div><div class="line">    = <span class="function"><span class="title">fun</span> <span class="params">(target: <span class="type">OutputStream</span>)</span></span></div><div class="line">    = <span class="function"><span class="title">fun</span> <span class="params">(message: <span class="type">Any</span>?)</span></span></div><div class="line">    = target.write(<span class="string">"<span class="subst">$tag</span> <span class="subst">$message</span>\n"</span>.toByteArray())</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">	log(<span class="string">"louis"</span>)(System.<span class="keyword">out</span>)(<span class="string">"what f**k"</span>)</div><div class="line">&#125;</div><div class="line">output:</div><div class="line">louis what f**k</div></pre></td></tr></table></figure>
+<p>这就是把他柯里化的最终版本了，其实也只是利用了fp的范式，看到这里你应该要骂人了，这哪里简单了，没关系，我们写Kotlin，要的就是简单易读(骚)，我们不还有扩展函数吗，给这种东西写个柯里化的扩展还不是分分钟吗，仔细看。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>:</div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;P1, P2, P3, R&gt;</span> Function3<span class="type">&lt;P1, P2, P3, R&gt;</span>.<span class="title">curried</span><span class="params">()</span></span>: (P1) -&gt; (P2) -&gt; (P3) -&gt; R &#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="title">fun</span> <span class="params">(p1: <span class="type">P1</span>)</span></span>: (P2) -&gt; (P3) -&gt; R &#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="title">fun</span> <span class="params">(p2: <span class="type">P2</span>)</span></span>: (P3) -&gt; R &#123;</div><div class="line">            <span class="keyword">return</span> <span class="function"><span class="title">fun</span> <span class="params">(p3: <span class="type">P3</span>)</span></span>: R &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">this</span>(p1, p2, p3)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    ::log.curried()(<span class="string">"louis"</span>)(System.<span class="keyword">out</span>)(<span class="string">"what f**k"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>::log是method reference(函数引用)，java8后也有这个概念，这就不多说了，另一个故事了，你应该看到了，我们给三个参数的函数写了个扩展方法，这样我们所有三个参数的函数柯里化就可以直接调这个扩展函数了。</p>
+<blockquote>
+<p>其实柯里化本身很简单，难的是他的概念。</p>
+</blockquote>
+<p>这东西我也是记录一下，现在差不多写完了，收工睡觉了。</p>
+<p><strong>谢谢你看到这里看到发牢骚&gt;_&lt;。。。</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>暂不支持，我开心再加<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kotlin</a>
         		</li>
       		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Binder</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/07/几分钟手写一个双向链表/" class="archive-article-date">
-  	<time datetime="2017-11-07T06:42:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/07/几分钟手写一个双向链表/">几分钟手写一个双向链表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/11/搭建ngnix/" class="archive-article-date">
-  	<time datetime="2017-10-11T07:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/11/搭建ngnix/">搭建nginx</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">流媒体服务器 ubuntu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/C++编程风格笔记/" class="archive-article-date">
-  	<time datetime="2017-09-11T06:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/C++编程风格笔记/">C++编程风格笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/LouisShark/2018/02/11/Kotlin的柯里化/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/" class="archive-article-date">
-  	<time datetime="2017-07-05T06:41:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-05</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/12/12/Binder/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Binder随意记录
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/">Mrak message parts that should not be translated</a>
-    </h1>
+  
+  
+    <div class="netease"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">官网Guide</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">本地化资源</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+  
   
     
+        <link rel="stylesheet" href="../../gitalk/gitalk.css">
+        <script src="../../gitalk/gitalk.min.js"></script>
+        <div id="gitalk-container"></div>
+        <script type="text/javascript">
+            var gitalk = new Gitalk({
+                id: location.pathname,
+                clientID: '2e0ac0d0b4b56fb035c5',
+                clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
+                repo: 'blog_comment',
+                owner: 'LouisShark',
+                admin: 'LouisShark',
+                distractionFreeMode: 'true',
+            })
+            gitalk.render('gitalk-container')
+        </script>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/23/AppCompatActivity的作用分析/" class="archive-article-date">
-  	<time datetime="2017-06-23T09:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/23/AppCompatActivity的作用分析/">AppCompatActivity的作用分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/14/滑动冲突的解决方式/" class="archive-article-date">
-  	<time datetime="2017-06-14T03:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/14/滑动冲突的解决方式/">滑动冲突的解决方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动冲突</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件分发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/02/使用SVG来实现复杂的自定义View/" class="archive-article-date">
-  	<time datetime="2017-06-02T01:48:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/02/使用SVG来实现复杂的自定义View/">使用SVG来实现复杂的自定义View</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">自定义view</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVG</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/08/UI事件传递/" class="archive-article-date">
-  	<time datetime="2017-05-08T03:46:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/08/UI事件传递/">UI事件传递</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">UI事件传递</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">android开发艺术探索</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/04/ffmpeg基础知识和win编译/" class="archive-article-date">
-  	<time datetime="2017-05-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/04/ffmpeg基础知识和win编译/">ffmpeg知识点</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ffmpeg</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/02/手动实现arraylist和hashmap/" class="archive-article-date">
-  	<time datetime="2017-05-02T08:37:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/02/手动实现arraylist和hashmap/">手动实现arraylist和hashmap</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/19/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-19T09:58:12.666Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/19/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
     
+
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "https://github.com/LouisShark/2018/02/11/Kotlin的柯里化/",
+  owner: 'LouisShark',
+  repo: 'blog_comment',
+  oauth: {
+    client_id: '2e0ac0d0b4b56fb035c5',
+    client_secret: '33de597701f4685b8c69fdf17274a362bc039ee0',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -691,8 +425,8 @@ cript>
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
