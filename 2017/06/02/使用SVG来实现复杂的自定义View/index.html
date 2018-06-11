@@ -196,7 +196,7 @@
 </ol>
 </blockquote>
 <p>对了，地图资源可以在<strong><a href="https://www.amcharts.com/dl/javascript-maps/" target="_blank" rel="external">这里</a> </strong>下载。开始写代码吧。</p>
-<p><a href="https://github.com/LouisShark/LouisMap">项目地址</a>点这里可以看源码。</p>
+<p><a href="https://github.com/LouisShark/LouisMap" target="_blank" rel="external">项目地址</a>点这里可以看源码。</p>
 <p>前两步不需要我如何说了吧，可以把转化后的android代码，放入res/raw目录下，接下来开始第三步：</p>
 <a id="more"></a>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">parseXMLWithPull</span><span class="params">()</span> </span>&#123;</div><div class="line">       InputStream inputStream = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           inputStream = context.getResources().openRawResource(R.raw.taiwanhigh);</div><div class="line">           XmlPullParserFactory factory = XmlPullParserFactory.newInstance();</div><div class="line">           factory.setNamespaceAware(<span class="keyword">true</span>);</div><div class="line">           XmlPullParser xmlPullParser = factory.newPullParser();</div><div class="line">           xmlPullParser.setInput(inputStream, <span class="string">"UTF-8"</span>);</div><div class="line">           <span class="keyword">int</span> eventType = xmlPullParser.getEventType();</div><div class="line">           ProvinceItem item = <span class="keyword">null</span>;</div><div class="line">           <span class="keyword">while</span> (eventType != XmlPullParser.END_DOCUMENT) &#123;</div><div class="line">               String nodeName = xmlPullParser.getName();</div><div class="line">               <span class="keyword">switch</span> (eventType) &#123;</div><div class="line">                   <span class="comment">//开始解析某个节点</span></div><div class="line">                   <span class="keyword">case</span> XmlPullParser.START_DOCUMENT:</div><div class="line">                       itemList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">                       <span class="keyword">break</span>;</div><div class="line">                   <span class="keyword">case</span> XmlPullParser.START_TAG:</div><div class="line">                       <span class="keyword">if</span> (<span class="string">"path"</span>.equals(nodeName)) &#123;</div><div class="line">                           String pathData = xmlPullParser.getAttributeValue(<span class="string">"http://schemas.android.com/apk/res/android"</span>, <span class="string">"pathData"</span>);</div><div class="line">                           Path path = PathParser.createPathFromPathData(pathData);</div><div class="line">                           item = <span class="keyword">new</span> ProvinceItem(path);</div><div class="line">                       &#125;</div><div class="line">                       <span class="keyword">break</span>;</div><div class="line">                   <span class="keyword">case</span> XmlPullParser.END_TAG:</div><div class="line">                       <span class="keyword">if</span> (nodeName.equalsIgnoreCase(<span class="string">"path"</span>) &amp;&amp; item != <span class="keyword">null</span>) &#123;</div><div class="line">                           <span class="keyword">assert</span> itemList != <span class="keyword">null</span>;</div><div class="line">                           itemList.add(item);</div><div class="line">                           item = <span class="keyword">null</span>;</div><div class="line">                           handler.sendEmptyMessage(PARSE_END);</div><div class="line">                       &#125;</div><div class="line">                       <span class="keyword">break</span>;</div><div class="line">                   <span class="keyword">default</span>:</div><div class="line">                       <span class="keyword">break</span>;</div><div class="line">               &#125;</div><div class="line">               eventType = xmlPullParser.next();</div><div class="line">           &#125;</div><div class="line"></div><div class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">       &#125; <span class="keyword">finally</span> &#123;</div><div class="line">           <span class="keyword">if</span> (inputStream != <span class="keyword">null</span>) &#123;</div><div class="line">               <span class="keyword">try</span> &#123;</div><div class="line">                   inputStream.close();</div><div class="line">               &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                   e.printStackTrace();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
@@ -525,7 +525,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
+                <a href="javascript:void(0)" class="js-tag color2">kotlin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,7 +537,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,10 +546,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kotlin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,6 +569,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -577,15 +581,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">-kotlin -易错题</a>
               </li>
             
             <div class="clearfix"></div>

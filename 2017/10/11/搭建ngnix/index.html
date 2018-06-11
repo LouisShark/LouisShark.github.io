@@ -15,7 +15,7 @@
 <meta property="og:url" content="//louisshark.github.io/2017/10/11/搭建ngnix/index.html">
 <meta property="og:site_name" content="Paris">
 <meta property="og:description" content="最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。 第一部分：准备工作先在/root/下新建一个目录存放这些文件。  mkdir nginxcd nginx  然后在执行下面三条命令。 下载Nginxwget http://nginx.org/download/nginx-1.12.1.tar.gz 下载OpenSSL(因为">
-<meta property="og:updated_time" content="2017-10-11T08:08:11.686Z">
+<meta property="og:updated_time" content="2018-03-23T10:39:36.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建nginx">
 <meta name="twitter:description" content="最近萌生搭建一个流媒体服务器的想法，因为自己在写一些音视频的东西，所以就想搞一个玩一玩。本篇在ubuntu16.04下成功。 第一部分：准备工作先在/root/下新建一个目录存放这些文件。  mkdir nginxcd nginx  然后在执行下面三条命令。 下载Nginxwget http://nginx.org/download/nginx-1.12.1.tar.gz 下载OpenSSL(因为">
@@ -197,7 +197,7 @@
 <h2 id="第二部分-编译"><a href="#第二部分-编译" class="headerlink" title="第二部分 编译"></a>第二部分 编译</h2><blockquote>
 <p><code>cd openssl-OpenSSL_1_1_0f/</code></p>
 <p><code>mkdir bin</code></p>
-<p>./config –prefix=`pwd`/bin</p>
+<p><strong>./config –prefix=`pwd`/bin</strong></p>
 </blockquote>
 <p>上面这条执行完之后会出现Makefile文件，接下来正式编译</p>
 <blockquote>
@@ -216,10 +216,10 @@
 <p>回到nginx目录下，开始编译nginx。</p>
 <blockquote>
 <p>cd /root/nginx/nginx-1.12.1/</p>
-<p>./configure –prefix=`pwd`/bin –add-module=/root/nginx/nginx-rtmp-module-1.2.0</p>
+<p><strong>./configure –prefix=`pwd`/bin –add-module=/root/nginx/nginx-rtmp-module-1.2.0</strong></p>
 <p>make install</p>
 </blockquote>
-<p>之后会多一个bin目录就代表成功了，来到这个目录执行</p>
+<p>之后会多一个bin目录就代表成功了，来到这个目录下的sbin执行</p>
 <blockquote>
 <p>./nginx</p>
 </blockquote>
@@ -529,7 +529,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
+                <a href="javascript:void(0)" class="js-tag color2">kotlin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,7 +541,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color2">Binder</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,10 +550,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">本地化资源</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kotlin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,6 +573,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -581,15 +585,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">流媒体服务器 ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">滑动冲突</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件分发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">-kotlin -易错题</a>
               </li>
             
             <div class="clearfix"></div>
