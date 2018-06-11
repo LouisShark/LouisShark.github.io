@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="//louisshark.github.io">
   <title>kotlin academy&#39;s trouble | Paris</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##Kotlin puzzlers dd  话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy   以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃 ###Ord">
+  <meta name="description" content="##Kotlin puzzlers dd  话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy   以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。 ###Or">
 <meta name="keywords" content="-kotlin -易错题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kotlin academy's trouble">
 <meta property="og:url" content="//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html">
 <meta property="og:site_name" content="Paris">
-<meta property="og:description" content="##Kotlin puzzlers dd  话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy   以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃 ###Ord">
-<meta property="og:updated_time" content="2018-06-11T05:57:26.970Z">
+<meta property="og:description" content="##Kotlin puzzlers dd  话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy   以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。 ###Or">
+<meta property="og:updated_time" content="2018-06-11T06:18:46.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kotlin academy's trouble">
-<meta name="twitter:description" content="##Kotlin puzzlers dd  话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy   以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃 ###Ord">
+<meta name="twitter:description" content="##Kotlin puzzlers dd  话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy   以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。 ###Or">
   
   
     <link rel="icon" href="/favicon.png">
@@ -189,7 +189,7 @@
 <blockquote>
 <p>话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 <strong>原文地址： <a href="https://kotlin-academy.herokuapp.com/#/" target="_blank" rel="external">Kotlin Academy</a> </strong></p>
 </blockquote>
-<p><strong>以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃</strong></p>
+<p><strong>以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。</strong></p>
 <p>###Order of nullable operators （猫王操作符的优先级 <em>重要提示</em></p>
 <p><strong>Level：Beginner</strong></p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    <span class="keyword">val</span> x: <span class="built_in">Int</span>? = <span class="number">2</span> </div><div class="line">    <span class="keyword">val</span> y: <span class="built_in">Int</span> = <span class="number">3</span></div><div class="line">    <span class="keyword">val</span> sum = x?:<span class="number">0</span> + y</div><div class="line">    </div><div class="line">    println(sum)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
