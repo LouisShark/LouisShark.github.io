@@ -619,7 +619,7 @@ libavfilter:  包含多媒体处理常用的滤镜功能
 </ol>
 <hr>
 <ol>
-<li><strong>新建build_android.sh文件</strong><br><em>注意</em>：要根据环境配置的前四项，且每行末尾不能有空格。export TMPDIR,NDK,SYSROOT,TOOLCHAIN-cross-prefix 一定有<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">export TMPDIR="D:\ffmpeg\tmp"</span><br><span class="line">NDK=D:\/sdk\/ndk-bundle</span><br><span class="line">SYSROOT=$NDK/platforms\/android-24\/arch-arm/</span><br><span class="line">TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64</span><br><span class="line">function build_one &#123; </span><br><span class="line">./configure \</span><br><span class="line">     --prefix=$PREFIX \</span><br><span class="line">     --enable-shared \</span><br><span class="line">     --disable-static \</span><br><span class="line">     --disable-doc \</span><br><span class="line">     --disable-ffmpeg \</span><br><span class="line">     --disable-ffplay \</span><br><span class="line">     --disable-ffprobe \</span><br><span class="line">     --disable-ffserver \</span><br><span class="line">     --disable-avdevice \</span><br><span class="line">     --disable-doc \</span><br><span class="line">     --disable-symver \</span><br><span class="line">     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</span><br><span class="line">     --target-os=linux \</span><br><span class="line">     --arch=arm \</span><br><span class="line">     --enable-cross-compile \</span><br><span class="line">     --sysroot=$SYSROOT \</span><br><span class="line">     --extra-cflags="-Os -fpic $ADDI_CFLAGS" \</span><br><span class="line">     --extra-ldflags="$ADDI_LDFLAGS" \</span><br><span class="line">     $ADDITIONAL_CONFIGURE_FLAG</span><br><span class="line">     make clean</span><br><span class="line">     make</span><br><span class="line">     make install</span><br><span class="line"> &#125;</span><br><span class="line"> CPU=arm</span><br><span class="line"> PREFIX=$(pwd)/android/$CPU</span><br><span class="line"> ADDI_CFLAGS="-marm"</span><br><span class="line"> build_one</span><br></pre></td></tr></table></figure>
+<li><strong>新建build_android.sh文件</strong><br><em>注意</em>：要根据环境配置的前四项，且每行末尾不能有空格。export TMPDIR,NDK,SYSROOT,TOOLCHAIN-cross-prefix 一定有<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">export TMPDIR="D:\ffmpeg\tmp"</span><br><span class="line">NDK=D:\/sdk\/ndk-bundle</span><br><span class="line">SYSROOT=$NDK/platforms\/android-24\/arch-arm/</span><br><span class="line">TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64</span><br><span class="line">function build_one &#123; </span><br><span class="line">./configure \</span><br><span class="line">     --prefix=$PREFIX \</span><br><span class="line">     --enable-shared \</span><br><span class="line">     --disable-static \</span><br><span class="line">     --disable-doc \</span><br><span class="line">     --disable-ffmpeg \</span><br><span class="line">     --disable-ffplay \</span><br><span class="line">     --disable-ffprobe \</span><br><span class="line">     --disable-ffserver \</span><br><span class="line">     --disable-avdevice \</span><br><span class="line">     --disable-doc \</span><br><span class="line">     --disable-symver \</span><br><span class="line">     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \</span><br><span class="line">     --target-os=linux \</span><br><span class="line">     --arch=arm \</span><br><span class="line">     --enable-cross-compile \</span><br><span class="line">     --sysroot=$SYSROOT \</span><br><span class="line">     --extra-cflags="-Os -fpic $ADDI_CFLAGS" \</span><br><span class="line">     --extra-ldflags="$ADDI_LDFLAGS" \</span><br><span class="line">     $ADDITIONAL_CONFIGURE_FLAG</span><br><span class="line">     make clean</span><br><span class="line">     make</span><br><span class="line">     make install</span><br><span class="line"> &#125;</span><br><span class="line"> CPU=arm</span><br><span class="line"> PREFIX=$(pwd)/android/$CPU</span><br><span class="line"> ADDI_CFLAGS="-marm"</span><br><span class="line"> build_one</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>然后在MinGW中cd进ffmpeg目录。<br>命令：</p>
@@ -650,30 +650,30 @@ libavfilter:  包含多媒体处理常用的滤镜功能
                 <!-- Post Comments -->
                 
                     
-    <!-- 使用 Gitalk -->
-<div id="gitalk-comment">
-    <!-- Gitalk 评论框 -->
-<div id="gitalk-container"></div>
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-            clientID: '2e0ac0d0b4b56fb035c5',
-            clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
-            repo: 'blog_comment',
-            owner: 'LouisShark',
-            admin: ['LouisShark'],
-            // facebook-like distraction free mode
-            distractionFreeMode: false
-        })
-   gitalk.render('gitalk-container')
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = '//louisshark.github.io/2017/05/04/ffmpeg基础知识和win编译/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '//louisshark.github.io/2017/05/04/ffmpeg基础知识和win编译/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
 </script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//louisshark.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
 </div>
 <style>
-    #gitalk-comment {
+    #disqus-comment{
         background-color: #eee;
         padding: 2pc;
     }
@@ -1078,7 +1078,8 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-   <!-- GitTalk -->
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//louisshark.disqus.com/count.js" async></script>
 
 
 

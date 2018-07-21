@@ -67,7 +67,7 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 将包含次序标准化可增强可读性丶避免隐藏依赖(hidden dependencies， 隐藏依赖主要指包含的文件中编译时)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。
 项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：
 1#include &#34;base/logging.h&#34;">
-    <meta name="keywords" content="Android, Google,C++,笔记">
+    <meta name="keywords" content="Android, Google,笔记,C++">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -259,7 +259,7 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 将包含次序标准化可增强可读性丶避免隐藏依赖(hidden dependencies， 隐藏依赖主要指包含的文件中编译时)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。
 项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：
 1#include &#34;base/logging.h&#34;">
-    <meta property="og:article:tag" content="C++"> <meta property="og:article:tag" content="笔记"> 
+    <meta property="og:article:tag" content="笔记"> <meta property="og:article:tag" content="C++"> 
 
     
         <meta property="article:published_time" content="Mon Sep 11 2017 14:19:25 GMT+0800">
@@ -304,7 +304,7 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
             "url": "/img/favicon.png"
         }
     },
-    "keywords": ",C++,笔记Android, Google",
+    "keywords": ",笔记,C++Android, Google",
     "description": "C++编程风格笔记
 
 定义函数时，参数顺序为：输入参数在前，输出参数在后。
@@ -771,30 +771,30 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
                 <!-- Post Comments -->
                 
                     
-    <!-- 使用 Gitalk -->
-<div id="gitalk-comment">
-    <!-- Gitalk 评论框 -->
-<div id="gitalk-container"></div>
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<script>
-    var gitalk = new Gitalk({
-            clientID: '2e0ac0d0b4b56fb035c5',
-            clientSecret: '33de597701f4685b8c69fdf17274a362bc039ee0',
-            repo: 'blog_comment',
-            owner: 'LouisShark',
-            admin: ['LouisShark'],
-            // facebook-like distraction free mode
-            distractionFreeMode: false
-        })
-   gitalk.render('gitalk-container')
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = '//louisshark.github.io/2017/09/11/C++编程风格笔记/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '//louisshark.github.io/2017/09/11/C++编程风格笔记/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
 </script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//louisshark.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
 </div>
 <style>
-    #gitalk-comment {
+    #disqus-comment{
         background-color: #eee;
         padding: 2pc;
     }
@@ -1199,7 +1199,8 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-   <!-- GitTalk -->
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//louisshark.disqus.com/count.js" async></script>
 
 
 
