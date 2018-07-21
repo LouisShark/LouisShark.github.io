@@ -27,6 +27,8 @@
 
 
 
+        <link rel="dns-prefetch" href="https://cdn-city.livere.com"/>
+
 
 
 
@@ -61,7 +63,7 @@
 Koltin是什么语言我也不想多说了，google的推荐让这个东西着实火了一把，我也就怀着好奇心去学了下，因为以前一直写Java(写的时间也不久)，确实被Kotlin的扩展函数，重载操作符，空安全给吸引到了，说实话，写了Kotlin，我真的觉得Java在这个时代有点过去式的感觉。。不多说了，看标题就知道我今天要说的是什么了。
 ###柯里化
 这是一个神奇的东西，Java未曾出现过，起码在java8之前(即使是8我觉得也不是标准的Curry，只是像而已)，虽然Kotlin没有这个语法糖，但对于可以FP的Kotlin来说，这都不是事。">
-    <meta name="keywords" content="Android, Google,kotlin,笔记">
+    <meta name="keywords" content="Android, Google,笔记,kotlin">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -247,7 +249,7 @@ Koltin是什么语言我也不想多说了，google的推荐让这个东西着�
 Koltin是什么语言我也不想多说了，google的推荐让这个东西着实火了一把，我也就怀着好奇心去学了下，因为以前一直写Java(写的时间也不久)，确实被Kotlin的扩展函数，重载操作符，空安全给吸引到了，说实话，写了Kotlin，我真的觉得Java在这个时代有点过去式的感觉。。不多说了，看标题就知道我今天要说的是什么了。
 ###柯里化
 这是一个神奇的东西，Java未曾出现过，起码在java8之前(即使是8我觉得也不是标准的Curry，只是像而已)，虽然Kotlin没有这个语法糖，但对于可以FP的Kotlin来说，这都不是事。">
-    <meta property="og:article:tag" content="kotlin"> <meta property="og:article:tag" content="笔记"> 
+    <meta property="og:article:tag" content="笔记"> <meta property="og:article:tag" content="kotlin"> 
 
     
         <meta property="article:published_time" content="Sun Feb 11 2018 00:13:40 GMT+0800">
@@ -292,7 +294,7 @@ Koltin是什么语言我也不想多说了，google的推荐让这个东西着�
             "url": "/img/favicon.png"
         }
     },
-    "keywords": ",kotlin,笔记Android, Google",
+    "keywords": ",笔记,kotlinAndroid, Google",
     "description": "
 难得今天休息了一天，就一直在睡觉，突然看到群里有人说到Kotlin的柯里化，正好最近在学习Kotlin，就想要记录一下。想到自己很久没动的博客(懒..不是忙)，垂死病中惊坐起，意识到自己不能继续颓废下去了，赶紧爬起来写了这篇博客，也算是新年有个好开始吧。以后尽量把博客捡起来。。。
 
@@ -569,30 +571,23 @@ Koltin是什么语言我也不想多说了，google的推荐让这个东西着�
                 <!-- Post Comments -->
                 
                     
-    <!-- 使用 DISQUS -->
-<div id="disqus-comment">
-    <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_config = function () {
-        this.page.url = '//louisshark.github.io/2018/02/11/Kotlin的柯里化/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = '//louisshark.github.io/2018/02/11/Kotlin的柯里化/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-</script>
-<script type="text/ls-javascript" id="disqus-thread-script">
-    queue.offer(function() {
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document;
-                var s = d.createElement('script');
-                s.src = '//LouisShark.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', + new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        });
-</script>
-
+    <!-- 使用 来必力 -->
+<div id="livere-comment">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI1MC8xNDc3OA==">
+	<script type="text/ls-javascript" id="livere-comment-js">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+       if (typeof LivereTower === 'function') { return; }
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+</div>
 </div>
 <style>
-    #disqus-comment{
+    #livere-comment{
         background-color: #eee;
         padding: 2pc;
     }
@@ -997,8 +992,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-   <!-- 使用 DISQUS js 代码 -->
-<script id="dsq-count-scr" src="//LouisShark.disqus.com/count.js" async></script>
+   
 
 
 
