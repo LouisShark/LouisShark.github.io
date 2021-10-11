@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+    <link rel="dns-prefetch" href="https://cdn-city.livere.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Binder随意记录 | 
+        
+        LouisShark的符文大陆
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="[TOC]
+###为何选择Binder
+
+Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。
+####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。
+
+socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。
+管道和消息队列：因为采用存储转发方式，所以至少需要拷贝2次数据，效率低。
+共享内存：虽然在传输时没有拷贝数据，但其控制机制复杂。
+
+
+
+
+IPC
+数据拷贝次数
+
+
+
+
+共享内存
+0
+
+
+Binder
+1
+
+
+Socket/管道/消息队列
+2
+
+
+
+####安全性高传统IPC没有任何安全措施，完全以来上层协议来确保。首先传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。">
+    <meta name="keywords" content="Android, Google,android,Binder">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="LouisShark的符文大陆">
+    <meta name="msapplication-starturl" content="//louisshark.github.io/2017/12/12/Binder/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LouisShark的符文大陆">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="IuSTXI07C6gfiHYRhSFRHGD6abgigp02xTCgeC0-Rbc" />
+    <meta name="baidu-site-verification" content="Hom3iks4mH" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="//louisshark.github.io/2017/12/12/Binder/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Binder随意记录 | LouisShark的符文大陆">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="[TOC]
+###为何选择Binder
+
+Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。
+####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。
+
+socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。
+管道和消息队列：因为采用存储转发方式，所以至少需要拷贝2次数据，效率低。
+共享内存：虽然在传输时没有拷贝数据，但其控制机制复杂。
+
+
+
+
+IPC
+数据拷贝次数
+
+
+
+
+共享内存
+0
+
+
+Binder
+1
+
+
+Socket/管道/消息队列
+2
+
+
+
+####安全性高传统IPC没有任何安全措施，完全以来上层协议来确保。首先传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。">
+    <meta property="og:article:tag" content="android"> <meta property="og:article:tag" content="Binder"> 
+
+    
+        <meta property="article:published_time" content="Tue Dec 12 2017 17:42:15 GMT+0800">
+        <meta property="article:modified_time" content="Mon Dec 18 2017 09:39:09 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="//louisshark.github.io/2017/12/12/Binder/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "//louisshark.github.io/2017/12/12/Binder/index.html",
+    "headline": "Binder随意记录",
+    "datePublished": "Tue Dec 12 2017 17:42:15 GMT+0800",
+    "dateModified": "Mon Dec 18 2017 09:39:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "LouisShark",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpg"
+        },
+        "description": "Stop Stoping"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LouisShark的符文大陆",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",android,BinderAndroid, Google",
+    "description": "[TOC]
+###为何选择Binder
+
+Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。
+####传输性能好Binder的优点之一就是，复杂数据类型传递可以复用内存。
+
+socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。
+管道和消息队列：因为采用存储转发方式，所以至少需要拷贝2次数据，效率低。
+共享内存：虽然在传输时没有拷贝数据，但其控制机制复杂。
+
+
+
+
+IPC
+数据拷贝次数
+
+
+
+
+共享内存
+0
+
+
+Binder
+1
+
+
+Socket/管道/消息队列
+2
+
+
+
+####安全性高传统IPC没有任何安全措施，完全以来上层协议来确保。首先传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-122704699-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#易用性"><span class="post-toc-number">1.</span> <span class="post-toc-text">易用性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Binder总体架构"><span class="post-toc-number">2.</span> <span class="post-toc-text">Binder总体架构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ServiceManager与实名Binder"><span class="post-toc-number">3.</span> <span class="post-toc-text">ServiceManager与实名Binder</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Client获得实名Binder的引用"><span class="post-toc-number">4.</span> <span class="post-toc-text">Client获得实名Binder的引用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Client与Server通讯"><span class="post-toc-number">5.</span> <span class="post-toc-text">Client与Server通讯</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Binder的线程管理"><span class="post-toc-number">6.</span> <span class="post-toc-text">Binder的线程管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四大组件中常见的2个binder服务是？"><span class="post-toc-number">7.</span> <span class="post-toc-text">四大组件中常见的2个binder服务是？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#binder-ref与binder-node有什么区别"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">binder_ref与binder_node有什么区别</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#应用如何获取和添加Binder服务"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">应用如何获取和添加Binder服务</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Binder协议中BC与BR开头的协议都有什么区别？"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">Binder协议中BC与BR开头的协议都有什么区别？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#客户端调用Binder接口后抛出的DeadObjectException是什么意思？"><span class="post-toc-number">7.5.</span> <span class="post-toc-text">客户端调用Binder接口后抛出的DeadObjectException是什么意思？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Binder驱动加载过程中有哪些重要的步骤？"><span class="post-toc-number">7.6.</span> <span class="post-toc-text">Binder驱动加载过程中有哪些重要的步骤？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Binder的死亡通知机制的作用是什么，如何实现？"><span class="post-toc-number">7.7.</span> <span class="post-toc-text">Binder的死亡通知机制的作用是什么，如何实现？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#bindService所绑定的“服务概念和Binder中的服务Server有什么区别”"><span class="post-toc-number">7.8.</span> <span class="post-toc-text">bindService所绑定的“服务概念和Binder中的服务Server有什么区别”</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#writeStrongBinder与readStrongBinder的作用和原理"><span class="post-toc-number">7.9.</span> <span class="post-toc-text">writeStrongBinder与readStrongBinder的作用和原理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？"><span class="post-toc-number">7.10.</span> <span class="post-toc-text">每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#binder传输数据的最大限制是多少，占满后会导致什么问题"><span class="post-toc-number">7.11.</span> <span class="post-toc-text">binder传输数据的最大限制是多少，占满后会导致什么问题</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Binder驱动什么时候释放缓冲区的内存"><span class="post-toc-number">7.12.</span> <span class="post-toc-text">Binder驱动什么时候释放缓冲区的内存</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？"><span class="post-toc-number">7.13.</span> <span class="post-toc-text">为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#应用程序为什么支持Binder通信，直接可以使用四大组件呢"><span class="post-toc-number">7.14.</span> <span class="post-toc-text">应用程序为什么支持Binder通信，直接可以使用四大组件呢?</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Binder随意记录
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>LouisShark</strong>
+        <span>12月 12, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACZklEQVR42u3aUW4DIQwFwNz/0u0Bot0+20A30exXpSbAbCWgz379fPXzwsPDw8PDw8PDexjvFT/v37qc4OK39yNfzVJeGx4eHt4R3h9bbTzx1Wfex0mQzbXh4eHhHeTlUyZbfL645PgpHCd4eHh4j+QljOSomLxWPDw8vE/k3V+d8wv3Qw8GPDw8vEVhxCTAvX9Bj8ha8PDw8GJeXmQ6//PR+h4eHh5ewCu3NI3bCJIlLmu6wsPDw9vAqxa3ku/OQ4feevDw8PDO8JIoNofdf35tsBuFEXh4eHgbeNXNvXddztsLqm0HzXMPDw8PbymvV7yvbvf5OPd/gPLBgIeHhzfmTUr4kyat6mh51IuHh4e3m1fd4ifhbF4q2x5G4OHh4W2OcScTV8OIvDy2rACGh4eHN+D1LtZ5TJCXu0ZFMjw8PLyDvF75qncFnzQN4OHh4f0vr1CSb12aJ20BvYADDw8PbzcvL0rNF503v1bnwsPDw3sOb1Lyr8aySZQcXfTx8PDwNvPyf/6rBbNqu1X1wh0dDHh4eHhHeNXF9cZJLtzN14GHh4d3hJdMPG/JyotYo5gYDw8P7195+cZdvZr3rt3lpis8PDy8g7x5gFsNKXqhbfNgwMPDwxvwqk/vdfSu3c2wAw8PD28zr7cpT+LafLnJLIUCGB4eHt5S3vwwqH4r3+iXhRF4eHh4R2Lc6kJ7IUJvNDw8PLzP4uWX4Lzdat6OgIeHh/eJvCRuqAa+edSLh4eHd56XXHnzz/TC30mRDA8PD+8krxoB3COr4/SCjMtXg4eHh7eZ930PHh4eHh4eHh7eA55fJJQ1AFAohyEAAAAASUVORK5CYII=">
+    
+</ul>
+
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Binder/">Binder</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/android/">android</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Binder随意记录&url=//louisshark.github.io/2017/12/12/Binder/index.html&pic=//louisshark.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Binder随意记录&url=//louisshark.github.io/2017/12/12/Binder/index.html&via=LouisShark" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LouisShark的符文大陆&title=Binder随意记录&summary=子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。&pics=//louisshark.github.io/img/favicon.png&url=//louisshark.github.io/2017/12/12/Binder/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>[TOC]</p>
+<p>###为何选择Binder</p>
+<hr>
+<p>Linux已经拥有管道，system V IPC，socket等IPC手段，却还要依赖Binder来实现进程间通信，说明Binder具有无可比拟的优势。</p>
+<p>####传输性能好<br>Binder的优点之一就是，复杂数据类型传递可以复用内存。</p>
+<ul>
+<li>socket：是一个通用接口，导致其传输效率低，开销大，主要用在跨网络的进程间通信和本机上进程间的低速通信。</li>
+<li>管道和消息队列：因为采用存储转发方式，所以至少需要拷贝2次数据，效率低。</li>
+<li>共享内存：虽然在传输时没有拷贝数据，但其控制机制复杂。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">IPC</th>
+<th style="text-align:right">数据拷贝次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">共享内存</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">Binder</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Socket/管道/消息队列</td>
+<td style="text-align:right">2</td>
+</tr>
+</tbody>
+</table>
+<p>####安全性高<br>传统IPC没有任何安全措施，完全以来上层协议来确保。首先传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。</p>
+<a id="more"></a>
+<p>Android为每个安装好的应用程序分配了自己的UID，故进程的UID是鉴别进程身份的重要标志。可靠的身份标识只有IPC机制本身在内核中添加。</p>
+<p>传统IPC访问接入点是开放的，无法建立私有通道，Binder可以使用匿名Binder建立私密通道，别的进程就无法通过穷举或猜测等任何方式获得该Binder的引用，向该Binder发送请求。</p>
+<h4 id="易用性"><a href="#易用性" class="headerlink" title="易用性"></a>易用性</h4><hr>
+<p>Binder使用的是C/S通信方式，一个进程可以开启服务专门负责处理某个模块的业务，多个进程可以作为Client同时向Server发起请求。</p>
+<p>使用了面向对象的设计，发起一次binder call 就像在调用本地方法一样简单。</p>
+<p><strong>一次拷贝？</strong></p>
+<p>当Client向Server发送数据时，Client会先从自己的进程空间把通信数据拷贝到内核空间，因为Server和内核共享数据，所以不在需要重新拷贝数据，而是直接通过内存地址的偏移量直接获取到数据地址。总体来说拷贝了一次。</p>
+<p>Server和内核空间之所以能够共享一块空间数据主要是通过<code>binder_mmap</code>来实现的。它的主要功能是在内核的虚拟地址空间申请一块和用户虚拟内存相同大小的内存，然后在申请一个page大小的内存，将它映射到内核虚拟地址空间和用户虚拟内存空间，从而实现了用户空间缓存和内核空间缓冲同步的功能。</p>
+<h4 id="Binder总体架构"><a href="#Binder总体架构" class="headerlink" title="Binder总体架构"></a>Binder总体架构</h4><hr>
+<p>在Android系统中，运行在内核空间的，负责各个用户进程通过Binder通信的内核模块叫做Binder驱动，Binder驱动虽然默默无闻，确是通信的核心，尽管叫“驱动”，实际上和硬件设备没有任何关系，只是实现方式和设备驱动程序是一样的。</p>
+<blockquote>
+<p>面向对象思想的引入将进程间通信转化为通过对某个Binder对象的引用调用该对象的方法，而其独特之处在与Binder对象是一个可以跨进程引用的对象，他的实体位于一个进程中，而他的引用确遍布系统的各个进程中。最诱人的是这个引用和java里引用一样既可以是强类型，也可以是弱类型，而且从一个进程传给其他进程，让大家都能访问同一个server，就像讲一个对象或引用赋值给另一个引用一样。Binder模糊了进程边界，淡化了进程间通信过程。整个系统仿佛运行于同一个面向对象的程序之中。形形色色的Binder对象以及星罗棋布的引用仿佛粘连各个应用程序的胶水。</p>
+</blockquote>
+<p><strong>首先Binder分为Binder对象和Binder驱动</strong>，即Binder驱动就是主要的内核模块，而这个Binder对象是通讯的载体，可以自由的通过Bidner驱动自由穿梭任意进程。所以客户端或者服务器就可以把数据放入Binder对象里，然后进行调用和通讯。类似胞吞胞吐。</p>
+<p><strong>Binder框架定义了四个角色：</strong>Server，Client，ServiceManager以及Binder驱动。</p>
+<blockquote>
+<p>Server进程里的Binder对象指的是Binder本地对象，Client里面的对象指的是Binder代理对象；在Binder对象进行跨进程传递的时候，Binder驱动会自动完成这两种类型的转换；因此Binder驱动必然保存每一个跨进程的Binder对象的相关信息；在驱动中，Binder本地对象的代表是一个是一个叫做<code>binder_node</code>的数据结构，Binder代理对象 是用<code>binder_ref</code>代表的；有得地方把Binder本地对象直接称作Binder实体，把Binder代理对象直接称作 Binder引用（句柄）。</p>
+</blockquote>
+<h4 id="ServiceManager与实名Binder"><a href="#ServiceManager与实名Binder" class="headerlink" title="ServiceManager与实名Binder"></a>ServiceManager与实名Binder</h4><hr>
+<blockquote>
+<p>ServiceManager是一个进程，Server是另一个进程，Server向SM中注册Binder必然会涉及到进程间通信。当前实现的是进程间通信却又要用到进程间通信，就好像蛋孵出鸡的前提却是鸡孵蛋。Binder的实现比较巧妙，预先创造一只鸡来孵蛋：SM和其他进程间同样采用Binder通信，SM是Server端，有自己的Binder对象（实体），其他进程都是Client，需要通过这个Binder的引用来实现Binder的注册，查询和获取。SM提供的Binder比较特殊，他没有名字也不需要注册，当一个进程使用<code>BINDER_SET_CONTEXT_MGR</code>命令将自己注册在SM时Binder驱动会自动为他创建Binder实体（这就是预先造好的鸡）。其次这个Binder的引用在所有Client中都固定为0而无须通过其他手段获得。也就是说，一个Server若要向SM注册自己Binder就必需通过0这个引用号和SM的Binder通信。类比网络通信，0号引用就好比域名服务器的地址，你必须预先手工或动态配置好。</p>
+</blockquote>
+<ul>
+<li>首先，Server在自己的进程中向Binder驱动申请创建一个Server的Binder实体。</li>
+<li>Binder驱动为这个Server创建位于内核中的Binder实体节点以及Binder的引用。（在Binder驱动中创建一块内存）</li>
+<li>然后Server通过<strong>0</strong>这个引用号和SM的的Binder通信 将名字和新建的引用打包传递给SM（实体没有传给SM），通知SM注册一个名叫XXX的Server。</li>
+<li>SM收到数据包后，从中取出Server名字和引用，填入一张查找表中。</li>
+</ul>
+<p>Server初始化的时候，SM做了以下操作：</p>
+<ol>
+<li>为binder分配128k的内存</li>
+<li>通知binder驱动，使自身成为binder驱动的“DNS”</li>
+<li>维护一个监听Server的死循环，并且维护持有所有Server句柄的svclist</li>
+<li>添加Server的时候，进行权限，内存（充足）进行判断，如果没有添加过则将Server添加至svclist。</li>
+</ol>
+<h4 id="Client获得实名Binder的引用"><a href="#Client获得实名Binder的引用" class="headerlink" title="Client获得实名Binder的引用"></a>Client获得实名Binder的引用</h4><hr>
+<blockquote>
+<p>Server向SM注册了Binder引用及其名字后，Client就可以通过名字获取该Binder的引用了。Client也利用保留的0号引用向SM请求访问某个Binder：我申请获得名字叫张三的Binder的引用。SM收到这个连接请求，从请求数据包里获得Binder的名字，在查找表里找到该名字对应的条目，从条目中取出Binder的引用，将该引用作为回复发送给发起请求的Client。从面向对象的角度，这个Binder对象 现在有两个引用：一个位于SM中，一个位于发送请求的Client中。如果接下来有更多的Client请求该binder，系统中就会有更多的引用指向该Binder，就像Java里一个对象存在多个引用一样。而且类似的这些指向Binder的引用是强类型，从而确保只要有引用Binder实体就不会被释放掉。</p>
+</blockquote>
+<h4 id="Client与Server通讯"><a href="#Client与Server通讯" class="headerlink" title="Client与Server通讯"></a>Client与Server通讯</h4><hr>
+<blockquote>
+<p>client向SM发送申请服务Server的请求，那么SM就可以在查找表中找到该Service的Binder引用。并把Binder引用（BpBinder）返回给Client，此时Client便可以通过这个引用向Server（间接）发起调用，Binder引用将参数包装然后交给驱动并获取Server的调用结果。</p>
+</blockquote>
+<h4 id="Binder的线程管理"><a href="#Binder的线程管理" class="headerlink" title="Binder的线程管理"></a>Binder的线程管理</h4><hr>
+<p>每个binder的Server进程会创建很多线程来处理Binder请求，可以简单的理解为创建了一个Binder的线程池（虽然实际上并不完全是这样简单的线程管理方式），而真正管理这些线程并不是由这个Server端来管理的，而是由Binder驱动进行管理的。</p>
+<p>一个进程的Binder线程数默认最大是16，超过的请求会被阻塞等待空闲的Binder线程。你做进程间通信时处理并发问题就会有一个底，比如使用<code>ContentProvider</code>时，你就很清楚他的CRUD方法只能同时有16个线程在跑。（应用与ContentProvider为不同进程时）。</p>
+<h4 id="四大组件中常见的2个binder服务是？"><a href="#四大组件中常见的2个binder服务是？" class="headerlink" title="四大组件中常见的2个binder服务是？"></a>四大组件中常见的2个binder服务是？</h4><p>一个是实现了IActivityManager接口的ActivityManagerNative，ActivityManagerService是他的子类，提供了AMS中的所有服务，从APP调用binder call到AMS都是同步的，APP需要阻塞等待AMS执行完毕。</p>
+<p>一个是实现了IApplicationThread接口的ApplicationThreadNative，ActivityThread中的内部类ApplicationThread是他的子类，AMS可以发起异步请求到APP，不需要等待APP执行完成。</p>
+<ul>
+<li>BpBinder：Binder的代理对象，内部有一个成员变量mHandle，记录着远侧滑盖服务对象的handle</li>
+<li>BBinder：Binder本地服务对象</li>
+</ul>
+<h5 id="binder-ref与binder-node有什么区别"><a href="#binder-ref与binder-node有什么区别" class="headerlink" title="binder_ref与binder_node有什么区别"></a>binder_ref与binder_node有什么区别</h5><ul>
+<li>binder_ref与binder_node都存在于内核空间</li>
+<li>binder_node是实体对象、binder_ref是引用对象</li>
+<li>binder_node被binder_ref引用，binder_ref被BpBinder引用</li>
+</ul>
+<h5 id="应用如何获取和添加Binder服务"><a href="#应用如何获取和添加Binder服务" class="headerlink" title="应用如何获取和添加Binder服务"></a>应用如何获取和添加Binder服务</h5><p>获取与添加Binder服务的操作是交给大管家<code>ServiceManager</code>实现的；ServiceManager进程启动后会通过binder_loop睡眠等待客户端的请求，如果进程被客户端唤醒就会调用svcmgr_handler来处理获取或者添加服务的请求</p>
+<p>ServiceManager也是一种Binder服务，当应用获取ServiceManager服务的代理时，它的handle句柄固定为0，所以才不需要去查找，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> IServiceManager <span class="title">getIServiceManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sServiceManager != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> sServiceManager;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Find the service manager</span></span><br><span class="line">    sServiceManager = ServiceManagerNative.asInterface(BinderInternal.getContextObject());</span><br><span class="line">    <span class="keyword">return</span> sServiceManager;</span><br><span class="line">&#125;</span><br><span class="line">sp&lt;IBinder&gt; ProcessState::getContextObject(<span class="keyword">const</span> sp&lt;IBinder&gt;&amp; <span class="comment">/*caller*/</span>)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">return</span> getStrongProxyForHandle(<span class="number">0</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Binder协议中BC与BR开头的协议都有什么区别？"><a href="#Binder协议中BC与BR开头的协议都有什么区别？" class="headerlink" title="Binder协议中BC与BR开头的协议都有什么区别？"></a>Binder协议中BC<em>与BR</em>开头的协议都有什么区别？</h5><ul>
+<li>BC_：全称Binder Command，进程发送给Binder驱动数据时携带的协议</li>
+<li>BR_：全程Binder Return，Binder驱动发送给进程数据时携带的协议</li>
+</ul>
+<h5 id="Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗"><a href="#Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗" class="headerlink" title="Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗"></a>Binder服务在调用期间抛出了RuntimeException异常，服务端会Crash吗</h5><p>服务端不会Crash，RuntimeException被Binder服务端线程捕捉，随后将异常信息写入到reply中，发回Binder客户端进程，最后客户端binder线程会抛出这个异常，如果没有捕捉到这个RuntimeException，那么Binder客户端进程会Crash。</p>
+<h5 id="客户端调用Binder接口后抛出的DeadObjectException是什么意思？"><a href="#客户端调用Binder接口后抛出的DeadObjectException是什么意思？" class="headerlink" title="客户端调用Binder接口后抛出的DeadObjectException是什么意思？"></a>客户端调用Binder接口后抛出的DeadObjectException是什么意思？</h5><p>之所以抛出DeadObjectException最常见的原因是Binder服务端进程已经死亡。客户端进行binder调用时，Binder驱动发现服务端进程不能回应请求，那么就会抛出异常给客户端。</p>
+<p>还有一些比较生僻的原因，比如服务端此时的缓存内存空间（1016k）已经被占满了，Binder驱动就认为服务端此时并不能处理这个调用，那么就会在C++层抛出DeadObjectException到Java层。</p>
+<h5 id="Binder驱动加载过程中有哪些重要的步骤？"><a href="#Binder驱动加载过程中有哪些重要的步骤？" class="headerlink" title="Binder驱动加载过程中有哪些重要的步骤？"></a>Binder驱动加载过程中有哪些重要的步骤？</h5><ul>
+<li>binder_init：初始化Binder驱动环境，内核工作队列、文件系统节点、misc设备等</li>
+<li>binder_open：打开Binder设备，获取Binder驱动的文件描述符（fd）</li>
+<li>binder_mmap：将用户进程地址空间映射到Binder驱动设备内存。这也是Binder能够实现一次拷贝以来的根本。</li>
+<li>binder_ioctl：Binder的驱动的核心功能，用来进行数据读写操作</li>
+</ul>
+<h5 id="Binder的死亡通知机制的作用是什么，如何实现？"><a href="#Binder的死亡通知机制的作用是什么，如何实现？" class="headerlink" title="Binder的死亡通知机制的作用是什么，如何实现？"></a>Binder的死亡通知机制的作用是什么，如何实现？</h5><p>Binder服务端进程死亡后，依赖着Binder实体对象的客户端代理对象也会失效。当Binder服务无效时，驱动程序会发送死亡通知给各个已注册服务的客户端进程，以方便客户端做些销毁之类的操作。</p>
+<p>思维通知机制最常用在APP和AMS服务，是典型的C/S架构，当APP端的进程死亡后，其ApplicationThreadNative会被销毁，随后Binder驱动会发出死亡通知给AMS，方便清理已经失效的四大组件及应用进程信息。</p>
+<p>binder驱动的加载阶段会打开/dev/driver文件，当服务端的进程死亡后，系统会进入清理阶段，关闭所有与进程相关联的资源，这其中就包含了关闭/dev/driver文件描述符的操作，随后就会调用到Binder驱动的binder_release方法，结果层层调用最后会调用到binderDied这个回调方法。如果APP进程之前注册并实现过DeathRecipient这个接口，此时APP就能对Server进程的死亡做出处理。</p>
+<h5 id="bindService所绑定的“服务概念和Binder中的服务Server有什么区别”"><a href="#bindService所绑定的“服务概念和Binder中的服务Server有什么区别”" class="headerlink" title="bindService所绑定的“服务概念和Binder中的服务Server有什么区别”"></a>bindService所绑定的“服务概念和Binder中的服务Server有什么区别”</h5><p>bindService绑定的服务所指的是四大组件中的Service；调用context.bindService方法可以让Activity与Service形成一种“绑定”的概念。这个概念是在Android Framework定义，形成“绑定”的关系之后，Activity除了能够和Service进行通信之外，他们所在的进程存活状态也会相关联。<strong>注意，这个Service不确定是运行在本地还是远端，大部分情况下我们调用<code>startService</code>只是用来启动一个在本地定义的Service组件。当使用<code>bindService</code>时，一般是需要调用Service通过onBind返回的Binder服务接口，以此实现Activity与Service之间的通信。</strong></p>
+<p>Binder服务则是一个真正的C/S架构中的服务端角色。这个服务需要继承Binder类并实现一套服务接口才能生效。我们常见的ActivityManagerService正是一个继承了Binder类并运行在system_server的服务，用来提供四大组件以及进程方面的服务。</p>
+<p>注意，调用bindService后，Service.onBind方法会返回Binder服务Stub对象，然后APP会在AMS进行登记，然后经过层层调用才会在Binder客户端调用<code>onConnected</code>方法，如果Binder客户端和其服务端在同一个进程，客户端拿到的应该还是Stub对象，如果不在同一进程中，客户端拿到的应该是Binder服务的Proxy对象。</p>
+<p>本质上，bindService锁绑定的服务和Binder的服务属于同一类，他们实现进程间通信的原理都是借助了Binder这一套机制。</p>
+<h5 id="writeStrongBinder与readStrongBinder的作用和原理"><a href="#writeStrongBinder与readStrongBinder的作用和原理" class="headerlink" title="writeStrongBinder与readStrongBinder的作用和原理"></a>writeStrongBinder与readStrongBinder的作用和原理</h5><p>主要作用是实现两个进程之间的双工通信。还是以APP客户端的ApplicationThread和system_server服务端的ActivityManagerService这两个Binder服务来举例子，这两个服务的接口的大致模式都相同。</p>
+<h5 id="每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？"><a href="#每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？" class="headerlink" title="每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？"></a>每个进程最多存在多少个Binder线程，这些线程都被占满后会导致什么问题？</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// --frameworks/nativebs/binder/ProcessState.cpp</span></span><br><span class="line">#define DEFAULT_MAX_BINDER_THREADS 15</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">open_driver</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = open(<span class="string">"/dev/binder"</span>, O_RDWR);</span><br><span class="line">    <span class="keyword">if</span> (fd &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">...</span><br><span class="line">        size_t maxThreads = DEFAULT_MAX_BINDER_THREADS;</span><br><span class="line">        result = ioctl(fd, BINDER_SET_MAX_THREADS, &amp;maxThreads);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Binder线程池中的线程数量是在Binder驱动初始化时被定义的，进程池中的线程个数上限为15个，加上主Binder线程，一共最大能存在16个binder线程；</p>
+<p>当binder线程都在执行工作时，也就是当出现线程饥饿的时候，从别的进程调用的binder请求如果是同步的话，会在todo队列中阻塞等待，直到线程池中有空闲的binder进程来处理请求。</p>
+<h5 id="binder传输数据的最大限制是多少，占满后会导致什么问题"><a href="#binder传输数据的最大限制是多少，占满后会导致什么问题" class="headerlink" title="binder传输数据的最大限制是多少，占满后会导致什么问题"></a>binder传输数据的最大限制是多少，占满后会导致什么问题</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// --frameworks/nativebs/binder/ProcessState.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BINDER_VM_SIZE ((1*1024*1024) - (4096 *2))</span></span><br><span class="line">ProcessState::ProcessState()</span><br><span class="line">    : mDriverFD(open_driver())</span><br><span class="line">    , mVMStart(MAP_FAILED)</span><br><span class="line">    , mThreadCountLock(PTHREAD_MUTEX_INITIALIZER)</span><br><span class="line">    , mThreadCountDecrement(PTHREAD_COND_INITIALIZER)</span><br><span class="line">    , mExecutingThreadsCount(<span class="number">0</span>)</span><br><span class="line">    , mMaxThreads(DEFAULT_MAX_BINDER_THREADS)</span><br><span class="line">    , mManagesContexts(<span class="literal">false</span>)</span><br><span class="line">    , mBinderContextCheckFunc(<span class="literal">NULL</span>)</span><br><span class="line">    , mBinderContextUserData(<span class="literal">NULL</span>)</span><br><span class="line">    , mThreadPoolStarted(<span class="literal">false</span>)</span><br><span class="line">    , mThreadPoolSeq(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// mmap the binder, providing a chunk of virtual address space to receive transactions.</span></span><br><span class="line">    mVMStart = mmap(<span class="number">0</span>, BINDER_VM_SIZE, PROT_READ, MAP_PRIVATE | MAP_NORESERVE, mDriverFD, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在调用mmap时会指定Binder内存缓冲区的大小为1016k；当服务端的内存缓冲区被Binder进程占用满后，Binder驱动不会在处理binder调用并在c++层抛出DeadObjectException到binder客户端。<br><strong>同步空间是1016k，异步空间只有他的一半，也就是508k</strong>。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// --kernel/msm-3.18/drivers/staging/android/binder_alloc.c</span></span><br><span class="line"><span class="function">struct binder_buffer *<span class="title">binder_alloc_new_buf</span><span class="params">(struct binder_alloc *alloc,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="keyword">size_t</span> data_size,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="keyword">size_t</span> offsets_size,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="keyword">size_t</span> extra_buffers_size,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="keyword">int</span> is_async)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (is_async &amp;&amp;</span><br><span class="line">    <span class="comment">// 当Binder缓存空间不足时将会出现异常，Binder驱动不再会派发这个binder请求</span></span><br><span class="line">    alloc-&gt;free_async_space &lt; size + <span class="keyword">sizeof</span>(struct binder_buffer)) &#123;</span><br><span class="line">    binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,</span><br><span class="line">             <span class="string">"%d: binder_alloc_buf size %zd failed, no async space left\n"</span>,</span><br><span class="line">              alloc-&gt;pid, size);</span><br><span class="line">    eret = ERR_PTR(-ENOSPC);</span><br><span class="line">    <span class="keyword">goto</span> error_unlock;</span><br><span class="line">&#125;</span><br><span class="line">error_unlock:</span><br><span class="line">mutex_unlock(&amp;alloc-&gt;mutex);</span><br><span class="line"><span class="keyword">return</span> eret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Binder驱动什么时候释放缓冲区的内存"><a href="#Binder驱动什么时候释放缓冲区的内存" class="headerlink" title="Binder驱动什么时候释放缓冲区的内存"></a>Binder驱动什么时候释放缓冲区的内存</h5><p>是在binder call之后，调用Parcel.recycle来完成释放内存的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">startActivity</span><span class="params">(IApplicationThread caller, String callingPackage, Intent intent,</span></span></span><br><span class="line"><span class="function"><span class="params">        String resolvedType, IBinder resultTo, String resultWho, <span class="keyword">int</span> requestCode,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> startFlags, ProfilerInfo profilerInfo, Bundle options)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">    Parcel data = Parcel.obtain();</span><br><span class="line">    Parcel reply = Parcel.obtain();</span><br><span class="line">    mRemote.transact(START_ACTIVITY_TRANSACTION, data, reply, <span class="number">0</span>);</span><br><span class="line">    reply.recycle();</span><br><span class="line">    data.recycle();</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？"><a href="#为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？" class="headerlink" title="为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？"></a>为什么使用广播传输2MB的Bitmap会跑异常，而使用AIDL生成的Binder接口传输Bitmap就不会抛异常呢？</h5><p>通过Binder直接传输Bitmap，如果bitmap的大小大于128k，那么传输Bitmap内容的方式就会使用ashmem，Binder只需要负责传输ashmem的fd到服务端即可。这种Binder+ashmem的方式在Android中很常见，比如四大组件的ContentProvider.query方法，从Provider中查找的数据通常会超过1016k这个限制，使用ashmem不仅能突破这个限制，还有提高大量数据传输的效率</p>
+<p>使用广播来传输跨进程传输数据的话则不一样，bitmap是被填入到Bundle中，随后以Parcelable的序列化方式传输到AMS的，如果Bundle数据量大于800k，就会抛出TrasnactionTooLargeException的异常</p>
+<p>依据Bitmap是否过大来使用ashmem还是Binder的方式传输内容的逻辑在native层的Bitmap_createFromParcel。</p>
+<h5 id="应用程序为什么支持Binder通信，直接可以使用四大组件呢"><a href="#应用程序为什么支持Binder通信，直接可以使用四大组件呢" class="headerlink" title="应用程序为什么支持Binder通信，直接可以使用四大组件呢?"></a>应用程序为什么支持Binder通信，直接可以使用四大组件呢?</h5><p>所有应用的进程都是通过调用AMS.startProcessLocked方法来fork Zygote进程创建的；Zygote在启动时会在preloadClasses中预先加载上千个类，而在fork子进程时，这些操作就不需要在做了，大大节约了子进程的启动时间。</p>
+<p>应用进程的Binder驱动初始化的操作正是在zygote fork自身之后做的。system_server与zygote的通信使用socket，之所以不使用binder的原因很简单，socket的使用对于写这个功能的工程师来说更简单。</p>
+<p>在zygote进程的初始化操作完成后，zygote会通过socket返回给system_server pid，随后AMS会将pid和应用的Application进行绑定。也就是说在应用调用Application.onCreate之前，binder驱动的初始化就已经完成了，所以直接就可以使用Binder来通信。</p>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="//louisshark.github.io/2017/12/12/Binder/">//louisshark.github.io/2017/12/12/Binder/</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 来必力 -->
+<div id="livere-comment">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI1MC8xNDc3OA==">
+	<script type="text/ls-javascript" id="livere-comment-js">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+       if (typeof LivereTower === 'function') { return; }
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+</div>
+</div>
+<style>
+    #livere-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/02/11/Kotlin的柯里化/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/11/07/几分钟手写一个双向链表/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.jpg" alt="LouisShark's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        mshark.louis@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:mshark.louis@gmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">cloud_circle</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person_pin</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友链">
+                
+                    <i class="material-icons sidebar-material-icons">link</i>
+                
+                友链
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">14</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/shark_louis" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/u/5331922690?refer_flag=1001030101_&amp;is_all=1" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/LouisShark" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/louisshark" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+        <a href="https://space.bilibili.com/18731855/#/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-bilibili">
+                <span class="visuallyhidden">Bilibili</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;LouisShark的符文大陆
+            
+                <br>
+                
+                    子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。
+                
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2016;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+        </body>
+    
+</html>
