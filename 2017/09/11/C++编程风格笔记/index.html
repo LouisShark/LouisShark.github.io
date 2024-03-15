@@ -1,582 +1,228 @@
 <!DOCTYPE html>
-<html style="display: none;" lang="zh">
-    <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.5.6 -->
-    <script>
-        window.materialVersion = "1.5.6"
-        // Delete localstorage with these tags
-        window.oldVersion = [
-            'codestartv1',
-            '1.3.4',
-            '1.4.0',
-            '1.4.0b1',
-            '1.5.0',
-            '1.5.2',
-            '1.5.5'
-        ]
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="C++编程风格笔记  定义函数时，参数顺序为：输入参数在前，输出参数在后。  C&#x2F;C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入&#x2F;输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++编程风格笔记">
+<meta property="og:url" content="https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="LouisShark的随笔">
+<meta property="og:description" content="C++编程风格笔记  定义函数时，参数顺序为：输入参数在前，输出参数在后。  C&#x2F;C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入&#x2F;输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-09-11T06:19:25.000Z">
+<meta property="article:modified_time" content="2017-09-11T06:25:51.000Z">
+<meta property="article:author" content="LouisShark">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@shark_louis">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>C++编程风格笔记</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+    <script async defer
+            data-website-id="1a5fb885-3814-4a05-ab13-f956e13fcdf8"
+            src="https://analytics.us.umami.is/script.js">
     </script>
 
-    <!-- dns prefetch -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
 
-
-
-    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
-
-
-
-    <link rel="dns-prefetch" href="https://cdn-city.livere.com"/>
-
-
-
-    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
-
-
-
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
-
-
-
-
-
-    <!-- Meta & Info -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!-- Title -->
+    <!-- styles -->
     
-    <title>
-        
-            C++编程风格笔记 | 
-        
-        LouisShark的随笔
-    </title>
+<link rel="stylesheet" href="/css/style.css">
 
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
-    <link rel="icon" href="/img/favicon.png">
-
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="C++编程风格笔记
-
-定义函数时，参数顺序为：输入参数在前，输出参数在后。
-
-C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。
-
-
-包含文件的名称及次序
-
-将包含次序标准化可增强可读性丶避免隐藏依赖(hidden dependencies， 隐藏依赖主要指包含的文件中编译时)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。
-项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：
-1#include &#34;base/logging.h&#34;">
-    <meta name="keywords" content="Android, Google,笔记,C++">
-    <meta name="theme-color" content="#0097A7">
-
-    <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import lsloader -->
-    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
-
-    <!-- Import queue -->
-    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
-
-    <!-- Import CSS -->
+    <!-- persian styles -->
     
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-        
-            
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-            
-        
-
-    
-
-    
-
-    <!-- Config CSS -->
-
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    overflow-x: hidden !important;
-  }
-  
-  code {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  }
-
-  a {
-    color: #00838F;
-  }
-
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-image: url(/img/bg.jpg);
-      }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-<!-- Import Font -->
-<!-- Import Roboto -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
-<!-- Import Material Icons -->
-
-
-    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-
-
-
-    <!-- Import jQuery -->
-    
-        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
-    
-
-    <!-- WebAPP Icons -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="LouisShark的随笔">
-    <meta name="msapplication-starturl" content="//louisshark.github.io/2017/09/11/C++编程风格笔记/">
-    <meta name="msapplication-navbutton-color" content="#0097A7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="LouisShark的随笔">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- Site Verification -->
-    <meta name="google-site-verification" content="IuSTXI07C6gfiHYRhSFRHGD6abgigp02xTCgeC0-Rbc" />
-    <meta name="baidu-site-verification" content="Hom3iks4mH" />
-
-    <!-- RSS -->
-    
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="//louisshark.github.io/2017/09/11/C++编程风格笔记/">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="C++编程风格笔记 | LouisShark的随笔">
-    <meta property="og:image" content="/img/favicon.png">
-    <meta property="og:description" content="C++编程风格笔记
-
-定义函数时，参数顺序为：输入参数在前，输出参数在后。
-
-C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。
-
-
-包含文件的名称及次序
-
-将包含次序标准化可增强可读性丶避免隐藏依赖(hidden dependencies， 隐藏依赖主要指包含的文件中编译时)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。
-项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：
-1#include &#34;base/logging.h&#34;">
-    <meta property="og:article:tag" content="笔记"> <meta property="og:article:tag" content="C++"> 
-
-    
-        <meta property="article:published_time" content="Mon Sep 11 2017 14:19:25 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 11 2017 14:25:51 GMT+0800">
-    
-
-    <!-- The Twitter Card protocol -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Add canonical link for SEO -->
-    
-        <link rel="canonical" href="//louisshark.github.io/2017/09/11/C++编程风格笔记/index.html" />
-    
-
-    <!-- Structured-data for SEO -->
-    
-        
-
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": "//louisshark.github.io/2017/09/11/C++编程风格笔记/index.html",
-    "headline": "C++编程风格笔记",
-    "datePublished": "Mon Sep 11 2017 14:19:25 GMT+0800",
-    "dateModified": "Mon Sep 11 2017 14:25:51 GMT+0800",
-    "author": {
-        "@type": "Person",
-        "name": "LouisShark",
-        "image": {
-            "@type": "ImageObject",
-            "url": "/img/avatar.jpg"
-        },
-        "description": "Stop Stoping"
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "LouisShark的随笔",
-        "logo": {
-            "@type":"ImageObject",
-            "url": "/img/favicon.png"
-        }
-    },
-    "keywords": ",笔记,C++Android, Google",
-    "description": "C++编程风格笔记
-
-定义函数时，参数顺序为：输入参数在前，输出参数在后。
-
-C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为非常数指针(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。
-
-
-包含文件的名称及次序
-
-将包含次序标准化可增强可读性丶避免隐藏依赖(hidden dependencies， 隐藏依赖主要指包含的文件中编译时)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。
-项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：
-1#include &#34;base/logging.h&#34;",
-}
-</script>
-
-
-    
-
-    <!-- Analytics -->
-    
-        <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-122704699-1', 'auto');ga('send', 'pageview');
-</script>
+    <!-- rss -->
     
     
-    
-
-    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="LouisShark的随笔" type="application/atom+xml">
 </head>
 
-
+<body class="max-width mx-auto px3 ltr">
     
-        <body id="scheme-Paradox" class="lazy">
-            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span id="MD-burger-id" class="MD-burger-layer"></span>
-                        </button>
-                    
-
-                    <!-- Post TOC -->
-
-    
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-
-    <!-- Left aligned menu below button -->
-    
-    
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结以上："><span class="post-toc-number">1.</span> <span class="post-toc-text">总结以上：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#局部变量"><span class="post-toc-number"></span> <span class="post-toc-text">局部变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全局变量"><span class="post-toc-number"></span> <span class="post-toc-text">全局变量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结："><span class="post-toc-number">1.</span> <span class="post-toc-text">总结：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类"><span class="post-toc-number"></span> <span class="post-toc-text">类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-拷贝构造函数"><span class="post-toc-number">1.</span> <span class="post-toc-text">4.拷贝构造函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-结构体和类（struct-vs-Classes）"><span class="post-toc-number">2.</span> <span class="post-toc-text">5.结构体和类（struct vs Classes）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-继承-inheritance"><span class="post-toc-number">3.</span> <span class="post-toc-text">6.继承(inheritance)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-多重继承"><span class="post-toc-number">4.</span> <span class="post-toc-text">7.多重继承</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-接口"><span class="post-toc-number">5.</span> <span class="post-toc-text">8.接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-操作符重载"><span class="post-toc-number">6.</span> <span class="post-toc-text">9.操作符重载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-存取控制"><span class="post-toc-number">7.</span> <span class="post-toc-text">10.存取控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-声明次序"><span class="post-toc-number">8.</span> <span class="post-toc-text">11.声明次序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于类的结论"><span class="post-toc-number"></span> <span class="post-toc-text">关于类的结论</span></a>
-    </ul>
-    
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
-    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/LouisShark">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-</script>
-
+        <li><a class="icon" aria-label="上一篇" href="/2017/10/11/%E6%90%AD%E5%BB%BAngnix/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-    
-            <p class="article-headline-p">
-                C++编程风格笔记
-            </p>
-        </div>
-
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>LouisShark</strong>
-        <span>9月 11, 2017</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">devices other</i>
-    <span class="visuallyhidden">devices other</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-    
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC2klEQVR42u3aQW7DMAwEwPz/0+0L7OxSTpFK41PRGpZGPRBc6vVz5PPCxsbGxsbGxsbG/kr2K34uP3f75v0X7r989eZsz9jY2Nh7s/Ml7zHtm1eYdpVoz9jY2NgHsK8KwNXP+ZJ5WWrfTPaMjY2Njf3mc0GTsNJsYGNjY2N/gn3/5n3jMTsmbGxsbOynQqW8YViPpXLSx7M0bGxs7K9n50PT7/n5T+fb2NjY2F/Mbp/1UpQc+mzY8Gbn2NjY2Juy88JwdQRJVDQ7xHzdaC1sbGzsrdlJZJMz1gOj2YChLmDY2NjYW7Dz6zL55vIykzQeBawNlbCxsbGPYedbTDZatxBxFPVmXWxsbOxN2e3Fx6SBmV2ybBuSupXCxsbGPoCdD1bbkrMSGLVNy8NZGjY2NvY/YbdNyMpIICHlLcfSVAQbGxt7I3bShMyuReZXJ2dHVpRJbGxs7K3ZswipDXfyMXA7GF66c4qNjY29HXtWTmYbao+p/QI2Njb2mey2pLVlZiVUSorf5R6wsbGxt2avUGeFZxZpJesOr+xgY2Njb8SeXaNMAG081B49NjY2NnYe6K9c6EmOuG1mhqESNjY29kbs2XbbUClvG9odDlsRbGxs7C3YbWA0C4ZWWohZUIWNjY19DrtdcjaIba/+JMf9wJUdbGxs7I3YsyYh30Q7hMjXKg4IGxsb+wB2XorWG492D+2/qrhzio2Njb0d+7GCEbccTzVCw1YEGxsbe1N2XkLaotUe7mzAMCxg2NjY2P+QvRIb5QOD+xK4Ejnlv8fGxsbelb0eAyXHMSuQs+Jaz7exsbGxt2A/td2kjLUF8oMFDBsbG3s7dhLQ3G9r/Ur9LEh6YDyAjY2NfSR7FiGtNyfDZgkbGxsbe6GAzUYF7ZXNN1/GxsbGPoDdBj35X4voJ2hjklWwsbGxT2OvxD2zdmW92ahbI2xsbOxN2ec82NjY2NjY2NjY2F/z/AIyumg6gsVZ3AAAAABJRU5ErkJggg==">
-    
+        
+        <li><a class="icon" aria-label="下一篇" href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&text=C++编程风格笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&is_video=false&description=C++编程风格笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++编程风格笔记&body=Check out this article: https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&name=C++编程风格笔记&description=&lt;p&gt;&lt;em&gt;C&lt;/em&gt;++编程风格笔记&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;定义函数时，参数顺序为：输入参数在前，输出参数在后。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;C&amp;#x2F;C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入&amp;#x2F;输出常数为&lt;em&gt;非常数指针&lt;/em&gt;(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;包含文件的名称及次序&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;将包含次序标准化可增强可读性丶避免隐藏依赖(&lt;em&gt;hidden dependencies， 隐藏依赖主要指包含的文件中编译时&lt;/em&gt;)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。&lt;/p&gt;
+&lt;p&gt;项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。&amp;#x2F;&amp;#x2F;.(当前路径) ..（父路径）。&amp;#x2F;&amp;#x2F;例如，google-awesome-project&amp;#x2F;src&amp;#x2F;base&amp;#x2F;logging.h应像这样被包含：&lt;/p&gt;
+&lt;figure class=&#34;highlight c++&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;base/logging.h&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&t=C++编程风格笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
+    </div>
     
-
-    <!-- Tags (bookmark) -->
     
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/C/">C++</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/笔记/">笔记</a>
-    </ul>
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%BB%A5%E4%B8%8A%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">总结以上：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number"></span> <span class="toc-text">局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number"></span> <span class="toc-text">全局变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number"></span> <span class="toc-text">类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">4.拷贝构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB%EF%BC%88struct-vs-Classes%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">5.结构体和类（struct vs Classes）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%A7%E6%89%BF-inheritance"><span class="toc-number">3.</span> <span class="toc-text">6.继承(inheritance)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF"><span class="toc-number">4.</span> <span class="toc-text">7.多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">8.接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="toc-number">6.</span> <span class="toc-text">9.操作符重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%AD%98%E5%8F%96%E6%8E%A7%E5%88%B6"><span class="toc-number">7.</span> <span class="toc-text">10.存取控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%A3%B0%E6%98%8E%E6%AC%A1%E5%BA%8F"><span class="toc-number">8.</span> <span class="toc-text">11.声明次序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%B1%BB%E7%9A%84%E7%BB%93%E8%AE%BA"><span class="toc-number"></span> <span class="toc-text">关于类的结论</span></a>
+      </div>
     
-
-    <!-- Share -->
-    
-        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-
-    
-        
-            <!-- Busuanzi Views -->
-            <a class="post_share-link" href="#">
-                <li class="mdl-menu__item">
-                    <span id="busuanzi_container_page_pv">
-                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
-                    </span>
-                </li>
-            </a>
-        
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=C++编程风格笔记&url=//louisshark.github.io/2017/09/11/C++编程风格笔记/index.html&pic=//louisshark.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=C++编程风格笔记&url=//louisshark.github.io/2017/09/11/C++编程风格笔记/index.html&via=LouisShark" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-
-    <!-- Share Google+ -->
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LouisShark的随笔&title=C++编程风格笔记&summary=子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。&pics=//louisshark.github.io/img/favicon.png&url=//louisshark.github.io/2017/09/11/C++编程风格笔记/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-    
+  </span>
 </div>
 
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><em>C</em>++编程风格笔记</p>
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        C++编程风格笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">LouisShark</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-11T06:19:25.000Z" class="dt-published" itemprop="datePublished">2017-09-11</time>
+        
+        (Updated: <time datetime="2017-09-11T06:25:51.000Z" class="dt-updated" itemprop="dateModified">2017-09-11</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C++</a>, <a class="p-category" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><em>C</em>++编程风格笔记</p>
 <blockquote>
 <p><strong>定义函数时，参数顺序为：输入参数在前，输出参数在后。</strong></p>
 </blockquote>
-<p>C/C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入/输出常数为<em>非常数指针</em>(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。</p>
+<p>C&#x2F;C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入&#x2F;输出常数为<em>非常数指针</em>(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。</p>
 <hr>
 <blockquote>
 <p>包含文件的名称及次序</p>
 </blockquote>
 <p>将包含次序标准化可增强可读性丶避免隐藏依赖(<em>hidden dependencies， 隐藏依赖主要指包含的文件中编译时</em>)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。</p>
-<p>项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。//.(当前路径) ..（父路径）。//例如，google-awesome-project/src/base/logging.h应像这样被包含：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"base/logging.h"</span></span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>dir/foo.cc的主要作用是执行或测试dir2/foo2.h的功能，foo.cc中包含头文件的次序如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dir2/foo2.h</span><br><span class="line">C系统文件</span><br><span class="line">C++系统文件</span><br><span class="line">其他库头文件</span><br><span class="line">本项目内头文件</span><br></pre></td></tr></table></figure>
+<p>项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。&#x2F;&#x2F;.(当前路径) ..（父路径）。&#x2F;&#x2F;例如，google-awesome-project&#x2F;src&#x2F;base&#x2F;logging.h应像这样被包含：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;base/logging.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>dir&#x2F;foo.cc的主要作用是执行或测试dir2&#x2F;foo2.h的功能，foo.cc中包含头文件的次序如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dir2/foo2.h</span><br><span class="line">C系统文件</span><br><span class="line">C++系统文件</span><br><span class="line">其他库头文件</span><br><span class="line">本项目内头文件</span><br></pre></td></tr></table></figure>
+
 <p>这种排序方式可有效减少隐藏依赖，我们希望每一个头文件都独立编译。最简单的实现方式是将其作为第一个.h文件包含在对应的.cc中。</p>
-<p>dir/foo.cc和 dir2/foo2.h通常位于相同目录下（像base/basictypes_unittest.cc和base/basictypes.h），但也可在不同的目录下。</p>
+<p>dir&#x2F;foo.cc和 dir2&#x2F;foo2.h通常位于相同目录下（像base&#x2F;basictypes_unittest.cc和base&#x2F;basictypes.h），但也可在不同的目录下。</p>
 <p><strong>相同目录下头文件按字母排序是不错的选择。</strong></p>
-<p>举例来说，“google-awesome-project/src/foo/internal/fooserver.cc”的包含次序如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;foo/public/fooserver.h&quot;   //优先位置</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;hash_map&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &quot;base/basictypes.h&quot;</span><br><span class="line">#include &quot;base/commandlineflags.h&quot;</span><br><span class="line">#include &quot;foo/public/bar.h&quot;</span><br></pre></td></tr></table></figure>
+<p>举例来说，“google-awesome-project&#x2F;src&#x2F;foo&#x2F;internal&#x2F;fooserver.cc”的包含次序如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;foo/public/fooserver.h&quot;   //优先位置</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;hash_map&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &quot;base/basictypes.h&quot;</span><br><span class="line">#include &quot;base/commandlineflags.h&quot;</span><br><span class="line">#include &quot;foo/public/bar.h&quot;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="总结以上："><a href="#总结以上：" class="headerlink" title="总结以上："></a>总结以上：</h3><ol>
 <li>避免多重包含是学编程时最基本的要求。</li>
 <li>前置声明是为了降低编译依赖，防止修改一个头文件引发多米诺效应。</li>
@@ -589,18 +235,25 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 <h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><hr>
 <p>将函数尽可能置于最小作用域内，在声明变量时将其初始化。</p>
 <p>C++允许在函数的任何位置声明变量。提倡在尽可能小的作用域内声明变量，离第一次使用越近越好。这使得代码易于阅读，易于定位变量的声明位置丶变量类型和初始值。特别是，应使用初始化代替声明+赋值的方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i;</span><br><span class="line">i = f();     //坏 ---- 初始化和声明分离</span><br><span class="line">int j = g()；  //好------初始化时声明</span><br></pre></td></tr></table></figure>
-<p><strong>注意：gcc可正确执行<em>for(int i =0; i &lt; 10 ;++i)(i的作用域仅限for循环)</em>,因此其他for循环可重用i。if和 while 等语句中，作用域声明同样是正确的。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">while(const char* p= strchr(str, &apos;/&apos;)) str = p +1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i;</span><br><span class="line">i = f();     //坏 ---- 初始化和声明分离</span><br><span class="line">int j = g()；  //好------初始化时声明</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：gcc可正确执行<em>for(int i &#x3D;0; i &lt; 10 ;++i)(i的作用域仅限for循环)</em>,因此其他for循环可重用i。if和 while 等语句中，作用域声明同样是正确的。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">while(const char* p= strchr(str, &#x27;/&#x27;)) str = p +1;</span><br></pre></td></tr></table></figure>
+
 <p><strong>注意：如果变量是一个对象，每次进入作用域都要调用其构造函数，每次退出都要调用其析构函数。</strong></p>
-<p>//低效的实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0; i &lt; 1000000; ++i) &#123;</span><br><span class="line">  Foo f;</span><br><span class="line">  f.DoSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#x2F;&#x2F;低效的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0; i &lt; 1000000; ++i) &#123;</span><br><span class="line">  Foo f;</span><br><span class="line">  f.DoSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>类似变量要放到循环作用域外面声明要高效的多：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Foo f;</span><br><span class="line">for (int i = 0; i &lt; 1000000; ++i) &#123;</span><br><span class="line">  f.DoSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Foo f;</span><br><span class="line">for (int i = 0; i &lt; 1000000; ++i) &#123;</span><br><span class="line">  f.DoSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><hr>
 <p>class类型的全局变量是被禁止的，内建类型的全局变量是允许的，当然多线程代码中非常数全局变量也是被禁止的。永远不要使用函数返回值初始化全局变量。如果一定要使用class类型的全局变量，请使用单例模式(singleton pattern)。</p>
 <p>对于全局的字符串常量，使用C风格的字符串，而不要使用STL的字符串：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const char kFrogSays[] = &quot;ribbet&quot;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const char kFrogSays[] = &quot;ribbet&quot;;</span><br></pre></td></tr></table></figure>
+
 <p>虽然允许在全局作用域使用全局变量，但请三思。大多数全局变量应该是类的静态数据成员，或者当其只在.cc文件中使用时，将其定义到不具名命名空间中，或者使用静态关联以限制变量的作用域。</p>
 <p><strong>记住，静态成员变量视作全局变量，所以也不能是class类型！！</strong></p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ol>
@@ -661,7 +314,8 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 <p><strong>结论：</strong></p>
 <p>大量的类并不需要可拷贝，也不需要一个拷贝构造函数或赋值操作。但不幸的是，你不主动声明他们，编译器会为你自动生成，而且是public。</p>
 <p><strong>可以考虑在类的private中添加空的(dummy)拷贝构造函数和赋值操作，只有声明，没有定义。由于这些空程序声明为private，当其他代码视图使用他们时，编译器将报错，为了方便，可以使用宏定义DISALLOW_COPY_AND_ASSIGN。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//禁止使用拷贝构造函数和赋值操作的宏</span><br><span class="line">//应在类的private:中使用</span><br><span class="line">#define DISALLOW_COPY_AND_ASSIGN(TypeName) \</span><br><span class="line">	TypeName(const TypeName&amp;);             \</span><br><span class="line">	void operator = (const TypeName&amp;)</span><br><span class="line">class Foo &#123;</span><br><span class="line">  public:</span><br><span class="line">  	Foo(int f);</span><br><span class="line">  	~Foo();</span><br><span class="line">  private:</span><br><span class="line">  	DISALLOW_COPY_AND_ASSIGN(Foo);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//禁止使用拷贝构造函数和赋值操作的宏</span><br><span class="line">//应在类的private:中使用</span><br><span class="line">#define DISALLOW_COPY_AND_ASSIGN(TypeName) \</span><br><span class="line">	TypeName(const TypeName&amp;);             \</span><br><span class="line">	void operator = (const TypeName&amp;)</span><br><span class="line">class Foo &#123;</span><br><span class="line">  public:</span><br><span class="line">  	Foo(int f);</span><br><span class="line">  	~Foo();</span><br><span class="line">  private:</span><br><span class="line">  	DISALLOW_COPY_AND_ASSIGN(Foo);</span><br><span class="line">&#125;;	</span><br></pre></td></tr></table></figure>
+
 <p>如上所述，绝大多数情况应使用DISALLOW_COPY_AND_ASSIGN,如果类确实需要拷贝，应在该类的头文件中说明原由，并适当定义拷贝构造函数和赋值操作，注意在operator中检测自赋值(self-assignment)情况。</p>
 <p>在将类作为STL容器值的时候，你可能有使类可拷贝的冲动。类似情况下，真正该做的是使用指针指向STL容器中的对象，可以考虑使用 <code>std::tr1::shared_ptr</code>.</p>
 <h3 id="5-结构体和类（struct-vs-Classes）"><a href="#5-结构体和类（struct-vs-Classes）" class="headerlink" title="5.结构体和类（struct vs Classes）"></a>5.结构体和类（struct vs Classes）</h3><p>仅当只有数据时使用struct，其他一律使用class。</p>
@@ -694,7 +348,7 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 <blockquote>
 <p>当一个类满足以下条件时，称为纯接口：</p>
 <ol>
-<li>只有纯虚函数(“=0”)和静态函数(下文提到的析构函数除外)。</li>
+<li>只有纯虚函数(“&#x3D;0”)和静态函数(下文提到的析构函数除外)。</li>
 <li>没有非静态数据成员。</li>
 <li>没有定义任何构造函数。如果有也不含参数，并且为protected。</li>
 <li>如果是子类，也只能继承满足以上条件并以interface为后缀的类。</li>
@@ -709,20 +363,20 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 <p>只有在满足上述需要时，类才以interface结尾，但反过来满足上述需要的类未必一定以interface结尾。</p>
 <h3 id="9-操作符重载"><a href="#9-操作符重载" class="headerlink" title="9.操作符重载"></a>9.操作符重载</h3><p><strong>除少数特定环境外，不要重载操作符。</strong></p>
 <blockquote>
-<p><strong>定义：</strong>一个类可以定义诸如 + 丶/等操作符，使其可以像内建类型一样直接使用。</p>
+<p><strong>定义：</strong>一个类可以定义诸如 + 丶&#x2F;等操作符，使其可以像内建类型一样直接使用。</p>
 <p><strong>优点：</strong>是代码看上去更加直观，就像内建类型(如<strong>int</strong>)那样，重载操作符使那些equal丶add等暗淡无关的函数名好玩多了。为了使一些模板函数正确工作，可能需要定义操作符。</p>
 <p><strong>缺点：</strong>虽然操作符重载令代码更加直观，但也有一些不足。</p>
 <ol>
 <li>混淆直觉，让你误以为一些耗时操作像内建操作那样轻巧</li>
-<li>查找重载操作符的调用处更加困难，查找equal显然比同等调用==容易的多。</li>
+<li>查找重载操作符的调用处更加困难，查找equal显然比同等调用&#x3D;&#x3D;容易的多。</li>
 <li>有的操作符可以对指针进行操作，容易导致bugs丶Foo+4 做的是一件事，而&amp;Foo+4 可能做的是完全不同的另一件事，对于二者，编译器都不会报错，使其很难调试。</li>
-<li>重载还有令你吃惊的副作用，比如重载操作符<strong>&amp;</strong>的类不能被前置声明。</li>
+<li>重载还有令你吃惊的副作用，比如重载操作符**&amp;**的类不能被前置声明。</li>
 </ol>
 </blockquote>
 <p><strong>结论：</strong></p>
-<p>一般不要重载操作符，尤其是赋值操作(operator==)比较阴险，应避免重载，需要的话可以定义类似equal丶copyFrom等函数。</p>
-<p>然而，极少数情况下需要重载操作符以便与模板或“标准”C++类衔接(operator&lt;&lt;(ostream&amp;,const T&amp;)),如果被证明是正当的尚可接受，但你要尽可能避免这样做尤其是不要仅仅为了在STL容器中作为key使用就重载operator==或operator&lt;，取而代之，你应该在声明容器的时候，创建相等判断和大小比较的仿函数类型。</p>
-<p>有些STL算法确实需要重载operator==时可以这么做，不要忘了提供文档说明原因。</p>
+<p>一般不要重载操作符，尤其是赋值操作(operator&#x3D;&#x3D;)比较阴险，应避免重载，需要的话可以定义类似equal丶copyFrom等函数。</p>
+<p>然而，极少数情况下需要重载操作符以便与模板或“标准”C++类衔接(operator&lt;&lt;(ostream&amp;,const T&amp;)),如果被证明是正当的尚可接受，但你要尽可能避免这样做尤其是不要仅仅为了在STL容器中作为key使用就重载operator&#x3D;&#x3D;或operator&lt;，取而代之，你应该在声明容器的时候，创建相等判断和大小比较的仿函数类型。</p>
+<p>有些STL算法确实需要重载operator&#x3D;&#x3D;时可以这么做，不要忘了提供文档说明原因。</p>
 <p>参考拷贝构造函数和函数重载。</p>
 <h3 id="10-存取控制"><a href="#10-存取控制" class="headerlink" title="10.存取控制"></a>10.存取控制</h3><p>将数据成员私有化，并提供相关存取函数，如定义变量foo_及取值函数foo()丶赋值函数set_foo().</p>
 <p>存取函数的定义一般内联在头文件中。</p>
@@ -756,563 +410,184 @@ C/C++函数参数分为输入参数和输出参数两种，有时输入参数也
 <li>函数体尽量短小丶紧凑，功能单一</li>
 </ul>
 
-        
-                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
-                    <p><strong>
-                         
-                            This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
-                        </strong>
-                        <br>
-                        <strong>本文链接：</strong><a href="//louisshark.github.io/2017/09/11/C++编程风格笔记/">//louisshark.github.io/2017/09/11/C++编程风格笔记/</a>
-                    </p>
-                </blockquote>
-        
-    
+  </div>
+</article>
 
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用 来必力 -->
-<div id="livere-comment">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI1MC8xNDc3OA==">
-	<script type="text/ls-javascript" id="livere-comment-js">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-       if (typeof LivereTower === 'function') { return; }
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-</div>
-</div>
-<style>
-    #livere-comment{
-        background-color: #eee;
-        padding: 2pc;
-    }
-</style>
-
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/2017/10/11/搭建ngnix/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
         </div>
     </div>
 
 
 
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.jpg" alt="LouisShark's avatar">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="https://github.com/LouisShark">项目</a></li>
+        
+      </ul>
     </div>
 
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        mshark.louis@gmail.com
-        <b class="caret"></b>
-    </a>
-</div>
-
-
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
-            
-                <li>
-                    <a href="mailto:mshark.louis@gmail.com" target="_blank" title="Email Me">
-                        
-                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        
-                        Email Me
-                    </a>
-                </li>
-            
-        </ul>
-    </li>
-
-    <!-- Homepage -->
     
-        <li id="sidebar-first-li">
-            <a href="/">
-                
-                    <i class="material-icons sidebar-material-icons">home</i>
-                
-                主页
-            </a>
-        </li>
-        
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%BB%A5%E4%B8%8A%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">总结以上：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number"></span> <span class="toc-text">局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number"></span> <span class="toc-text">全局变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number"></span> <span class="toc-text">类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">4.拷贝构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB%EF%BC%88struct-vs-Classes%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">5.结构体和类（struct vs Classes）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%A7%E6%89%BF-inheritance"><span class="toc-number">3.</span> <span class="toc-text">6.继承(inheritance)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF"><span class="toc-number">4.</span> <span class="toc-text">7.多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">8.接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="toc-number">6.</span> <span class="toc-text">9.操作符重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%AD%98%E5%8F%96%E6%8E%A7%E5%88%B6"><span class="toc-number">7.</span> <span class="toc-text">10.存取控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%A3%B0%E6%98%8E%E6%AC%A1%E5%BA%8F"><span class="toc-number">8.</span> <span class="toc-text">11.声明次序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%B1%BB%E7%9A%84%E7%BB%93%E8%AE%BA"><span class="toc-number"></span> <span class="toc-text">关于类的结论</span></a>
+      </div>
     
 
-    <!-- Archives  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">inbox</i>
-                
-                    归档
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
-            </ul>
-        </li>
-        
-    
-
-    <!-- Categories  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
-                
-                分类
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                
-            </ul>
-        </li>
-        
-            <li class="divider"></li>
-        
-    
-
-    <!-- Pages  -->
-    
-        <li>
-            <a href="/tags" title="标签云">
-                
-                    <i class="material-icons sidebar-material-icons">cloud_circle</i>
-                
-                标签云
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/timeline" title="时间轴">
-                
-                    <i class="material-icons sidebar-material-icons">timeline</i>
-                
-                时间轴
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/about" title="关于我">
-                
-                    <i class="material-icons sidebar-material-icons">person_pin</i>
-                
-                关于我
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/links" title="友链">
-                
-                    <i class="material-icons sidebar-material-icons">link</i>
-                
-                友链
-            </a>
-        </li>
-        
-            <li class="divider"></li>
-        
-    
-
-    <!-- Article Number  -->
-    
-        <li>
-            <a href="/archives">
-                文章总数
-                <span class="sidebar-badge">14</span>
-            </a>
-        </li>
-        
-    
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&text=C++编程风格笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&is_video=false&description=C++编程风格笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++编程风格笔记&body=Check out this article: https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&title=C++编程风格笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&name=C++编程风格笔记&description=&lt;p&gt;&lt;em&gt;C&lt;/em&gt;++编程风格笔记&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;定义函数时，参数顺序为：输入参数在前，输出参数在后。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;C&amp;#x2F;C++函数参数分为输入参数和输出参数两种，有时输入参数也会输出（值被修改时），输入参数一般传值或常数引用，输出参数或输入&amp;#x2F;输出常数为&lt;em&gt;非常数指针&lt;/em&gt;(non-const pointers)。对参数排序时，将所有输入参数置于输出参数之前。不要仅仅因为是新添加的参数，就将其置于最后，而应该依然置于输出参数之前。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;包含文件的名称及次序&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;将包含次序标准化可增强可读性丶避免隐藏依赖(&lt;em&gt;hidden dependencies， 隐藏依赖主要指包含的文件中编译时&lt;/em&gt;)，次序如下：C库丶C++库丶其他库的.h丶项目内的.h。&lt;/p&gt;
+&lt;p&gt;项目内头文件应按照项目源代码目录树结构排序，并且避免使用UNIX文件路径。&amp;#x2F;&amp;#x2F;.(当前路径) ..（父路径）。&amp;#x2F;&amp;#x2F;例如，google-awesome-project&amp;#x2F;src&amp;#x2F;base&amp;#x2F;logging.h应像这样被包含：&lt;/p&gt;
+&lt;figure class=&#34;highlight c++&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;span class=&#34;keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;base/logging.h&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/&t=C++编程风格笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Sidebar Divider -->
-
-    <div class="sidebar-divider"></div>
-
-
-<!-- Theme Material -->
-
-
-<!-- Help & Support -->
-<!--
-
--->
-
-<!-- Feedback -->
-<!--
-
--->
-
-<!-- About Theme -->
-<!--
-
--->
-
     </div>
 
-    <!-- Sidebar Image -->
-    
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
 
-</aside>
-
-                    
-
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
+  </div>
 </div>
 
-                    
-
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
     
-        <a href="https://twitter.com/shark_louis" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Facebook -->
-    
-
-    <!-- Google + -->
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/u/5331922690?refer_flag=1001030101_&amp;is_all=1" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
-                <span class="visuallyhidden">Weibo</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/LouisShark" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
-                <span class="visuallyhidden">Github</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Zhihu -->
-    
-        <a href="https://www.zhihu.com/people/louisshark" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
-                <span class="visuallyhidden">Zhihu</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Bilibili -->
-    
-        <a href="https://space.bilibili.com/18731855/#/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-bilibili">
-                <span class="visuallyhidden">Bilibili</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Telegram -->
-    
-
-    <!-- V2EX -->
-    
-
-    <!-- Segmentfault -->
-    
-</div>
-
-
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;LouisShark的随笔
-            
-                <br>
-                
-                    子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。
-                
-            
-        </div>
-
-        <!-- Paradox Footer Right Section -->
-
+    2016-2024
+    LouisShark
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
         <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
-
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
-
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
-        </div>
-    
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/LouisShark">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-                    <!-- Import JS File -->
-
-    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+    </div>
+    <!-- styles -->
 
 
 
-    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
 
 
-    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
 
+<!-- clipboard -->
 
-<script type="text/ls-javascript" id="NProgress-script">
-    NProgress.configure({
-        showSpinner: true
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
     });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
-    <!-- Busuanzi -->
-    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+        var disqus_shortname = 'LouisShark';
 
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
 
+<!-- utterances Comments -->
 
-   
-
-
-
-
-
-<!-- UC Browser Compatible -->
-<script>
-	var agent = navigator.userAgent.toLowerCase();
-	if(agent.indexOf('ucbrowser')>0) {
-		document.write('<link rel="stylesheet" href="/css/uc.css">');
-	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-	}
-</script>
-
-<!-- Import prettify js  -->
-
-    
-        
-            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
-        
-    
-
-
-
-<!-- Window Load -->
-<!-- add class for prettify -->
-<script type="text/ls-javascript" id="window-load">
-    $(window).on('load', function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-
-    
-        
-            $(function() {
-                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
-                prettyPrint();
-                })
-        
-    
-    
-</script>
-
-<!-- MathJax Load-->
-
-
-<!-- Bing Background -->
-
-
-<script type="text/ls-javascript" id="lazy-load">
-    // Offer LazyLoad
-    queue.offer(function(){
-        $('.lazy').lazyload({
-            effect : 'show'
-        });
-    });
-
-    // Start Queue
-    $(document).ready(function(){
-        setInterval(function(){
-            queue.execNext();
-        },200);
-    });
-</script>
-
-<!-- Custom Footer -->
-
-
-
-<script>
-    var copyrightNow = new Date().getFullYear();
-    var textContent = document.querySelector('span[year]')
-
-    copyrightSince = 2016;
-    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
-        textContent.textContent = copyrightNow
-    } else {
-        textContent.textContent = copyrightSince + ' - ' + copyrightNow
-    }
-
-    (function(){
-        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
-
-        for (var i = 0; i < scriptList.length; ++i) {
-            var item = scriptList[i];
-            lsloader.runInlineScript(item.id,item.id);
-        }
-    })()
-console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
-</script>
-
-                </main>
-            </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-        </body>
-    
+</body>
 </html>

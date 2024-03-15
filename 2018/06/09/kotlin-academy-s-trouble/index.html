@@ -1,575 +1,210 @@
 <!DOCTYPE html>
-<html style="display: none;" lang="zh">
-    <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.5.6 -->
-    <script>
-        window.materialVersion = "1.5.6"
-        // Delete localstorage with these tags
-        window.oldVersion = [
-            'codestartv1',
-            '1.3.4',
-            '1.4.0',
-            '1.4.0b1',
-            '1.5.0',
-            '1.5.2',
-            '1.5.5'
-        ]
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Kotlin puzzlers 话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址：Kotlin Academy  以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。 Order of null">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kotlin academy&#39;s trouble">
+<meta property="og:url" content="https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html">
+<meta property="og:site_name" content="LouisShark的随笔">
+<meta property="og:description" content="Kotlin puzzlers 话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址：Kotlin Academy  以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。 Order of null">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-06-09T03:15:48.000Z">
+<meta property="article:modified_time" content="2024-03-15T07:08:17.022Z">
+<meta property="article:author" content="LouisShark">
+<meta property="article:tag" content="-kotlin -易错题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@shark_louis">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>kotlin academy&#39;s trouble</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+    <script async defer
+            data-website-id="1a5fb885-3814-4a05-ab13-f956e13fcdf8"
+            src="https://analytics.us.umami.is/script.js">
     </script>
 
-    <!-- dns prefetch -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
 
-
-
-    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
-
-
-
-    <link rel="dns-prefetch" href="https://cdn-city.livere.com"/>
-
-
-
-    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
-
-
-
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
-
-
-
-
-
-    <!-- Meta & Info -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!-- Title -->
+    <!-- styles -->
     
-    <title>
-        
-            kotlin academy&#39;s trouble | 
-        
-        LouisShark的随笔
-    </title>
+<link rel="stylesheet" href="/css/style.css">
 
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
-    <link rel="icon" href="/img/favicon.png">
-
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="Kotlin puzzlers
-话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy 
-
-以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。
-Order of nullable operators （猫王操作符的优先级 重要提示Level：Beginner
-1234567fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val x: Int? = 2     val y: Int = 3    val sum = x?:0 + y        println(sum)&amp;#125;
-What will it print ? Some possibilities: //这个不用翻译了吧…
-a. 3
-b. 5
-c. 2
-d. 0
-
-Author: Thomas Nield
-">
-    <meta name="keywords" content="Android, Google,-kotlin -易错题">
-    <meta name="theme-color" content="#0097A7">
-
-    <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import lsloader -->
-    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
-
-    <!-- Import queue -->
-    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
-
-    <!-- Import CSS -->
+    <!-- persian styles -->
     
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-        
-            
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-            
-        
-
-    
-
-    
-
-    <!-- Config CSS -->
-
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    overflow-x: hidden !important;
-  }
-  
-  code {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  }
-
-  a {
-    color: #00838F;
-  }
-
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-image: url(/img/bg.jpg);
-      }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-<!-- Import Font -->
-<!-- Import Roboto -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
-<!-- Import Material Icons -->
-
-
-    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-
-
-
-    <!-- Import jQuery -->
-    
-        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
-    
-
-    <!-- WebAPP Icons -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="LouisShark的随笔">
-    <meta name="msapplication-starturl" content="//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/">
-    <meta name="msapplication-navbutton-color" content="#0097A7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="LouisShark的随笔">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- Site Verification -->
-    <meta name="google-site-verification" content="IuSTXI07C6gfiHYRhSFRHGD6abgigp02xTCgeC0-Rbc" />
-    <meta name="baidu-site-verification" content="Hom3iks4mH" />
-
-    <!-- RSS -->
-    
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="kotlin academy&#39;s trouble | LouisShark的随笔">
-    <meta property="og:image" content="/img/favicon.png">
-    <meta property="og:description" content="Kotlin puzzlers
-话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy 
-
-以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。
-Order of nullable operators （猫王操作符的优先级 重要提示Level：Beginner
-1234567fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val x: Int? = 2     val y: Int = 3    val sum = x?:0 + y        println(sum)&amp;#125;
-What will it print ? Some possibilities: //这个不用翻译了吧…
-a. 3
-b. 5
-c. 2
-d. 0
-
-Author: Thomas Nield
-">
-    <meta property="og:article:tag" content="-kotlin -易错题"> 
-
-    
-        <meta property="article:published_time" content="Sat Jun 09 2018 11:15:48 GMT+0800">
-        <meta property="article:modified_time" content="Mon Jun 11 2018 14:29:51 GMT+0800">
-    
-
-    <!-- The Twitter Card protocol -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Add canonical link for SEO -->
-    
-        <link rel="canonical" href="//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html" />
-    
-
-    <!-- Structured-data for SEO -->
-    
-        
-
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": "//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html",
-    "headline": "kotlin academy's trouble",
-    "datePublished": "Sat Jun 09 2018 11:15:48 GMT+0800",
-    "dateModified": "Mon Jun 11 2018 14:29:51 GMT+0800",
-    "author": {
-        "@type": "Person",
-        "name": "LouisShark",
-        "image": {
-            "@type": "ImageObject",
-            "url": "/img/avatar.jpg"
-        },
-        "description": "Stop Stoping"
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "LouisShark的随笔",
-        "logo": {
-            "@type":"ImageObject",
-            "url": "/img/favicon.png"
-        }
-    },
-    "keywords": ",-kotlin -易错题Android, Google",
-    "description": "Kotlin puzzlers
-话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 原文地址： Kotlin Academy 
-
-以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。
-Order of nullable operators （猫王操作符的优先级 重要提示Level：Beginner
-1234567fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val x: Int? = 2     val y: Int = 3    val sum = x?:0 + y        println(sum)&amp;#125;
-What will it print ? Some possibilities: //这个不用翻译了吧…
-a. 3
-b. 5
-c. 2
-d. 0
-
-Author: Thomas Nield
-",
-}
-</script>
-
-
-    
-
-    <!-- Analytics -->
-    
-        <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-122704699-1', 'auto');ga('send', 'pageview');
-</script>
+    <!-- rss -->
     
     
-    
-
-    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="LouisShark的随笔" type="application/atom+xml">
 </head>
 
-
+<body class="max-width mx-auto px3 ltr">
     
-        <body id="scheme-Paradox" class="lazy">
-            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span id="MD-burger-id" class="MD-burger-layer"></span>
-                        </button>
-                    
-
-                    <!-- Post TOC -->
-
-    
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-
-    <!-- Left aligned menu below button -->
-    
-    
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Kotlin-puzzlers"><span class="post-toc-number">1.</span> <span class="post-toc-text">Kotlin puzzlers</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Order-of-nullable-operators-（猫王操作符的优先级-重要提示"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Order of nullable operators （猫王操作符的优先级 重要提示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Contravariance-逆变"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Contravariance (逆变)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Interface-delegation-and-data-classes"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Interface delegation and data classes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#WTF-with-labels"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">WTF with labels</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Return-in-Function-literal"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Return in Function literal</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Int-plus-plus"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Int plus-plus</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Function-names"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Function names</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Receivers-wars"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">Receivers wars</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Negative-numbers"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">Negative numbers</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Child-apply"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">Child apply</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Subtypes-and-Generics-List"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">Subtypes and Generics: List</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Copy"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">Copy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Cyclic-object-construction"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">Cyclic object construction</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Overriding-properties-that-are-used-in-a-parent"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">Overriding properties that are used in a parent</span></a></li></ol></li></ol>
-    </ul>
-    
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
-    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/LouisShark">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-</script>
-
         
-    
-            <p class="article-headline-p">
-                kotlin academy's trouble
-            </p>
-        </div>
+        <li><a class="icon" aria-label="下一篇" href="/2018/02/11/Kotlin%E7%9A%84%E6%9F%AF%E9%87%8C%E5%8C%96/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&text=kotlin academy&#39;s trouble"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&is_video=false&description=kotlin academy&#39;s trouble"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=kotlin academy&#39;s trouble&body=Check out this article: https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&name=kotlin academy&#39;s trouble&description=&lt;h1 id=&#34;Kotlin-puzzlers&#34;&gt;&lt;a href=&#34;#Kotlin-puzzlers&#34; class=&#34;headerlink&#34; title=&#34;Kotlin puzzlers&#34;&gt;&lt;/a&gt;Kotlin puzzlers&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 &lt;strong&gt;原文地址：&lt;a href=&#34;https://kotlin-academy.herokuapp.com/#/&#34;&gt;Kotlin Academy&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;Order-of-nullable-operators-（猫王操作符的优先级-重要提示&#34;&gt;&lt;a href=&#34;#Order-of-nullable-operators-（猫王操作符的优先级-重要提示&#34; class=&#34;headerlink&#34; title=&#34;Order of nullable operators （猫王操作符的优先级 重要提示&#34;&gt;&lt;/a&gt;Order of nullable operators （猫王操作符的优先级 &lt;em&gt;重要提示&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Level：Beginner&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight kotlin&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;fun&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(args: &lt;span class=&#34;type&#34;&gt;Array&lt;/span&gt;&amp;lt;&lt;span class=&#34;type&#34;&gt;String&lt;/span&gt;&amp;gt;)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;val&lt;/span&gt; x: &lt;span class=&#34;built_in&#34;&gt;Int&lt;/span&gt;? = &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;val&lt;/span&gt; y: &lt;span class=&#34;built_in&#34;&gt;Int&lt;/span&gt; = &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;val&lt;/span&gt; sum = x?:&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt; + y&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    println(sum)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>LouisShark</strong>
-        <span>6月 09, 2018</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">devices other</i>
-    <span class="visuallyhidden">devices other</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-    
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0UlEQVR42u3awY7bMAwE0Pz/T7fXAm12Z0i3SKXnU2AYjp5yYMjR68eV1wsbGxsbGxsbGxv7I9mv+PrDi365/+755P7vb/sGMFozNjY29tns5Gvy+8kGvXtDvmXtmrGxsbFvYCdfkxSMpOx9/cy75zdbg42NjY2dkPKyNGs2sLGxsbH/BrsdG73blG9GQtjY2NjYDw2V8qU/FSd8xCwNGxsb++PZeWj6OZ//ab6NjY2N/cHs9spLVz5+2ryhWDk2Njb2oey2Ddgf3IkGQGVUHK0TGxsb+1B2u/S2dLVjpnwj2jVjY2Njn83OhzWzRbShb/KTtIeKsLGxsU9l51/TLmWzHfmWFduEjY2NfSi7jQSeKkLJ8crZFmBjY2Pfxt6M/vOxUVJy2gOXdbHExsbGPpQ9W+gsJEhakdmoazVLw8bGxv7P2ZvDlK/RlTQ5bQycbCU2Njb2Dey8VciLUN7qbALmqHXBxsbGPpQ9CwM20exTkXAdcmBjY2Mfym6LRNvGfA3ex73F4SFsbGzsQ9lJ8chbjln020a5s3AaGxsb+1T25hhNXnhmZWkTSGBjY2Pfyc5LSFv8ogJThhD1WAobGxv7MnZyROapAzqbaDkJMLCxsbHvYc+G8u2IJy+WszI57MCwsbGxj2bnwe2+4LWlqyiK2NjY2EezZ3/022Xtg+TNeAsbGxv7HvbfO6yTD5jaO9E2YWNjY1/JngUGyRva+PaB+9jY2NjXsDeHIGdNwqwFeiDoxcbGxj6C3V6zoHe20NmwKRoqYWNjYx/E3gSuSeuyWXTSCK1aEWxsbOyD2LNRfl7Y2nZiHwBjY2Nj38nODzXmDcmmRG0Oa2JjY2Nj523A7JDNpoxhY2NjYz9VwIYtQdnYzAZb2NjY2Heyk4ZhVpDyZ2YBc/QzYGNjYx/Nbv/i58d08hKYxMNti4KNjY19A/ueCxsbGxsbGxsbG/tjrp/xuXIUcPE5VQAAAABJRU5ErkJggg==">
-    
+&lt;p&gt;&lt;strong&gt;What will it print ? Some possibilities:&lt;/strong&gt; &amp;#x2F;&amp;#x2F;这个不用翻译了吧…&lt;/p&gt;
+&lt;p&gt;a. 3&lt;/p&gt;
+&lt;p&gt;b. 5&lt;/p&gt;
+&lt;p&gt;c. 2&lt;/p&gt;
+&lt;p&gt;d. 0&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Author: Thomas Nield&lt;/p&gt;
+&lt;/blockquote&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&t=kotlin academy&#39;s trouble"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
+    </div>
     
-
-    <!-- Tags (bookmark) -->
     
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/kotlin-易错题/">-kotlin -易错题</a>
-    </ul>
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kotlin-puzzlers"><span class="toc-number">1.</span> <span class="toc-text">Kotlin puzzlers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Order-of-nullable-operators-%EF%BC%88%E7%8C%AB%E7%8E%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7-%E9%87%8D%E8%A6%81%E6%8F%90%E7%A4%BA"><span class="toc-number">1.0.1.</span> <span class="toc-text">Order of nullable operators （猫王操作符的优先级 重要提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Contravariance-%E9%80%86%E5%8F%98"><span class="toc-number">1.0.2.</span> <span class="toc-text">Contravariance (逆变)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interface-delegation-and-data-classes"><span class="toc-number">1.0.3.</span> <span class="toc-text">Interface delegation and data classes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WTF-with-labels"><span class="toc-number">1.0.4.</span> <span class="toc-text">WTF with labels</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Return-in-Function-literal"><span class="toc-number">1.0.5.</span> <span class="toc-text">Return in Function literal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Int-plus-plus"><span class="toc-number">1.0.6.</span> <span class="toc-text">Int plus-plus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-names"><span class="toc-number">1.0.7.</span> <span class="toc-text">Function names</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Receivers-wars"><span class="toc-number">1.0.8.</span> <span class="toc-text">Receivers wars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Negative-numbers"><span class="toc-number">1.0.9.</span> <span class="toc-text">Negative numbers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Child-apply"><span class="toc-number">1.0.10.</span> <span class="toc-text">Child apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Subtypes-and-Generics-List"><span class="toc-number">1.0.11.</span> <span class="toc-text">Subtypes and Generics: List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy"><span class="toc-number">1.0.12.</span> <span class="toc-text">Copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cyclic-object-construction"><span class="toc-number">1.0.13.</span> <span class="toc-text">Cyclic object construction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Overriding-properties-that-are-used-in-a-parent"><span class="toc-number">1.0.14.</span> <span class="toc-text">Overriding properties that are used in a parent</span></a></li></ol></li></ol></li></ol>
+      </div>
     
-
-    <!-- Share -->
-    
-        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-
-    
-        
-            <!-- Busuanzi Views -->
-            <a class="post_share-link" href="#">
-                <li class="mdl-menu__item">
-                    <span id="busuanzi_container_page_pv">
-                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
-                    </span>
-                </li>
-            </a>
-        
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=kotlin academy&#39;s trouble&url=//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html&pic=//louisshark.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=kotlin academy&#39;s trouble&url=//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html&via=LouisShark" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-
-    <!-- Share Google+ -->
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LouisShark的随笔&title=kotlin academy&#39;s trouble&summary=子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。&pics=//louisshark.github.io/img/favicon.png&url=//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-    
+  </span>
 </div>
 
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="Kotlin-puzzlers"><a href="#Kotlin-puzzlers" class="headerlink" title="Kotlin puzzlers"></a>Kotlin puzzlers</h2><blockquote>
-<p>话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 <strong>原文地址： <a href="https://kotlin-academy.herokuapp.com/#/" target="_blank" rel="noopener">Kotlin Academy</a> </strong></p>
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        kotlin academy&#39;s trouble
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">LouisShark</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-06-09T03:15:48.000Z" class="dt-published" itemprop="datePublished">2018-06-09</time>
+        
+        (Updated: <time datetime="2024-03-15T07:08:17.022Z" class="dt-updated" itemprop="dateModified">2024-03-15</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/kotlin-%E6%98%93%E9%94%99%E9%A2%98/" rel="tag">-kotlin -易错题</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Kotlin-puzzlers"><a href="#Kotlin-puzzlers" class="headerlink" title="Kotlin puzzlers"></a>Kotlin puzzlers</h1><blockquote>
+<p>话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 <strong>原文地址：<a href="https://kotlin-academy.herokuapp.com/#/">Kotlin Academy</a></strong></p>
 </blockquote>
 <p><strong>以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。</strong></p>
 <h3 id="Order-of-nullable-operators-（猫王操作符的优先级-重要提示"><a href="#Order-of-nullable-operators-（猫王操作符的优先级-重要提示" class="headerlink" title="Order of nullable operators （猫王操作符的优先级 重要提示"></a>Order of nullable operators （猫王操作符的优先级 <em>重要提示</em></h3><p><strong>Level：Beginner</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> x: <span class="built_in">Int</span>? = <span class="number">2</span> </span><br><span class="line">    <span class="keyword">val</span> y: <span class="built_in">Int</span> = <span class="number">3</span></span><br><span class="line">    <span class="keyword">val</span> sum = x?:<span class="number">0</span> + y</span><br><span class="line">    </span><br><span class="line">    println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>What will it print ? Some possibilities:</strong> //这个不用翻译了吧…</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> x: <span class="built_in">Int</span>? = <span class="number">2</span></span><br><span class="line">    <span class="keyword">val</span> y: <span class="built_in">Int</span> = <span class="number">3</span></span><br><span class="line">    <span class="keyword">val</span> sum = x?:<span class="number">0</span> + y</span><br><span class="line"></span><br><span class="line">    println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>What will it print ? Some possibilities:</strong> &#x2F;&#x2F;这个不用翻译了吧…</p>
 <p>a. 3</p>
 <p>b. 5</p>
 <p>c. 2</p>
@@ -577,11 +212,13 @@ Author: Thomas Nield
 <blockquote>
 <p>Author: Thomas Nield</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
+
 <hr>
 <h3 id="Contravariance-逆变"><a href="#Contravariance-逆变" class="headerlink" title="Contravariance (逆变)"></a>Contravariance (逆变)</h3><p><strong>Level：Beginner</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wrapper</span>&lt;<span class="type">in T</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> instanceVariableOne: Wrapper&lt;<span class="built_in">Nothing</span>&gt; = Wrapper&lt;Any&gt;() <span class="comment">//Line A</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> instanceVariableTwo: Wrapper&lt;Any&gt; = Wrapper&lt;<span class="built_in">Nothing</span>&gt;() <span class="comment">//Line B</span></span><br></pre></td></tr></table></figure>
-<p><strong>What does it display? Some possibilities:</strong> </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Wrapper</span>&lt;<span class="type">in T</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> instanceVariableOne: Wrapper&lt;<span class="built_in">Nothing</span>&gt; = Wrapper&lt;Any&gt;() <span class="comment">//Line A</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> instanceVariableTwo: Wrapper&lt;Any&gt; = Wrapper&lt;<span class="built_in">Nothing</span>&gt;() <span class="comment">//Line B</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>What does it display? Some possibilities:</strong></p>
 <p>a. Both lines A and B compile.</p>
 <p>b. Lines A and B do not compile.</p>
 <p>c. Line A compiles;Line B does not.</p>
@@ -594,11 +231,12 @@ Author: Thomas Nield
 <p><strong>解析：</strong></p>
 <blockquote>
 <p>Elvis operator(猫王操作符，我脑补)，比<code>+</code>具有更低优先级的操作符，所以 <code>+</code>会先被计算，</p>
-<p>即 sum = x ?: ( 0 + y) = x ?: 3  =  2, 使用小括号可以正确计算。</p>
+<p>即 sum &#x3D; x ?: ( 0 + y) &#x3D; x ?: 3  &#x3D;  2, 使用小括号可以正确计算。</p>
 </blockquote>
 <hr>
 <h3 id="Interface-delegation-and-data-classes"><a href="#Interface-delegation-and-data-classes" class="headerlink" title="Interface delegation and data classes"></a>Interface delegation and data classes</h3><p><strong>Level：Expert</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Container</span></span>(</span><br><span class="line">	<span class="keyword">val</span> name: String, </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> items: List&lt;<span class="built_in">Int</span>&gt;</span><br><span class="line">) : List&lt;<span class="built_in">Int</span>&gt; <span class="keyword">by</span> items</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> (name, items) = Container(<span class="string">"Kotlin"</span>, listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">    println(<span class="string">"Hello <span class="subst">$name</span>, <span class="subst">$items</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Container</span>(</span><br><span class="line">	<span class="keyword">val</span> name: String,</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> items: List&lt;<span class="built_in">Int</span>&gt;</span><br><span class="line">) : List&lt;<span class="built_in">Int</span>&gt; <span class="keyword">by</span> items</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> (name, items) = Container(<span class="string">&quot;Kotlin&quot;</span>, listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">    println(<span class="string">&quot;Hello <span class="variable">$name</span>, <span class="variable">$items</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p><strong>What will it print? Some possibilities:</strong></p>
 <p>a. Hello Kotlin,[1, 2, 3]</p>
 <p>b. Hello Kotlin, 1</p>
@@ -611,7 +249,7 @@ Author: Thomas Nield
 <p>c. Line A compiles;Line B does not.</p>
 <p><strong>解析：</strong></p>
 <blockquote>
-<p><code>Wrapper&lt;in T&gt;</code> 中的<code>T</code>是逆变的。 <code>Wrapper</code>的类型应该与<code>T</code>的子类型相反，即 <code>super T</code>。</p>
+<p><code>Wrapper&lt;in T&gt;</code> 中的<code>T</code>是逆变的。 <code>Wrapper </code>的类型应该与<code>T</code>的子类型相反，即 <code>super T</code>。</p>
 <p>因为<code>Nothing</code>是<code>Any</code>的子类型(注:Nothing 是其他所有类型的子类型)，所以<code>Wrapper&lt;Any&gt;</code> 是<code>Wrapper&lt;Nothing&gt;</code>的子类型。</p>
 <p>Line A compiles。他将一个子类型赋值给超类。</p>
 <p>Line B does not compile。 他将一个超类赋值给子类。</p>
@@ -619,6 +257,7 @@ Author: Thomas Nield
 <hr>
 <h3 id="WTF-with-labels"><a href="#WTF-with-labels" class="headerlink" title="WTF with labels"></a>WTF with labels</h3><p><strong>Level：Advanced</strong></p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> j = <span class="symbol">wtf@</span>&#123; n: <span class="built_in">Int</span> -&gt;</span><br><span class="line">        <span class="symbol">wtf@</span>(<span class="symbol">wtf@</span>n + <span class="symbol">wtf@</span><span class="number">2</span>)</span><br><span class="line">    &#125;(<span class="number">10</span>)</span><br><span class="line">    print(j)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>What does it display? Some possibilities:</strong></p>
 <p>a. It won’t compile</p>
 <p>b. 10</p>
@@ -636,11 +275,12 @@ Author: Thomas Nield
 <p><code>Container</code>用by delegation的方式实现了接口<code>List&lt;Int&gt;</code>，因此调用了上面的扩展函数。</p>
 <p>所以，(name, items)解构后第二个参数就是伪代码就是listOf(1, 2, 3).component2()</p>
 <p>你可以在JB的issue tracker中找到以下讨论：</p>
-<p><a href="https://youtrack.jetbrains.com/issue/KT-24308" target="_blank" rel="noopener">https://youtrack.jetbrains.com/issue/KT-24308</a></p>
+<p><a href="https://youtrack.jetbrains.com/issue/KT-24308">https://youtrack.jetbrains.com/issue/KT-24308</a></p>
 </blockquote>
 <hr>
 <h3 id="Return-in-Function-literal"><a href="#Return-in-Function-literal" class="headerlink" title="Return in Function literal"></a>Return in Function literal</h3><p><strong>Level：Beginner</strong></p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">f1</span><span class="params">()</span></span> &#123;</span><br><span class="line">    (<span class="number">1.</span><span class="number">.4</span>).forEach&#123;</span><br><span class="line">        <span class="keyword">if</span> (it == <span class="number">2</span>) <span class="keyword">return</span></span><br><span class="line">        println(it)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">f2</span><span class="params">()</span></span> &#123;</span><br><span class="line">    (<span class="number">1.</span><span class="number">.4</span>).forEach(<span class="function"><span class="title">fun</span><span class="params">(it)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (it == <span class="number">2</span>) <span class="keyword">return</span></span><br><span class="line">        println(it)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    f1()</span><br><span class="line">    f2()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>What does it display? Some possibilities:</strong></p>
 <p>a. 134134</p>
 <p>b. 1134</p>
@@ -657,7 +297,8 @@ Author: Thomas Nield
 </blockquote>
 <hr>
 <h3 id="Int-plus-plus"><a href="#Int-plus-plus" class="headerlink" title="Int plus-plus"></a>Int plus-plus</h3><p><strong>Level：Beginner</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line">    println(i.inc()) </span><br><span class="line">    println(i.inc()) </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> j = <span class="number">0</span></span><br><span class="line">    println(j++)   </span><br><span class="line">    println(++j)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line">    println(i.inc())</span><br><span class="line">    println(i.inc())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> j = <span class="number">0</span></span><br><span class="line">    println(j++)</span><br><span class="line">    println(++j)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>What does it display? Some possibilities:</strong></p>
 <p>a. 0, 1, 0, 1</p>
 <p>b. 0, 1, 0, 2</p>
@@ -676,9 +317,10 @@ Author: Thomas Nield
 <hr>
 <h3 id="Function-names"><a href="#Function-names" class="headerlink" title="Function names"></a>Function names</h3><p><strong>Level：Expert</strong></p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> ``<span class="params">()</span></span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> ` `<span class="params">()</span></span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> `everything works.`<span class="params">()</span></span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> `1/1/ <span class="keyword">is</span> ok; 1/0 <span class="keyword">is</span> an error`<span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>Which functions have acceptable names? Some possibilities:</strong></p>
 <p>a. ok; ok; ok; ok</p>
-<p>b. error; ok; ok;  error; </p>
+<p>b. error; ok; ok;  error;</p>
 <p>c. error; ok; error; error;</p>
 <p>d. error; error; error; error;</p>
 <blockquote>
@@ -690,14 +332,15 @@ Author: Thomas Nield
 <blockquote>
 <p>前缀++（++j）增加数值并且返回增加后新的值，但是后缀++（i++）虽然同样增加数值但<strong>它返回的是未增加老的值</strong>。</p>
 <p>本题带有迷惑的地方是kotlin函数<code>inc()</code>的前缀和后缀.详细请看</p>
-<p><a href="https://www.kotlincn.net/docs/reference/operator-overloading.html#%E9%80%92%E5%A2%9E%E4%B8%8E%E9%80%92%E5%87%8F" target="_blank" rel="noopener">递增和递减</a></p>
+<p><a href="https://www.kotlincn.net/docs/reference/operator-overloading.html#%E9%80%92%E5%A2%9E%E4%B8%8E%E9%80%92%E5%87%8F">递增和递减</a></p>
 </blockquote>
 <hr>
 <h3 id="Receivers-wars"><a href="#Receivers-wars" class="headerlink" title="Receivers wars"></a>Receivers wars</h3><p><strong>Level：Advanced</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"Top-level rule"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">"Extension receiver rule"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">"Dispatch receiver rule"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> Foo.<span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">"Member extension function rule"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> Foo.<span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">        foo()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        Foo().test()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    Test().testFoo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Top-level rule&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Extension receiver rule&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Dispatch receiver rule&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> Foo.<span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Member extension function rule&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> Foo.<span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">        foo()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        Foo().test()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    Test().testFoo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>Which does it display? Some possibilities:</strong></p>
 <p>a. Top-level rule</p>
-<p>b. Extension receiver rule </p>
+<p>b. Extension receiver rule</p>
 <p>c. Dispatch receiver rule</p>
 <p>d. Member extension function rule</p>
 <blockquote>
@@ -710,15 +353,16 @@ Author: Thomas Nield
 <ol>
 <li>:声明必须要有名字</li>
 <li>:Ok</li>
-<li>和 4. : 命名包含非法字符，”,”  “;” 和 “/“</li>
+<li>和 4. : 命名包含非法字符，”,”  “;” 和 “&#x2F;“</li>
 </ol>
 </blockquote>
 <hr>
 <h3 id="Negative-numbers"><a href="#Negative-numbers" class="headerlink" title="Negative numbers"></a>Negative numbers</h3><p><strong>Level：Advanced</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(<span class="number">-1.</span>inc())</span><br><span class="line">    println(<span class="string">", "</span>)</span><br><span class="line">    println(<span class="number">1</span> + -(<span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(-<span class="number">1.</span>inc())</span><br><span class="line">    println(<span class="string">&quot;, &quot;</span>)</span><br><span class="line">    println(<span class="number">1</span> + -(<span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>Which does it display? Some possibilities:</strong></p>
 <p>a. 0, 0</p>
-<p>b. Won’t compile in line 4 </p>
+<p>b. Won’t compile in line 4</p>
 <p>c. 0, 2</p>
 <p>d. -2, 0</p>
 <blockquote>
@@ -733,7 +377,8 @@ Author: Thomas Nield
 </blockquote>
 <hr>
 <h3 id="Child-apply"><a href="#Child-apply" class="headerlink" title="Child apply"></a>Child apply</h3><p><strong>Level：Advanced</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>(<span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">lookup</span><span class="params">()</span></span> = <span class="string">"lookup in: <span class="subst">$name</span>"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span>: <span class="type">Node</span></span>(<span class="string">"container"</span>) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">createChild</span><span class="params">(name: <span class="type">String</span>)</span></span>: Node? = Node(name)</span><br><span class="line">    <span class="keyword">val</span> child1 = createChild(<span class="string">"child1"</span>)?.apply &#123;</span><br><span class="line">        println(<span class="string">"child1 <span class="subst">$&#123;lookup()&#125;</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">val</span> child2 = createChild(<span class="string">"child2"</span>).apply &#123;</span><br><span class="line">        println(<span class="string">"child2 <span class="subst">$&#123;lookup()&#125;</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    Example()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="keyword">class</span> <span class="title class_">Node</span>(<span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">lookup</span><span class="params">()</span></span> = <span class="string">&quot;lookup in: <span class="variable">$name</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span>: <span class="type">Node</span>(<span class="string">&quot;container&quot;</span>) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">createChild</span><span class="params">(name: <span class="type">String</span>)</span></span>: Node? = Node(name)</span><br><span class="line">    <span class="keyword">val</span> child1 = createChild(<span class="string">&quot;child1&quot;</span>)?.apply &#123;</span><br><span class="line">        println(<span class="string">&quot;child1 <span class="subst">$&#123;lookup()&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">val</span> child2 = createChild(<span class="string">&quot;child2&quot;</span>).apply &#123;</span><br><span class="line">        println(<span class="string">&quot;child2 <span class="subst">$&#123;lookup()&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    Example()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>Which does it display? Some possibilities:</strong></p>
 <p>a. child1 lookup in: child1;child2 lookup in : child2</p>
 <p>b. child1 lookup in: child1;child2 lookup in : container</p>
@@ -752,12 +397,13 @@ Author: Thomas Nield
 </blockquote>
 <hr>
 <h3 id="Subtypes-and-Generics-List"><a href="#Subtypes-and-Generics-List" class="headerlink" title="Subtypes and Generics: List"></a>Subtypes and Generics: List</h3><p><strong>Level：Advanced</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span>&lt;<span class="type">T</span>&gt;</span></span><br><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="type">T</span>&gt;</span>(</span><br><span class="line">    <span class="keyword">val</span> payload: T,</span><br><span class="line">    <span class="keyword">var</span> next: LinkedList&lt;T&gt; = EmptyList</span><br><span class="line">) : LinkedList&lt;T&gt;()</span><br><span class="line"><span class="keyword">object</span> EmptyList : LinkedList&lt;<span class="built_in">Nothing</span>&gt;()</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title class_">LinkedList</span>&lt;<span class="type">T</span>&gt;</span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;<span class="type">T</span>&gt;(</span><br><span class="line">    <span class="keyword">val</span> payload: T,</span><br><span class="line">    <span class="keyword">var</span> next: LinkedList&lt;T&gt; = EmptyList</span><br><span class="line">) : LinkedList&lt;T&gt;()</span><br><span class="line"><span class="keyword">object</span> EmptyList : LinkedList&lt;<span class="built_in">Nothing</span>&gt;()</span><br></pre></td></tr></table></figure>
+
 <p><strong>Will it compile?If not, what do I need to do? Some possibilities:</strong></p>
 <p>a. Looks great.This code will compile as is.</p>
 <p>b. A sealed class cannot have a type parameter.</p>
-<p>c. Write sealed class LinkedList<in t="">.</in></p>
-<p>d. Write sealed class LinkedList<out t=""></out></p>
+<p>c. Write sealed class LinkedList<in T>.</p>
+<p>d. Write sealed class LinkedList<out T></p>
 <blockquote>
 <p>Author: Allan Caine</p>
 </blockquote>
@@ -765,13 +411,14 @@ Author: Thomas Nield
 <p>b. child1 lookup in: child1;child2 lookup in : container</p>
 <p><strong>解析：</strong></p>
 <blockquote>
-<p><code>createChild</code> 返回一个可空的对象，所以<code>child2</code>的<code>apply</code>的接收者是<code>Node？</code>。</p>
+<p><code>createChild</code> 返回一个可空的对象，所以<code>child2</code>的<code>apply </code>的接收者是<code>Node？</code>。</p>
 <p>我们不能在未解包的情况下直接调用<code>lookup</code>.如果想要调用则应该使用<code>this?.lookup()</code>。</p>
 <p>因为没有这样做，编辑器会找他能使用的<code>lookup</code>方法，即<code>Example</code>的上下文的lookup。</p>
 </blockquote>
 <hr>
 <h3 id="Copy"><a href="#Copy" class="headerlink" title="Copy"></a>Copy</h3><p><strong>Level：Advanced</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Container</span></span>(<span class="keyword">val</span> list: MutableList&lt;String&gt;)</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> list = mutableListOf(<span class="string">"one"</span>, <span class="string">"two"</span>)</span><br><span class="line">    <span class="keyword">val</span> c1 = Container(list)</span><br><span class="line">    <span class="keyword">val</span> c2 = c1.copy()</span><br><span class="line">    list += <span class="string">"oops"</span></span><br><span class="line">    println(c2.list.joinToString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Container</span>(<span class="keyword">val</span> list: MutableList&lt;String&gt;)</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> list = mutableListOf(<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>)</span><br><span class="line">    <span class="keyword">val</span> c1 = Container(list)</span><br><span class="line">    <span class="keyword">val</span> c2 = c1.copy()</span><br><span class="line">    list += <span class="string">&quot;oops&quot;</span></span><br><span class="line">    println(c2.list.joinToString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>What does it display? Some possibilities:</strong></p>
 <p>a. one, two.</p>
 <p>b. one,two,oops</p>
@@ -781,7 +428,7 @@ Author: Thomas Nield
 <p>Author: Anton Keks</p>
 </blockquote>
 <p><strong>上题答案：</strong></p>
-<p>d. Write sealed class LinkedList<out t=""></out></p>
+<p>d. Write sealed class LinkedList<out T></p>
 <p><strong>解析：</strong></p>
 <blockquote>
 <p>目前所写的代码不能正确编译。<code>Node&lt;T&gt;</code>的属性<code>next</code>不能给<code>EmptyList</code>的默认值。</p>
@@ -790,11 +437,12 @@ Author: Thomas Nield
 <p>密封类可以有类型参数(type parameters). Kotlin <code>object</code>不能有类型参数(type parameters). 所以b错</p>
 <p>如果LinkedList是逆变的，<code>LinkedList&lt;Nothing&gt;</code>就变成所有LinkedList的父类型。然而本题要求的是子类型</p>
 <p>更多解释可以参考：</p>
-<p><a href="https://blog.kotlin-academy.com/kotlins-nothing-its-usefulness-in-generics-5076a6a457f7" target="_blank" rel="noopener">https://blog.kotlin-academy.com/kotlins-nothing-its-usefulness-in-generics-5076a6a457f7</a></p>
+<p><a href="https://blog.kotlin-academy.com/kotlins-nothing-its-usefulness-in-generics-5076a6a457f7">https://blog.kotlin-academy.com/kotlins-nothing-its-usefulness-in-generics-5076a6a457f7</a></p>
 </blockquote>
 <hr>
 <h3 id="Cyclic-object-construction"><a href="#Cyclic-object-construction" class="headerlink" title="Cyclic object construction"></a>Cyclic object construction</h3><p><strong>Level：Expert</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>(<span class="keyword">val</span> x: Any?)</span><br><span class="line"><span class="keyword">object</span> B : A(C)</span><br><span class="line"><span class="keyword">object</span> C : A(B)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(B.x)</span><br><span class="line">    println(C.x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="keyword">class</span> <span class="title class_">A</span>(<span class="keyword">val</span> x: Any?)</span><br><span class="line"><span class="keyword">object</span> B : A(C)</span><br><span class="line"><span class="keyword">object</span> C : A(B)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(B.x)</span><br><span class="line">    println(C.x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>What does it print? Some possibilities:</strong></p>
 <p>a. null; null</p>
 <p>b.C@2de80c; null</p>
@@ -812,7 +460,8 @@ Author: Thomas Nield
 </blockquote>
 <hr>
 <h3 id="Overriding-properties-that-are-used-in-a-parent"><a href="#Overriding-properties-that-are-used-in-a-parent" class="headerlink" title="Overriding properties that are used in a parent"></a>Overriding properties that are used in a parent</h3><p><strong>Level：Expert</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span></span>(<span class="keyword">open</span> <span class="keyword">val</span> a: String) &#123;</span><br><span class="line">    init &#123; print(a) &#125;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Children</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> a: String): Parent(a)</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    Children(<span class="string">"abc"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="keyword">class</span> <span class="title class_">Parent</span>(<span class="keyword">open</span> <span class="keyword">val</span> a: String) &#123;</span><br><span class="line">    <span class="keyword">init</span> &#123; print(a) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Children</span>(<span class="keyword">override</span> <span class="keyword">val</span> a: String): Parent(a)</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    Children(<span class="string">&quot;abc&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>What will it print? Some possibilities:</strong></p>
 <p>a. abc</p>
 <p>b.Unresolved reference: a</p>
@@ -826,573 +475,203 @@ Author: Thomas Nield
 <p>在初始化周期的情况下，完整的拓扑排序是不可能的，并且有可能观察循环中涉及的对象的值为null，</p>
 <p>如果将此值传递给期望不可为空类型的函数，则可能导致异常</p>
 <p>如果A的构造函数取非空的参数，就会抛出异常</p>
-<p><code>B</code> 初始化需要 <code>C</code>，<code>C</code> 初始化需要 <code>B</code>。咦，<code>B</code> 还没初始化完成呢，那么哪来的 <code>B</code> 呢，只能是 <code>null</code> 了啊！ 取自<a href="https://aisia.moe/2017/12/28/kotlin-puzzlers/" target="_blank" rel="noopener">夜雀</a>博客</p>
-<p>参考链接：<a href="http://jetbrains.github.io/kotlin-spec/#_singleton_objects" target="_blank" rel="noopener">http://jetbrains.github.io/kotlin-spec/#_singleton_objects</a></p>
+<p><code>B</code> 初始化需要 <code>C</code>，<code>C</code> 初始化需要 <code>B</code>。咦，<code>B</code> 还没初始化完成呢，那么哪来的 <code>B</code> 呢，只能是 <code>null</code> 了啊！ 取自<a href="https://aisia.moe/2017/12/28/kotlin-puzzlers/">夜雀</a>博客</p>
+<p>参考链接：<a href="http://jetbrains.github.io/kotlin-spec/#_singleton_objects">http://jetbrains.github.io/kotlin-spec/#_singleton_objects</a></p>
 </blockquote>
 <p><strong>本题答案：</strong></p>
 <p>d. null</p>
 <p><strong>解析：</strong></p>
 <blockquote>
 <p>这是kotlin的implement已知的最大问题，请看一下java代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span></span>&#123;</span><br><span class="line">&gt;     <span class="keyword">private</span> <span class="keyword">final</span> String a;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> String <span class="title">getA</span><span class="params">()</span></span>&#123;</span><br><span class="line">&gt; 		<span class="keyword">return</span> <span class="keyword">this</span>.a;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     Parent(String a) &#123;</span><br><span class="line">&gt;         <span class="keyword">super</span>();</span><br><span class="line">&gt;         <span class="keyword">this</span>.a = a;</span><br><span class="line">&gt;         System.out.print(<span class="keyword">this</span>.getA());</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">&gt;     <span class="keyword">private</span> <span class="keyword">final</span> String a;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> String <span class="title">getA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;         <span class="keyword">return</span> <span class="keyword">this</span>.a;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     B(String a) &#123;</span><br><span class="line">&gt;         <span class="keyword">super</span>(a);</span><br><span class="line">&gt;         <span class="keyword">this</span>.a = a;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Parent</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String a;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getA</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">this</span>.a;</span><br><span class="line">    &#125;</span><br><span class="line">    Parent(String a) &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.a = a;</span><br><span class="line">        System.out.print(<span class="built_in">this</span>.getA());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_">Parent</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String a;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getA</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.a;</span><br><span class="line">    &#125;</span><br><span class="line">    B(String a) &#123;</span><br><span class="line">        <span class="built_in">super</span>(a);</span><br><span class="line">        <span class="built_in">this</span>.a = a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>正如你所看到的，使用<code>getA</code>方法来获得a，唯一的问题是a被重写在<code>Child</code> 它实际上是引用<code>Child</code>里的<code>a</code>，那时候还没被赋值，因为parent总是被先初始化。</p>
-<p>在kotlin/js 也有相同的问题，结果是<code>undefined</code>。</p>
+<p>在kotlin&#x2F;js 也有相同的问题，结果是<code>undefined</code>。</p>
 </blockquote>
 <hr>
-<p>题目太多了，也就不全部摘写完了，想看的同学去<a href="https://github.com/angryziber/kotlin-puzzlers/" target="_blank" rel="noopener">这里</a>看，好了写完了溜了。</p>
+<p>题目太多了，也就不全部摘写完了，想看的同学去<a href="https://github.com/angryziber/kotlin-puzzlers/">这里</a>看，好了写完了溜了。</p>
 
-        
-                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
-                    <p><strong>
-                         
-                            This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
-                        </strong>
-                        <br>
-                        <strong>本文链接：</strong><a href="//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/">//louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/</a>
-                    </p>
-                </blockquote>
-        
-    
+  </div>
+</article>
 
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用 来必力 -->
-<div id="livere-comment">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI1MC8xNDc3OA==">
-	<script type="text/ls-javascript" id="livere-comment-js">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-       if (typeof LivereTower === 'function') { return; }
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-</div>
-</div>
-<style>
-    #livere-comment{
-        background-color: #eee;
-        padding: 2pc;
-    }
-</style>
-
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2018/02/11/Kotlin的柯里化/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
         </div>
     </div>
 
 
 
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.jpg" alt="LouisShark's avatar">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="https://github.com/LouisShark">项目</a></li>
+        
+      </ul>
     </div>
 
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        mshark.louis@gmail.com
-        <b class="caret"></b>
-    </a>
-</div>
-
-
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
-            
-                <li>
-                    <a href="mailto:mshark.louis@gmail.com" target="_blank" title="Email Me">
-                        
-                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        
-                        Email Me
-                    </a>
-                </li>
-            
-        </ul>
-    </li>
-
-    <!-- Homepage -->
     
-        <li id="sidebar-first-li">
-            <a href="/">
-                
-                    <i class="material-icons sidebar-material-icons">home</i>
-                
-                主页
-            </a>
-        </li>
-        
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kotlin-puzzlers"><span class="toc-number">1.</span> <span class="toc-text">Kotlin puzzlers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Order-of-nullable-operators-%EF%BC%88%E7%8C%AB%E7%8E%8B%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7-%E9%87%8D%E8%A6%81%E6%8F%90%E7%A4%BA"><span class="toc-number">1.0.1.</span> <span class="toc-text">Order of nullable operators （猫王操作符的优先级 重要提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Contravariance-%E9%80%86%E5%8F%98"><span class="toc-number">1.0.2.</span> <span class="toc-text">Contravariance (逆变)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interface-delegation-and-data-classes"><span class="toc-number">1.0.3.</span> <span class="toc-text">Interface delegation and data classes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WTF-with-labels"><span class="toc-number">1.0.4.</span> <span class="toc-text">WTF with labels</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Return-in-Function-literal"><span class="toc-number">1.0.5.</span> <span class="toc-text">Return in Function literal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Int-plus-plus"><span class="toc-number">1.0.6.</span> <span class="toc-text">Int plus-plus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-names"><span class="toc-number">1.0.7.</span> <span class="toc-text">Function names</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Receivers-wars"><span class="toc-number">1.0.8.</span> <span class="toc-text">Receivers wars</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Negative-numbers"><span class="toc-number">1.0.9.</span> <span class="toc-text">Negative numbers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Child-apply"><span class="toc-number">1.0.10.</span> <span class="toc-text">Child apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Subtypes-and-Generics-List"><span class="toc-number">1.0.11.</span> <span class="toc-text">Subtypes and Generics: List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy"><span class="toc-number">1.0.12.</span> <span class="toc-text">Copy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cyclic-object-construction"><span class="toc-number">1.0.13.</span> <span class="toc-text">Cyclic object construction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Overriding-properties-that-are-used-in-a-parent"><span class="toc-number">1.0.14.</span> <span class="toc-text">Overriding properties that are used in a parent</span></a></li></ol></li></ol></li></ol>
+      </div>
     
 
-    <!-- Archives  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">inbox</i>
-                
-                    归档
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
-            </ul>
-        </li>
-        
-    
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&text=kotlin academy&#39;s trouble"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&is_video=false&description=kotlin academy&#39;s trouble"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=kotlin academy&#39;s trouble&body=Check out this article: https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&title=kotlin academy&#39;s trouble"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&name=kotlin academy&#39;s trouble&description=&lt;h1 id=&#34;Kotlin-puzzlers&#34;&gt;&lt;a href=&#34;#Kotlin-puzzlers&#34; class=&#34;headerlink&#34; title=&#34;Kotlin puzzlers&#34;&gt;&lt;/a&gt;Kotlin puzzlers&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;话说已经好久没写blog了呢，又是失踪人口回归，我一直觉得不能强迫自己为了写博客而写博客，总是要为了记录点什么才行，这次我就刚好见到kotlin academy发的邮件，瞥了一眼觉得很多易错的题目蛮好(鬼畜)的，就忍不住想写了blog记录一下啦。 &lt;strong&gt;原文地址：&lt;a href=&#34;https://kotlin-academy.herokuapp.com/#/&#34;&gt;Kotlin Academy&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;以下题目的答案和解析都下一题揭晓啦（学自夜雀 逃。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;Order-of-nullable-operators-（猫王操作符的优先级-重要提示&#34;&gt;&lt;a href=&#34;#Order-of-nullable-operators-（猫王操作符的优先级-重要提示&#34; class=&#34;headerlink&#34; title=&#34;Order of nullable operators （猫王操作符的优先级 重要提示&#34;&gt;&lt;/a&gt;Order of nullable operators （猫王操作符的优先级 &lt;em&gt;重要提示&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Level：Beginner&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight kotlin&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;fun&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(args: &lt;span class=&#34;type&#34;&gt;Array&lt;/span&gt;&amp;lt;&lt;span class=&#34;type&#34;&gt;String&lt;/span&gt;&amp;gt;)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;val&lt;/span&gt; x: &lt;span class=&#34;built_in&#34;&gt;Int&lt;/span&gt;? = &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;val&lt;/span&gt; y: &lt;span class=&#34;built_in&#34;&gt;Int&lt;/span&gt; = &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;val&lt;/span&gt; sum = x?:&lt;span class=&#34;number&#34;&gt;0&lt;/span&gt; + y&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    println(sum)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
-    <!-- Categories  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
-                
-                分类
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                
-            </ul>
-        </li>
-        
-            <li class="divider"></li>
-        
-    
-
-    <!-- Pages  -->
-    
-        <li>
-            <a href="/tags" title="标签云">
-                
-                    <i class="material-icons sidebar-material-icons">cloud_circle</i>
-                
-                标签云
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/timeline" title="时间轴">
-                
-                    <i class="material-icons sidebar-material-icons">timeline</i>
-                
-                时间轴
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/about" title="关于我">
-                
-                    <i class="material-icons sidebar-material-icons">person_pin</i>
-                
-                关于我
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/links" title="友链">
-                
-                    <i class="material-icons sidebar-material-icons">link</i>
-                
-                友链
-            </a>
-        </li>
-        
-            <li class="divider"></li>
-        
-    
-
-    <!-- Article Number  -->
-    
-        <li>
-            <a href="/archives">
-                文章总数
-                <span class="sidebar-badge">14</span>
-            </a>
-        </li>
-        
-    
+&lt;p&gt;&lt;strong&gt;What will it print ? Some possibilities:&lt;/strong&gt; &amp;#x2F;&amp;#x2F;这个不用翻译了吧…&lt;/p&gt;
+&lt;p&gt;a. 3&lt;/p&gt;
+&lt;p&gt;b. 5&lt;/p&gt;
+&lt;p&gt;c. 2&lt;/p&gt;
+&lt;p&gt;d. 0&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Author: Thomas Nield&lt;/p&gt;
+&lt;/blockquote&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/&t=kotlin academy&#39;s trouble"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Sidebar Divider -->
-
-    <div class="sidebar-divider"></div>
-
-
-<!-- Theme Material -->
-
-
-<!-- Help & Support -->
-<!--
-
--->
-
-<!-- Feedback -->
-<!--
-
--->
-
-<!-- About Theme -->
-<!--
-
--->
-
     </div>
 
-    <!-- Sidebar Image -->
-    
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
 
-</aside>
-
-                    
-
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
+  </div>
 </div>
 
-                    
-
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
     
-        <a href="https://twitter.com/shark_louis" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Facebook -->
-    
-
-    <!-- Google + -->
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/u/5331922690?refer_flag=1001030101_&amp;is_all=1" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
-                <span class="visuallyhidden">Weibo</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/LouisShark" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
-                <span class="visuallyhidden">Github</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Zhihu -->
-    
-        <a href="https://www.zhihu.com/people/louisshark" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
-                <span class="visuallyhidden">Zhihu</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Bilibili -->
-    
-        <a href="https://space.bilibili.com/18731855/#/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-bilibili">
-                <span class="visuallyhidden">Bilibili</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Telegram -->
-    
-
-    <!-- V2EX -->
-    
-
-    <!-- Segmentfault -->
-    
-</div>
-
-
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;LouisShark的随笔
-            
-                <br>
-                
-                    子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。
-                
-            
-        </div>
-
-        <!-- Paradox Footer Right Section -->
-
+    2016-2024
+    LouisShark
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
         <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
-
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
-
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
-        </div>
-    
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/LouisShark">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-                    <!-- Import JS File -->
-
-    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+    </div>
+    <!-- styles -->
 
 
 
-    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
 
 
-    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
 
+<!-- clipboard -->
 
-<script type="text/ls-javascript" id="NProgress-script">
-    NProgress.configure({
-        showSpinner: true
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
     });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
-    <!-- Busuanzi -->
-    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+        var disqus_shortname = 'LouisShark';
 
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
 
+<!-- utterances Comments -->
 
-   
-
-
-
-
-
-<!-- UC Browser Compatible -->
-<script>
-	var agent = navigator.userAgent.toLowerCase();
-	if(agent.indexOf('ucbrowser')>0) {
-		document.write('<link rel="stylesheet" href="/css/uc.css">');
-	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-	}
-</script>
-
-<!-- Import prettify js  -->
-
-    
-        
-            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
-        
-    
-
-
-
-<!-- Window Load -->
-<!-- add class for prettify -->
-<script type="text/ls-javascript" id="window-load">
-    $(window).on('load', function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-
-    
-        
-            $(function() {
-                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
-                prettyPrint();
-                })
-        
-    
-    
-</script>
-
-<!-- MathJax Load-->
-
-
-<!-- Bing Background -->
-
-
-<script type="text/ls-javascript" id="lazy-load">
-    // Offer LazyLoad
-    queue.offer(function(){
-        $('.lazy').lazyload({
-            effect : 'show'
-        });
-    });
-
-    // Start Queue
-    $(document).ready(function(){
-        setInterval(function(){
-            queue.execNext();
-        },200);
-    });
-</script>
-
-<!-- Custom Footer -->
-
-
-
-<script>
-    var copyrightNow = new Date().getFullYear();
-    var textContent = document.querySelector('span[year]')
-
-    copyrightSince = 2016;
-    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
-        textContent.textContent = copyrightNow
-    } else {
-        textContent.textContent = copyrightSince + ' - ' + copyrightNow
-    }
-
-    (function(){
-        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
-
-        for (var i = 0; i < scriptList.length; ++i) {
-            var item = scriptList[i];
-            lsloader.runInlineScript(item.id,item.id);
-        }
-    })()
-console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
-</script>
-
-                </main>
-            </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-        </body>
-    
+</body>
 </html>

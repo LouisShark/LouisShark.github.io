@@ -1,1131 +1,412 @@
 <!DOCTYPE html>
-<html style="display: none;" lang="zh">
-    <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.5.6 -->
-    <script>
-        window.materialVersion = "1.5.6"
-        // Delete localstorage with these tags
-        window.oldVersion = [
-            'codestartv1',
-            '1.3.4',
-            '1.4.0',
-            '1.4.0b1',
-            '1.5.0',
-            '1.5.2',
-            '1.5.5'
-        ]
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AppCompatActivity的作用分析">
+<meta property="og:url" content="https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="LouisShark的随笔">
+<meta property="og:description" content="AppCompatActivity的作用分析 对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://louisshark.github.io/asset/img/delegate%E7%9A%84%E7%B1%BB%E7%BB%A7%E6%89%BF%E5%9B%BE.png">
+<meta property="article:published_time" content="2017-06-23T09:29:00.000Z">
+<meta property="article:modified_time" content="2017-06-24T06:04:14.000Z">
+<meta property="article:author" content="LouisShark">
+<meta property="article:tag" content="源码分析">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://louisshark.github.io/asset/img/delegate%E7%9A%84%E7%B1%BB%E7%BB%A7%E6%89%BF%E5%9B%BE.png">
+<meta name="twitter:creator" content="@shark_louis">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>AppCompatActivity的作用分析</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+    <script async defer
+            data-website-id="1a5fb885-3814-4a05-ab13-f956e13fcdf8"
+            src="https://analytics.us.umami.is/script.js">
     </script>
 
-    <!-- dns prefetch -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
 
-
-
-    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
-
-
-
-    <link rel="dns-prefetch" href="https://cdn-city.livere.com"/>
-
-
-
-    <link rel="dns-prefetch" href="https://www.google-analytics.com"/>
-
-
-
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
-
-
-
-
-
-    <!-- Meta & Info -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!-- Title -->
+    <!-- styles -->
     
-    <title>
-        
-            AppCompatActivity的作用分析 | 
-        
-        LouisShark的随笔
-    </title>
+<link rel="stylesheet" href="/css/style.css">
 
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
-    <link rel="icon" href="/img/favicon.png">
-
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="AppCompatActivity的作用分析
-对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)
-一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。">
-    <meta name="keywords" content="Android, Google,android,源码分析">
-    <meta name="theme-color" content="#0097A7">
-
-    <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import lsloader -->
-    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
-
-    <!-- Import queue -->
-    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
-
-    <!-- Import CSS -->
+    <!-- persian styles -->
     
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-        
-            
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-            
-        
-
-    
-
-    
-
-    <!-- Config CSS -->
-
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    overflow-x: hidden !important;
-  }
-  
-  code {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  }
-
-  a {
-    color: #00838F;
-  }
-
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-image: url(/img/bg.jpg);
-      }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-<!-- Import Font -->
-<!-- Import Roboto -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
-<!-- Import Material Icons -->
-
-
-    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-
-
-
-    <!-- Import jQuery -->
-    
-        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
-    
-
-    <!-- WebAPP Icons -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="LouisShark的随笔">
-    <meta name="msapplication-starturl" content="//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/">
-    <meta name="msapplication-navbutton-color" content="#0097A7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="LouisShark的随笔">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- Site Verification -->
-    <meta name="google-site-verification" content="IuSTXI07C6gfiHYRhSFRHGD6abgigp02xTCgeC0-Rbc" />
-    <meta name="baidu-site-verification" content="Hom3iks4mH" />
-
-    <!-- RSS -->
-    
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="AppCompatActivity的作用分析 | LouisShark的随笔">
-    <meta property="og:image" content="/img/favicon.png">
-    <meta property="og:description" content="AppCompatActivity的作用分析
-对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)
-一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。">
-    <meta property="og:article:tag" content="android"> <meta property="og:article:tag" content="源码分析"> 
-
-    
-        <meta property="article:published_time" content="Fri Jun 23 2017 17:29:00 GMT+0800">
-        <meta property="article:modified_time" content="Sat Jun 24 2017 14:04:14 GMT+0800">
-    
-
-    <!-- The Twitter Card protocol -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Add canonical link for SEO -->
-    
-        <link rel="canonical" href="//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/index.html" />
-    
-
-    <!-- Structured-data for SEO -->
-    
-        
-
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": "//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/index.html",
-    "headline": "AppCompatActivity的作用分析",
-    "datePublished": "Fri Jun 23 2017 17:29:00 GMT+0800",
-    "dateModified": "Sat Jun 24 2017 14:04:14 GMT+0800",
-    "author": {
-        "@type": "Person",
-        "name": "LouisShark",
-        "image": {
-            "@type": "ImageObject",
-            "url": "/img/avatar.jpg"
-        },
-        "description": "Stop Stoping"
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "LouisShark的随笔",
-        "logo": {
-            "@type":"ImageObject",
-            "url": "/img/favicon.png"
-        }
-    },
-    "keywords": ",android,源码分析Android, Google",
-    "description": "AppCompatActivity的作用分析
-对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)
-一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。",
-}
-</script>
-
-
-    
-
-    <!-- Analytics -->
-    
-        <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-122704699-1', 'auto');ga('send', 'pageview');
-</script>
+    <!-- rss -->
     
     
-    
-
-    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="LouisShark的随笔" type="application/atom+xml">
 </head>
 
-
+<body class="max-width mx-auto px3 ltr">
     
-        <body id="scheme-Paradox" class="lazy">
-            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span id="MD-burger-id" class="MD-burger-layer"></span>
-                        </button>
-                    
-
-                    <!-- Post TOC -->
-
-    
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-
-    <!-- Left aligned menu below button -->
-    
-    
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AppCompatActivity的作用分析"><span class="post-toc-number">1.</span> <span class="post-toc-text">AppCompatActivity的作用分析</span></a></li></ol>
-    </ul>
-    
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
-    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/LouisShark">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-</script>
-
+        <li><a class="icon" aria-label="上一篇" href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-    
-            <p class="article-headline-p">
-                AppCompatActivity的作用分析
-            </p>
-        </div>
-
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>LouisShark</strong>
-        <span>6月 23, 2017</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">devices other</i>
-    <span class="visuallyhidden">devices other</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-    
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC2ElEQVR42u3awW7jMAwE0P7/T+9e99JkhkwWhvR8KhJX9lOBEuTo58+V1w82NjY2NjY2Njb2I9k/8fX6t377NnnKv/e8Xmf1ztjY2NhHs9/86//lwcn9+dYk66zeGRsbG/sCdlJaXt/zuoQkRW62BVE5xMbGxsZetBlJ8cs3ERsbGxv7swXsdaOyH1E9tG5jY2NjP5K9aQPy1ZJhU0v6+iwNGxsb+/HsPDR9zs//Nd/GxsbGfjC7vdoY4BtHeYZvjo2NjX0o+1OD/ll7kB/xyYsuNjY2Nvan4tX2WE8eOeShAjY2NvZt7M2YaXZYJ/mkCADaWRo2Njb2Qezi4EtcopL2I39iEhu8eSI2Njb2Bex8oL85iLNfJ29+sLGxse9hz7agHRXNmp9PtTHY2NjY97DbViFvUdoAeD/kwsbGxr6NnQeubSORB8P5aKluY7CxsbEPZecHd/JBfxv6zsLjunXBxsbGPpqdNCd59NsOj9r182KGjY2NfQP7swP9zUBq36i8+QQbGxv7UHZRABaHMvcDrFmTg42NjX0PexMGzCKBTaMy3A5sbGzsK9mbO2dDqKRdaVfGxsbGvoHdloek1CVDopY6K5nY2NjYZ7PbYKANDPJB0uxNisKJjY2NfSi7faF9WzIbXbUlExsbG/sedvFrL+9s12lj2rbteRMPYGNjYx/Kzof4efHLn5WssCp42NjY2Bewk+OS7UsnZW8fEkQNDzY2NvY17PYYTV7k8m9nm1UcvsTGxsY+iN1e+eBpM36abf2bhgcbGxv7UPbsqOVsVLSJivNiWbQi2NjY2AexZ4/MC8ymnfj6UAkbGxv7IPasMcjjgU17M9s+bGxsbOw8rI1KyGiolOA/cGQHGxsb+zJ2G9kmcUI72Kr/GNjY2NgXsGcBQBsJ5OOqWemqCxg2Njb2EezN+L4dLbVxQlJEhwUMGxsb+wj2PRc2NjY2NjY2Njb2Y66/puR77j4e768AAAAASUVORK5CYII=">
-    
+        
+        <li><a class="icon" aria-label="下一篇" href="/2017/06/14/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&text=AppCompatActivity的作用分析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&is_video=false&description=AppCompatActivity的作用分析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AppCompatActivity的作用分析&body=Check out this article: https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&name=AppCompatActivity的作用分析&description=&lt;h1 id=&#34;AppCompatActivity的作用分析&#34;&gt;&lt;a href=&#34;#AppCompatActivity的作用分析&#34; class=&#34;headerlink&#34; title=&#34;AppCompatActivity的作用分析&#34;&gt;&lt;/a&gt;AppCompatActivity的作用分析&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)&lt;/p&gt;
+&lt;p&gt;一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&t=AppCompatActivity的作用分析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
+    </div>
     
-
-    <!-- Tags (bookmark) -->
     
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/android/">android</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/源码分析/">源码分析</a>
-    </ul>
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">AppCompatActivity的作用分析</span></a></li></ol>
+      </div>
     
-
-    <!-- Share -->
-    
-        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-
-    
-        
-            <!-- Busuanzi Views -->
-            <a class="post_share-link" href="#">
-                <li class="mdl-menu__item">
-                    <span id="busuanzi_container_page_pv">
-                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
-                    </span>
-                </li>
-            </a>
-        
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=AppCompatActivity的作用分析&url=//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/index.html&pic=//louisshark.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=AppCompatActivity的作用分析&url=//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/index.html&via=LouisShark" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-
-    <!-- Share Google+ -->
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=LouisShark的随笔&title=AppCompatActivity的作用分析&summary=子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。&pics=//louisshark.github.io/img/favicon.png&url=//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-    
+  </span>
 </div>
 
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="AppCompatActivity的作用分析"><a href="#AppCompatActivity的作用分析" class="headerlink" title="AppCompatActivity的作用分析"></a>AppCompatActivity的作用分析</h1><hr>
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        AppCompatActivity的作用分析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">LouisShark</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-06-23T09:29:00.000Z" class="dt-published" itemprop="datePublished">2017-06-23</time>
+        
+        (Updated: <time datetime="2017-06-24T06:04:14.000Z" class="dt-updated" itemprop="dateModified">2017-06-24</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/android/" rel="tag">android</a>, <a class="p-category" href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">源码分析</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="AppCompatActivity的作用分析"><a href="#AppCompatActivity的作用分析" class="headerlink" title="AppCompatActivity的作用分析"></a>AppCompatActivity的作用分析</h1><hr>
 <p>对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)</p>
 <p>一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <blockquote>
 <p>从AppCompatActivity源码的onCreate看到这个类初始化的第一步就调用了getDelegate获得了一个代理，并且你会发现下面所有的生命周期的方法都交由这个代理类来实现了，那么这个东西是什么呢？其实就是AppCompatDelegate这个抽象类。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">final</span> AppCompatDelegate delegate = getDelegate();</span><br><span class="line">     delegate.installViewFactory();</span><br><span class="line">     delegate.onCreate(savedInstanceState);</span><br><span class="line">     <span class="keyword">if</span> (delegate.applyDayNight() &amp;&amp; mThemeId != <span class="number">0</span>) &#123;</span><br><span class="line">         <span class="comment">// If DayNight has been applied, we need to re-apply the theme for</span></span><br><span class="line">         <span class="comment">// the changes to take effect. On API 23+, we should bypass</span></span><br><span class="line">         <span class="comment">// setTheme(), which will no-op if the theme ID is identical to the</span></span><br><span class="line">         <span class="comment">// current theme ID.</span></span><br><span class="line">         <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">23</span>) &#123;</span><br><span class="line">             onApplyThemeResource(getTheme(), mThemeId, <span class="keyword">false</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             setTheme(mThemeId);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> The &#123;<span class="doctag">@link</span> AppCompatDelegate&#125; being used by this Activity.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="meta">@NonNull</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> AppCompatDelegate <span class="title">getDelegate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (mDelegate == <span class="keyword">null</span>) &#123;</span><br><span class="line">         mDelegate = AppCompatDelegate.create(<span class="keyword">this</span>, <span class="keyword">this</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> mDelegate;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(<span class="meta">@Nullable</span> Bundle savedInstanceState)</span> &#123;</span><br><span class="line">     <span class="keyword">final</span> <span class="type">AppCompatDelegate</span> <span class="variable">delegate</span> <span class="operator">=</span> getDelegate();</span><br><span class="line">     delegate.installViewFactory();</span><br><span class="line">     delegate.onCreate(savedInstanceState);</span><br><span class="line">     <span class="keyword">if</span> (delegate.applyDayNight() &amp;&amp; mThemeId != <span class="number">0</span>) &#123;</span><br><span class="line">         <span class="comment">// If DayNight has been applied, we need to re-apply the theme for</span></span><br><span class="line">         <span class="comment">// the changes to take effect. On API 23+, we should bypass</span></span><br><span class="line">         <span class="comment">// setTheme(), which will no-op if the theme ID is identical to the</span></span><br><span class="line">         <span class="comment">// current theme ID.</span></span><br><span class="line">         <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">23</span>) &#123;</span><br><span class="line">             onApplyThemeResource(getTheme(), mThemeId, <span class="literal">false</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             setTheme(mThemeId);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> The &#123;<span class="doctag">@link</span> AppCompatDelegate&#125; being used by this Activity.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="meta">@NonNull</span></span><br><span class="line"> <span class="keyword">public</span> AppCompatDelegate <span class="title function_">getDelegate</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (mDelegate == <span class="literal">null</span>) &#123;</span><br><span class="line">         mDelegate = AppCompatDelegate.create(<span class="built_in">this</span>, <span class="built_in">this</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> mDelegate;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
 <p>那么<code>AppCompatDelegate</code>这个类到底做了什么呢？点进去看这个create方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AppCompatDelegate <span class="title">create</span><span class="params">(Activity activity, AppCompatCallback callback)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> create(activity, activity.getWindow(), callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> AppCompatDelegate <span class="title function_">create</span><span class="params">(Activity activity, AppCompatCallback callback)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> create(activity, activity.getWindow(), callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>然后调用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> AppCompatDelegate <span class="title">create</span><span class="params">(Context context, Window window,</span></span></span><br><span class="line"><span class="function"><span class="params">        AppCompatCallback callback)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> sdk = Build.VERSION.SDK_INT;</span><br><span class="line">    <span class="keyword">if</span> (BuildCompat.isAtLeastN()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppCompatDelegateImplN(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">23</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppCompatDelegateImplV23(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">14</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppCompatDelegateImplV14(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">11</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppCompatDelegateImplV11(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppCompatDelegateImplV9(context, window, callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> AppCompatDelegate <span class="title function_">create</span><span class="params">(Context context, Window window,</span></span><br><span class="line"><span class="params">        AppCompatCallback callback)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">sdk</span> <span class="operator">=</span> Build.VERSION.SDK_INT;</span><br><span class="line">    <span class="keyword">if</span> (BuildCompat.isAtLeastN()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplN</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">23</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV23</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">14</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV14</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">11</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV11</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV9</span>(context, window, callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>是不是感觉这些名字有点熟悉呢。</p>
 <blockquote>
 <p>这个方法返回了一些根据版本号的实现类。</p>
 </blockquote>
 <p>下面我将给出这个抽象类的类之间的继承关系：</p>
-<p><img src="../../../../asset/img/delegate的类继承图.png" alt=""></p>
+<p><img src="/../../../../asset/img/delegate%E7%9A%84%E7%B1%BB%E7%BB%A7%E6%89%BF%E5%9B%BE.png"></p>
 <blockquote>
 <p>在as 中使用ctrl + H的快捷键可以很快的看到类之间的继承图。</p>
 </blockquote>
 <p>发现他们之间相互继承，于是开始看V9的源码，找到了一个可疑的方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	这个方法会(invoke) &#123;当我们使用自己的layoutInflater的factory的时候&#125;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">createView</span><span class="params">(View parent, <span class="keyword">final</span> String name, @NonNull Context context,</span></span></span><br><span class="line"><span class="function"><span class="params">            @NonNull AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">boolean</span> isPre21 = Build.VERSION.SDK_INT &lt; <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mAppCompatViewInflater == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mAppCompatViewInflater = <span class="keyword">new</span> AppCompatViewInflater();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// We only want the View to inherit its context if we're running pre-v21</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">boolean</span> inheritContext = isPre21 &amp;&amp; shouldInheritContext((ViewParent) parent);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mAppCompatViewInflater.createView(parent, name, context, attrs, inheritContext,</span><br><span class="line">                isPre21, <span class="comment">/* Only read android:theme pre-L (L+ handles this anyway) */</span></span><br><span class="line">                <span class="keyword">true</span>, <span class="comment">/* Read read app:theme as a fallback at all times for legacy reasons */</span></span><br><span class="line">                VectorEnabledTintResources.shouldBeUsed() <span class="comment">/* Only tint wrap the context if enabled */</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">installViewFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        LayoutInflater layoutInflater = LayoutInflater.from(mContext);</span><br><span class="line">        <span class="keyword">if</span> (layoutInflater.getFactory() == <span class="keyword">null</span>) &#123;</span><br><span class="line">            LayoutInflaterCompat.setFactory(layoutInflater, <span class="keyword">this</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(LayoutInflaterCompat.getFactory(layoutInflater)</span><br><span class="line">                    <span class="keyword">instanceof</span> AppCompatDelegateImplV9)) &#123;</span><br><span class="line">                Log.i(TAG, <span class="string">"The Activity's LayoutInflater already has a Factory installed"</span></span><br><span class="line">                        + <span class="string">" so we can not install AppCompat's"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	这个方法会(invoke) &#123;当我们使用自己的layoutInflater的factory的时候&#125;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> View <span class="title function_">createView</span><span class="params">(View parent, <span class="keyword">final</span> String name, <span class="meta">@NonNull</span> Context context,</span></span><br><span class="line"><span class="params">            <span class="meta">@NonNull</span> AttributeSet attrs)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">boolean</span> <span class="variable">isPre21</span> <span class="operator">=</span> Build.VERSION.SDK_INT &lt; <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mAppCompatViewInflater == <span class="literal">null</span>) &#123;</span><br><span class="line">            mAppCompatViewInflater = <span class="keyword">new</span> <span class="title class_">AppCompatViewInflater</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// We only want the View to inherit its context if we&#x27;re running pre-v21</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">boolean</span> <span class="variable">inheritContext</span> <span class="operator">=</span> isPre21 &amp;&amp; shouldInheritContext((ViewParent) parent);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mAppCompatViewInflater.createView(parent, name, context, attrs, inheritContext,</span><br><span class="line">                isPre21, <span class="comment">/* Only read android:theme pre-L (L+ handles this anyway) */</span></span><br><span class="line">                <span class="literal">true</span>, <span class="comment">/* Read read app:theme as a fallback at all times for legacy reasons */</span></span><br><span class="line">                VectorEnabledTintResources.shouldBeUsed() <span class="comment">/* Only tint wrap the context if enabled */</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">installViewFactory</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">LayoutInflater</span> <span class="variable">layoutInflater</span> <span class="operator">=</span> LayoutInflater.from(mContext);</span><br><span class="line">        <span class="keyword">if</span> (layoutInflater.getFactory() == <span class="literal">null</span>) &#123;</span><br><span class="line">            LayoutInflaterCompat.setFactory(layoutInflater, <span class="built_in">this</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(LayoutInflaterCompat.getFactory(layoutInflater)</span><br><span class="line">                    <span class="keyword">instanceof</span> AppCompatDelegateImplV9)) &#123;</span><br><span class="line">                Log.i(TAG, <span class="string">&quot;The Activity&#x27;s LayoutInflater already has a Factory installed&quot;</span></span><br><span class="line">                        + <span class="string">&quot; so we can not install AppCompat&#x27;s&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>突然想起来一句话，兼容问题其实就是着色问题，AppCompatDelegate 的工作就是涂色。发现这个方法在AppCompatDelegate里面定义的，别问我怎么找到的，你在V9这个类看到1000多行代码的时候找到了，然后我跑回去看AppCompatDelegate这个类里面的方法。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Installs AppCompat's &#123;<span class="doctag">@link</span> android.view.LayoutInflater&#125; Factory so that it can replace</span></span><br><span class="line"><span class="comment">  * the framework widgets with compatible tinted versions. This should be called before</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@code</span> super.onCreate()&#125; as so:</span></span><br><span class="line"><span class="comment">  * &lt;pre class="prettyprint"&gt;</span></span><br><span class="line"><span class="comment">  * protected void onCreate(Bundle savedInstanceState) &#123;</span></span><br><span class="line"><span class="comment">  *     getDelegate().installViewFactory();</span></span><br><span class="line"><span class="comment">  *     getDelegate().onCreate(savedInstanceState);</span></span><br><span class="line"><span class="comment">  *     super.onCreate(savedInstanceState);</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  *     // ...</span></span><br><span class="line"><span class="comment">  * &#125;</span></span><br><span class="line"><span class="comment">  * &lt;/pre&gt;</span></span><br><span class="line"><span class="comment">  * If you are using your own &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory Factory&#125; or</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory2 Factory2&#125; then you can omit this call, and instead call</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> #createView(android.view.View, String, android.content.Context, android.util.AttributeSet)&#125;</span></span><br><span class="line"><span class="comment">  * from your factory to return any compatible widgets.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">installViewFactory</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * This should be called from a</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory2 LayoutInflater.Factory2&#125; in order</span></span><br><span class="line"><span class="comment">  * to return tint-aware widgets.</span></span><br><span class="line"><span class="comment">  * &lt;p&gt;</span></span><br><span class="line"><span class="comment">  * This is only needed if you are using your own</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater LayoutInflater&#125; factory, and have therefore not</span></span><br><span class="line"><span class="comment">  * installed the default factory via &#123;<span class="doctag">@link</span> #installViewFactory()&#125;.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> View <span class="title">createView</span><span class="params">(@Nullable View parent, String name, @NonNull Context context,</span></span></span><br><span class="line"><span class="function"><span class="params">         @NonNull AttributeSet attrs)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Installs AppCompat&#x27;s &#123;<span class="doctag">@link</span> android.view.LayoutInflater&#125; Factory so that it can replace</span></span><br><span class="line"><span class="comment">  * the framework widgets with compatible tinted versions. This should be called before</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@code</span> super.onCreate()&#125; as so:</span></span><br><span class="line"><span class="comment">  * &lt;pre class=&quot;prettyprint&quot;&gt;</span></span><br><span class="line"><span class="comment">  * protected void onCreate(Bundle savedInstanceState) &#123;</span></span><br><span class="line"><span class="comment">  *     getDelegate().installViewFactory();</span></span><br><span class="line"><span class="comment">  *     getDelegate().onCreate(savedInstanceState);</span></span><br><span class="line"><span class="comment">  *     super.onCreate(savedInstanceState);</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  *     // ...</span></span><br><span class="line"><span class="comment">  * &#125;</span></span><br><span class="line"><span class="comment">  * &lt;/pre&gt;</span></span><br><span class="line"><span class="comment">  * If you are using your own &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory Factory&#125; or</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory2 Factory2&#125; then you can omit this call, and instead call</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> #createView(android.view.View, String, android.content.Context, android.util.AttributeSet)&#125;</span></span><br><span class="line"><span class="comment">  * from your factory to return any compatible widgets.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">installViewFactory</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * This should be called from a</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory2 LayoutInflater.Factory2&#125; in order</span></span><br><span class="line"><span class="comment">  * to return tint-aware widgets.</span></span><br><span class="line"><span class="comment">  * &lt;p&gt;</span></span><br><span class="line"><span class="comment">  * This is only needed if you are using your own</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater LayoutInflater&#125; factory, and have therefore not</span></span><br><span class="line"><span class="comment">  * installed the default factory via &#123;<span class="doctag">@link</span> #installViewFactory()&#125;.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">abstract</span> View <span class="title function_">createView</span><span class="params">(<span class="meta">@Nullable</span> View parent, String name, <span class="meta">@NonNull</span> Context context,</span></span><br><span class="line"><span class="params">         <span class="meta">@NonNull</span> AttributeSet attrs)</span>;</span><br></pre></td></tr></table></figure>
+
 <p>看到上面的注释我突然顿悟了，找了半天的在哪里设置的layoutInflater的factory，原来是这样子，于是又去AppCompatActivity瞅了一眼：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">    final AppCompatDelegate delegate = getDelegate();</span><br><span class="line">    delegate.installViewFactory();</span><br><span class="line">    delegate.onCreate(savedInstanceState);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">    final AppCompatDelegate delegate = getDelegate();</span><br><span class="line">    delegate.installViewFactory();</span><br><span class="line">    delegate.onCreate(savedInstanceState);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>发现onCreate方法里果然有这句话，installViewFactory()；这个方法就是给The Activity’s LayoutInflater设置一个自己的factory，于是就会调用createView这个方法</p>
 </blockquote>
 <p><strong>注意</strong>createView里面的这句话：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> mAppCompatViewInflater.createView(parent, name, context, attrs, inheritContext,</span><br><span class="line">              isPre21, <span class="comment">/* Only read android:theme pre-L (L+ handles this anyway) */</span></span><br><span class="line">              <span class="keyword">true</span>, <span class="comment">/* Read read app:theme as a fallback at all times for legacy reasons */</span></span><br><span class="line">              VectorEnabledTintResources.shouldBeUsed() <span class="comment">/* Only tint wrap the context if enabled */</span></span><br><span class="line">      );</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> mAppCompatViewInflater.createView(parent, name, context, attrs, inheritContext,</span><br><span class="line">              isPre21, <span class="comment">/* Only read android:theme pre-L (L+ handles this anyway) */</span></span><br><span class="line">              <span class="literal">true</span>, <span class="comment">/* Read read app:theme as a fallback at all times for legacy reasons */</span></span><br><span class="line">              VectorEnabledTintResources.shouldBeUsed() <span class="comment">/* Only tint wrap the context if enabled */</span></span><br><span class="line">      );</span><br></pre></td></tr></table></figure>
+
 <p>于是跑到AppCompatViewInflater的createView方法看，终于找到了：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// We need to 'inject' our tint aware Views in place of the standard framework versions</span></span><br><span class="line">        <span class="keyword">switch</span> (name) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"TextView"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatTextView(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"ImageView"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatImageView(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"Button"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatButton(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"EditText"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatEditText(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"Spinner"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatSpinner(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"ImageButton"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatImageButton(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"CheckBox"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatCheckBox(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"RadioButton"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatRadioButton(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"CheckedTextView"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatCheckedTextView(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"AutoCompleteTextView"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatAutoCompleteTextView(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"MultiAutoCompleteTextView"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatMultiAutoCompleteTextView(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"RatingBar"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatRatingBar(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"SeekBar"</span>:</span><br><span class="line">                view = <span class="keyword">new</span> AppCompatSeekBar(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// We need to &#x27;inject&#x27; our tint aware Views in place of the standard framework versions</span></span><br><span class="line">        <span class="keyword">switch</span> (name) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;TextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;ImageView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatImageView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Button&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatButton</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;EditText&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatEditText</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Spinner&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatSpinner</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;ImageButton&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatImageButton</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;CheckBox&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatCheckBox</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;RadioButton&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatRadioButton</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;CheckedTextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatCheckedTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;AutoCompleteTextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatAutoCompleteTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;MultiAutoCompleteTextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatMultiAutoCompleteTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;RatingBar&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatRatingBar</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;SeekBar&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatSeekBar</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
 <p>原来在activity的oncreate一开始创建的时候，系统就自动帮我们把这些<em>色调</em>给我们换掉了所以你写在XML的控件，都会被换成AppCompat开头的兼容性的控件，当然前提是你要继承AppCompatActivity，这就是系统为我们所做的适配了，请注意，AppCompatViewInflater也给我们提供了一个热换肤的思路，下次有时间再说吧。</p>
 <p>总结起来，这个兼容其实就是<strong>偷梁换柱</strong>，而且看源码一定不能被细枝末节影响，像我一样，如果我能做点笔记，而不是草率的开始，应该过程会更加的轻松。</p>
 
-        
-                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
-                    <p><strong>
-                         
-                            This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
-                        </strong>
-                        <br>
-                        <strong>本文链接：</strong><a href="//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/">//louisshark.github.io/2017/06/23/AppCompatActivity的作用分析/</a>
-                    </p>
-                </blockquote>
-        
-    
+  </div>
+</article>
 
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用 来必力 -->
-<div id="livere-comment">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI1MC8xNDc3OA==">
-	<script type="text/ls-javascript" id="livere-comment-js">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-       if (typeof LivereTower === 'function') { return; }
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-</div>
-</div>
-<style>
-    #livere-comment{
-        background-color: #eee;
-        padding: 2pc;
-    }
-</style>
-
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/2017/07/05/Mrak-message-parts-that-should-not-be-translated/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/06/14/滑动冲突的解决方式/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
         </div>
     </div>
 
 
 
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.jpg" alt="LouisShark's avatar">
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="https://github.com/LouisShark">项目</a></li>
+        
+      </ul>
     </div>
 
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        mshark.louis@gmail.com
-        <b class="caret"></b>
-    </a>
-</div>
-
-
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
-            
-                <li>
-                    <a href="mailto:mshark.louis@gmail.com" target="_blank" title="Email Me">
-                        
-                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        
-                        Email Me
-                    </a>
-                </li>
-            
-        </ul>
-    </li>
-
-    <!-- Homepage -->
     
-        <li id="sidebar-first-li">
-            <a href="/">
-                
-                    <i class="material-icons sidebar-material-icons">home</i>
-                
-                主页
-            </a>
-        </li>
-        
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">AppCompatActivity的作用分析</span></a></li></ol>
+      </div>
     
 
-    <!-- Archives  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">inbox</i>
-                
-                    归档
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a>
-            </ul>
-        </li>
-        
-    
-
-    <!-- Categories  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
-                
-                分类
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                
-            </ul>
-        </li>
-        
-            <li class="divider"></li>
-        
-    
-
-    <!-- Pages  -->
-    
-        <li>
-            <a href="/tags" title="标签云">
-                
-                    <i class="material-icons sidebar-material-icons">cloud_circle</i>
-                
-                标签云
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/timeline" title="时间轴">
-                
-                    <i class="material-icons sidebar-material-icons">timeline</i>
-                
-                时间轴
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/about" title="关于我">
-                
-                    <i class="material-icons sidebar-material-icons">person_pin</i>
-                
-                关于我
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/links" title="友链">
-                
-                    <i class="material-icons sidebar-material-icons">link</i>
-                
-                友链
-            </a>
-        </li>
-        
-            <li class="divider"></li>
-        
-    
-
-    <!-- Article Number  -->
-    
-        <li>
-            <a href="/archives">
-                文章总数
-                <span class="sidebar-badge">14</span>
-            </a>
-        </li>
-        
-    
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&text=AppCompatActivity的作用分析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&is_video=false&description=AppCompatActivity的作用分析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AppCompatActivity的作用分析&body=Check out this article: https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&title=AppCompatActivity的作用分析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&name=AppCompatActivity的作用分析&description=&lt;h1 id=&#34;AppCompatActivity的作用分析&#34;&gt;&lt;a href=&#34;#AppCompatActivity的作用分析&#34; class=&#34;headerlink&#34; title=&#34;AppCompatActivity的作用分析&#34;&gt;&lt;/a&gt;AppCompatActivity的作用分析&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)&lt;/p&gt;
+&lt;p&gt;一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/&t=AppCompatActivity的作用分析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Sidebar Divider -->
-
-    <div class="sidebar-divider"></div>
-
-
-<!-- Theme Material -->
-
-
-<!-- Help & Support -->
-<!--
-
--->
-
-<!-- Feedback -->
-<!--
-
--->
-
-<!-- About Theme -->
-<!--
-
--->
-
     </div>
 
-    <!-- Sidebar Image -->
-    
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
 
-</aside>
-
-                    
-
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
+  </div>
 </div>
 
-                    
-
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
     
-        <a href="https://twitter.com/shark_louis" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
-                <span class="visuallyhidden">Twitter</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Facebook -->
-    
-
-    <!-- Google + -->
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/u/5331922690?refer_flag=1001030101_&amp;is_all=1" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
-                <span class="visuallyhidden">Weibo</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/LouisShark" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
-                <span class="visuallyhidden">Github</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Zhihu -->
-    
-        <a href="https://www.zhihu.com/people/louisshark" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
-                <span class="visuallyhidden">Zhihu</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Bilibili -->
-    
-        <a href="https://space.bilibili.com/18731855/#/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-bilibili">
-                <span class="visuallyhidden">Bilibili</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Telegram -->
-    
-
-    <!-- V2EX -->
-    
-
-    <!-- Segmentfault -->
-    
-</div>
-
-
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;LouisShark的随笔
-            
-                <br>
-                
-                    子曰：质胜文则野；文胜质则史。文质彬彬，然后君子。
-                
-            
-        </div>
-
-        <!-- Paradox Footer Right Section -->
-
+    2016-2024
+    LouisShark
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
         <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
-
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
-
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
-        </div>
-    
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="https://github.com/LouisShark">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-                    <!-- Import JS File -->
-
-    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+    </div>
+    <!-- styles -->
 
 
 
-    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
 
 
-    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
 
+<!-- clipboard -->
 
-<script type="text/ls-javascript" id="NProgress-script">
-    NProgress.configure({
-        showSpinner: true
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
     });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
-    <!-- Busuanzi -->
-    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script type="text/javascript">
+        var disqus_shortname = 'LouisShark';
 
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
 
+<!-- utterances Comments -->
 
-   
-
-
-
-
-
-<!-- UC Browser Compatible -->
-<script>
-	var agent = navigator.userAgent.toLowerCase();
-	if(agent.indexOf('ucbrowser')>0) {
-		document.write('<link rel="stylesheet" href="/css/uc.css">');
-	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-	}
-</script>
-
-<!-- Import prettify js  -->
-
-    
-        
-            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
-        
-    
-
-
-
-<!-- Window Load -->
-<!-- add class for prettify -->
-<script type="text/ls-javascript" id="window-load">
-    $(window).on('load', function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-
-    
-        
-            $(function() {
-                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
-                prettyPrint();
-                })
-        
-    
-    
-</script>
-
-<!-- MathJax Load-->
-
-
-<!-- Bing Background -->
-
-
-<script type="text/ls-javascript" id="lazy-load">
-    // Offer LazyLoad
-    queue.offer(function(){
-        $('.lazy').lazyload({
-            effect : 'show'
-        });
-    });
-
-    // Start Queue
-    $(document).ready(function(){
-        setInterval(function(){
-            queue.execNext();
-        },200);
-    });
-</script>
-
-<!-- Custom Footer -->
-
-
-
-<script>
-    var copyrightNow = new Date().getFullYear();
-    var textContent = document.querySelector('span[year]')
-
-    copyrightSince = 2016;
-    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
-        textContent.textContent = copyrightNow
-    } else {
-        textContent.textContent = copyrightSince + ' - ' + copyrightNow
-    }
-
-    (function(){
-        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
-
-        for (var i = 0; i < scriptList.length; ++i) {
-            var item = scriptList[i];
-            lsloader.runInlineScript(item.id,item.id);
-        }
-    })()
-console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
-</script>
-
-                </main>
-            </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-        </body>
-    
+</body>
 </html>
