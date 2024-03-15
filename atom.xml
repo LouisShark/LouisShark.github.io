@@ -69,9 +69,9 @@
     
     
     
-    <category term="kotlin" scheme="https://louisshark.github.io/tags/kotlin/"/>
-    
     <category term="笔记" scheme="https://louisshark.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="kotlin" scheme="https://louisshark.github.io/tags/kotlin/"/>
     
   </entry>
   
@@ -221,9 +221,9 @@
     
     
     
-    <category term="笔记" scheme="https://louisshark.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
     <category term="C++" scheme="https://louisshark.github.io/tags/C/"/>
+    
+    <category term="笔记" scheme="https://louisshark.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
