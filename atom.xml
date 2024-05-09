@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>LouisShark的随笔</title>
+  <title>LouisShark</title>
   <icon>https://www.gravatar.com/avatar/2f182f70906ab41797278eb9e73e4bed</icon>
   <subtitle>博客不定期更新</subtitle>
-  <link href="https://louisshark.github.io/atom.xml" rel="self"/>
+  <link href="https://ilouis.me/atom.xml" rel="self"/>
   
-  <link href="https://louisshark.github.io/"/>
+  <link href="https://ilouis.me/"/>
   <updated>2024-03-15T07:08:17.022Z</updated>
-  <id>https://louisshark.github.io/</id>
+  <id>https://ilouis.me/</id>
   
   <author>
     <name>LouisShark</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>kotlin academy&#39;s trouble</title>
-    <link href="https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/"/>
-    <id>https://louisshark.github.io/2018/06/09/kotlin-academy-s-trouble/</id>
+    <link href="https://ilouis.me/2018/06/09/kotlin-academy-s-trouble/"/>
+    <id>https://ilouis.me/2018/06/09/kotlin-academy-s-trouble/</id>
     <published>2018-06-09T03:15:48.000Z</published>
     <updated>2024-03-15T07:08:17.022Z</updated>
     
@@ -45,14 +45,14 @@
     
     
     
-    <category term="-kotlin -易错题" scheme="https://louisshark.github.io/tags/kotlin-%E6%98%93%E9%94%99%E9%A2%98/"/>
+    <category term="-kotlin -易错题" scheme="https://ilouis.me/tags/kotlin-%E6%98%93%E9%94%99%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>Kotlin的柯里化</title>
-    <link href="https://louisshark.github.io/2018/02/11/Kotlin%E7%9A%84%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
-    <id>https://louisshark.github.io/2018/02/11/Kotlin%E7%9A%84%E6%9F%AF%E9%87%8C%E5%8C%96/</id>
+    <link href="https://ilouis.me/2018/02/11/Kotlin%E7%9A%84%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
+    <id>https://ilouis.me/2018/02/11/Kotlin%E7%9A%84%E6%9F%AF%E9%87%8C%E5%8C%96/</id>
     <published>2018-02-10T16:13:40.000Z</published>
     <updated>2018-02-10T17:00:40.000Z</updated>
     
@@ -69,16 +69,16 @@
     
     
     
-    <category term="笔记" scheme="https://louisshark.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="https://ilouis.me/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="kotlin" scheme="https://louisshark.github.io/tags/kotlin/"/>
+    <category term="kotlin" scheme="https://ilouis.me/tags/kotlin/"/>
     
   </entry>
   
   <entry>
     <title>Binder随意记录</title>
-    <link href="https://louisshark.github.io/2017/12/12/Binder/"/>
-    <id>https://louisshark.github.io/2017/12/12/Binder/</id>
+    <link href="https://ilouis.me/2017/12/12/Binder/"/>
+    <id>https://ilouis.me/2017/12/12/Binder/</id>
     <published>2017-12-12T09:42:15.000Z</published>
     <updated>2017-12-18T01:39:09.000Z</updated>
     
@@ -120,16 +120,16 @@
     
     
     
-    <category term="android" scheme="https://louisshark.github.io/tags/android/"/>
+    <category term="android" scheme="https://ilouis.me/tags/android/"/>
     
-    <category term="Binder" scheme="https://louisshark.github.io/tags/Binder/"/>
+    <category term="Binder" scheme="https://ilouis.me/tags/Binder/"/>
     
   </entry>
   
   <entry>
     <title>几分钟手写一个双向链表</title>
-    <link href="https://louisshark.github.io/2017/11/07/%E5%87%A0%E5%88%86%E9%92%9F%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/"/>
-    <id>https://louisshark.github.io/2017/11/07/%E5%87%A0%E5%88%86%E9%92%9F%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</id>
+    <link href="https://ilouis.me/2017/11/07/%E5%87%A0%E5%88%86%E9%92%9F%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/"/>
+    <id>https://ilouis.me/2017/11/07/%E5%87%A0%E5%88%86%E9%92%9F%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</id>
     <published>2017-11-07T06:42:15.000Z</published>
     <updated>2017-11-07T09:19:03.000Z</updated>
     
@@ -164,14 +164,14 @@
     
     
     
-    <category term="数据结构" scheme="https://louisshark.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://ilouis.me/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>搭建nginx</title>
-    <link href="https://louisshark.github.io/2017/10/11/%E6%90%AD%E5%BB%BAngnix/"/>
-    <id>https://louisshark.github.io/2017/10/11/%E6%90%AD%E5%BB%BAngnix/</id>
+    <link href="https://ilouis.me/2017/10/11/%E6%90%AD%E5%BB%BAngnix/"/>
+    <id>https://ilouis.me/2017/10/11/%E6%90%AD%E5%BB%BAngnix/</id>
     <published>2017-10-11T07:13:33.000Z</published>
     <updated>2018-03-23T10:39:36.000Z</updated>
     
@@ -191,14 +191,14 @@
     
     
     
-    <category term="流媒体服务器 ubuntu" scheme="https://louisshark.github.io/tags/%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8-ubuntu/"/>
+    <category term="流媒体服务器 ubuntu" scheme="https://ilouis.me/tags/%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8-ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>C++编程风格笔记</title>
-    <link href="https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/"/>
-    <id>https://louisshark.github.io/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://ilouis.me/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/"/>
+    <id>https://ilouis.me/2017/09/11/C++%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E7%AC%94%E8%AE%B0/</id>
     <published>2017-09-11T06:19:25.000Z</published>
     <updated>2017-09-11T06:25:51.000Z</updated>
     
@@ -221,16 +221,16 @@
     
     
     
-    <category term="C++" scheme="https://louisshark.github.io/tags/C/"/>
+    <category term="C++" scheme="https://ilouis.me/tags/C/"/>
     
-    <category term="笔记" scheme="https://louisshark.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    <category term="笔记" scheme="https://ilouis.me/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>Mrak message parts that should not be translated</title>
-    <link href="https://louisshark.github.io/2017/07/05/Mrak-message-parts-that-should-not-be-translated/"/>
-    <id>https://louisshark.github.io/2017/07/05/Mrak-message-parts-that-should-not-be-translated/</id>
+    <link href="https://ilouis.me/2017/07/05/Mrak-message-parts-that-should-not-be-translated/"/>
+    <id>https://ilouis.me/2017/07/05/Mrak-message-parts-that-should-not-be-translated/</id>
     <published>2017-07-05T06:41:32.000Z</published>
     <updated>2024-03-15T07:10:13.821Z</updated>
     
@@ -246,18 +246,18 @@
     
     
     
-    <category term="官网Guide" scheme="https://louisshark.github.io/tags/%E5%AE%98%E7%BD%91Guide/"/>
+    <category term="官网Guide" scheme="https://ilouis.me/tags/%E5%AE%98%E7%BD%91Guide/"/>
     
-    <category term="本地化资源" scheme="https://louisshark.github.io/tags/%E6%9C%AC%E5%9C%B0%E5%8C%96%E8%B5%84%E6%BA%90/"/>
+    <category term="本地化资源" scheme="https://ilouis.me/tags/%E6%9C%AC%E5%9C%B0%E5%8C%96%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
   <entry>
     <title>AppCompatActivity的作用分析</title>
-    <link href="https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/"/>
-    <id>https://louisshark.github.io/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/</id>
+    <link href="https://ilouis.me/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/"/>
+    <id>https://ilouis.me/2017/06/23/AppCompatActivity%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90/</id>
     <published>2017-06-23T09:29:00.000Z</published>
-    <updated>2017-06-24T06:04:14.000Z</updated>
+    <updated>2024-05-09T06:18:04.714Z</updated>
     
     <content type="html"><![CDATA[<h1 id="AppCompatActivity的作用分析"><a href="#AppCompatActivity的作用分析" class="headerlink" title="AppCompatActivity的作用分析"></a>AppCompatActivity的作用分析</h1><hr><p>对于v7包下的AppCompatActivity，我是比较晚入的android(并不知道是不是坑)，所以一开始就用的as创建项目就很奇怪为什么我的activity自动继承了AppCompatActivity，不是应该继承Activity吗？Ecm？我仿佛感觉受到了欺骗，于是就对其进行了研究(就是看源码拉)。(因为当时是边看边解析边写的，所以思路可能有点乱，自己再看一遍源码更好，也是学习的一部分)</p><p>一开始我就发现了v4 v7 v13等等的support库，然后发现这些库是用来解决兼容问题的，数字分别对应了android的API版本，即分别适配android版本4，7，13以上的app。看完之后发现google程序员为了适配也是良苦用心啊。</p><span id="more"></span><blockquote><p>从AppCompatActivity源码的onCreate看到这个类初始化的第一步就调用了getDelegate获得了一个代理，并且你会发现下面所有的生命周期的方法都交由这个代理类来实现了，那么这个东西是什么呢？其实就是AppCompatDelegate这个抽象类。</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(<span class="meta">@Nullable</span> Bundle savedInstanceState)</span> &#123;</span><br><span class="line">     <span class="keyword">final</span> <span class="type">AppCompatDelegate</span> <span class="variable">delegate</span> <span class="operator">=</span> getDelegate();</span><br><span class="line">     delegate.installViewFactory();</span><br><span class="line">     delegate.onCreate(savedInstanceState);</span><br><span class="line">     <span class="keyword">if</span> (delegate.applyDayNight() &amp;&amp; mThemeId != <span class="number">0</span>) &#123;</span><br><span class="line">         <span class="comment">// If DayNight has been applied, we need to re-apply the theme for</span></span><br><span class="line">         <span class="comment">// the changes to take effect. On API 23+, we should bypass</span></span><br><span class="line">         <span class="comment">// setTheme(), which will no-op if the theme ID is identical to the</span></span><br><span class="line">         <span class="comment">// current theme ID.</span></span><br><span class="line">         <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">23</span>) &#123;</span><br><span class="line">             onApplyThemeResource(getTheme(), mThemeId, <span class="literal">false</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             setTheme(mThemeId);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> The &#123;<span class="doctag">@link</span> AppCompatDelegate&#125; being used by this Activity.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="meta">@NonNull</span></span><br><span class="line"> <span class="keyword">public</span> AppCompatDelegate <span class="title function_">getDelegate</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (mDelegate == <span class="literal">null</span>) &#123;</span><br><span class="line">         mDelegate = AppCompatDelegate.create(<span class="built_in">this</span>, <span class="built_in">this</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> mDelegate;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><p>那么<code>AppCompatDelegate</code>这个类到底做了什么呢？点进去看这个create方法</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> AppCompatDelegate <span class="title function_">create</span><span class="params">(Activity activity, AppCompatCallback callback)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> create(activity, activity.getWindow(), callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后调用：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> AppCompatDelegate <span class="title function_">create</span><span class="params">(Context context, Window window,</span></span><br><span class="line"><span class="params">        AppCompatCallback callback)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">sdk</span> <span class="operator">=</span> Build.VERSION.SDK_INT;</span><br><span class="line">    <span class="keyword">if</span> (BuildCompat.isAtLeastN()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplN</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">23</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV23</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">14</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV14</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sdk &gt;= <span class="number">11</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV11</span>(context, window, callback);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AppCompatDelegateImplV9</span>(context, window, callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>是不是感觉这些名字有点熟悉呢。</p><blockquote><p>这个方法返回了一些根据版本号的实现类。</p></blockquote><p>下面我将给出这个抽象类的类之间的继承关系：</p><p><img src="/../../../../asset/img/delegate%E7%9A%84%E7%B1%BB%E7%BB%A7%E6%89%BF%E5%9B%BE.png"></p><blockquote><p>在as 中使用ctrl + H的快捷键可以很快的看到类之间的继承图。</p></blockquote><p>发现他们之间相互继承，于是开始看V9的源码，找到了一个可疑的方法：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">这个方法会(invoke) &#123;当我们使用自己的layoutInflater的factory的时候&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> View <span class="title function_">createView</span><span class="params">(View parent, <span class="keyword">final</span> String name, <span class="meta">@NonNull</span> Context context,</span></span><br><span class="line"><span class="params">            <span class="meta">@NonNull</span> AttributeSet attrs)</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">boolean</span> <span class="variable">isPre21</span> <span class="operator">=</span> Build.VERSION.SDK_INT &lt; <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mAppCompatViewInflater == <span class="literal">null</span>) &#123;</span><br><span class="line">            mAppCompatViewInflater = <span class="keyword">new</span> <span class="title class_">AppCompatViewInflater</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// We only want the View to inherit its context if we&#x27;re running pre-v21</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">boolean</span> <span class="variable">inheritContext</span> <span class="operator">=</span> isPre21 &amp;&amp; shouldInheritContext((ViewParent) parent);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mAppCompatViewInflater.createView(parent, name, context, attrs, inheritContext,</span><br><span class="line">                isPre21, <span class="comment">/* Only read android:theme pre-L (L+ handles this anyway) */</span></span><br><span class="line">                <span class="literal">true</span>, <span class="comment">/* Read read app:theme as a fallback at all times for legacy reasons */</span></span><br><span class="line">                VectorEnabledTintResources.shouldBeUsed() <span class="comment">/* Only tint wrap the context if enabled */</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">installViewFactory</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">LayoutInflater</span> <span class="variable">layoutInflater</span> <span class="operator">=</span> LayoutInflater.from(mContext);</span><br><span class="line">        <span class="keyword">if</span> (layoutInflater.getFactory() == <span class="literal">null</span>) &#123;</span><br><span class="line">            LayoutInflaterCompat.setFactory(layoutInflater, <span class="built_in">this</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(LayoutInflaterCompat.getFactory(layoutInflater)</span><br><span class="line">                    <span class="keyword">instanceof</span> AppCompatDelegateImplV9)) &#123;</span><br><span class="line">                Log.i(TAG, <span class="string">&quot;The Activity&#x27;s LayoutInflater already has a Factory installed&quot;</span></span><br><span class="line">                        + <span class="string">&quot; so we can not install AppCompat&#x27;s&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><blockquote><p>突然想起来一句话，兼容问题其实就是着色问题，AppCompatDelegate 的工作就是涂色。发现这个方法在AppCompatDelegate里面定义的，别问我怎么找到的，你在V9这个类看到1000多行代码的时候找到了，然后我跑回去看AppCompatDelegate这个类里面的方法。</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Installs AppCompat&#x27;s &#123;<span class="doctag">@link</span> android.view.LayoutInflater&#125; Factory so that it can replace</span></span><br><span class="line"><span class="comment">  * the framework widgets with compatible tinted versions. This should be called before</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@code</span> super.onCreate()&#125; as so:</span></span><br><span class="line"><span class="comment">  * &lt;pre class=&quot;prettyprint&quot;&gt;</span></span><br><span class="line"><span class="comment">  * protected void onCreate(Bundle savedInstanceState) &#123;</span></span><br><span class="line"><span class="comment">  *     getDelegate().installViewFactory();</span></span><br><span class="line"><span class="comment">  *     getDelegate().onCreate(savedInstanceState);</span></span><br><span class="line"><span class="comment">  *     super.onCreate(savedInstanceState);</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  *     // ...</span></span><br><span class="line"><span class="comment">  * &#125;</span></span><br><span class="line"><span class="comment">  * &lt;/pre&gt;</span></span><br><span class="line"><span class="comment">  * If you are using your own &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory Factory&#125; or</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory2 Factory2&#125; then you can omit this call, and instead call</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> #createView(android.view.View, String, android.content.Context, android.util.AttributeSet)&#125;</span></span><br><span class="line"><span class="comment">  * from your factory to return any compatible widgets.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">installViewFactory</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * This should be called from a</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater.Factory2 LayoutInflater.Factory2&#125; in order</span></span><br><span class="line"><span class="comment">  * to return tint-aware widgets.</span></span><br><span class="line"><span class="comment">  * &lt;p&gt;</span></span><br><span class="line"><span class="comment">  * This is only needed if you are using your own</span></span><br><span class="line"><span class="comment">  * &#123;<span class="doctag">@link</span> android.view.LayoutInflater LayoutInflater&#125; factory, and have therefore not</span></span><br><span class="line"><span class="comment">  * installed the default factory via &#123;<span class="doctag">@link</span> #installViewFactory()&#125;.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">abstract</span> View <span class="title function_">createView</span><span class="params">(<span class="meta">@Nullable</span> View parent, String name, <span class="meta">@NonNull</span> Context context,</span></span><br><span class="line"><span class="params">         <span class="meta">@NonNull</span> AttributeSet attrs)</span>;</span><br></pre></td></tr></table></figure><p>看到上面的注释我突然顿悟了，找了半天的在哪里设置的layoutInflater的factory，原来是这样子，于是又去AppCompatActivity瞅了一眼：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">    final AppCompatDelegate delegate = getDelegate();</span><br><span class="line">    delegate.installViewFactory();</span><br><span class="line">    delegate.onCreate(savedInstanceState);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><blockquote><p>发现onCreate方法里果然有这句话，installViewFactory()；这个方法就是给The Activity’s LayoutInflater设置一个自己的factory，于是就会调用createView这个方法</p></blockquote><p><strong>注意</strong>createView里面的这句话：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> mAppCompatViewInflater.createView(parent, name, context, attrs, inheritContext,</span><br><span class="line">              isPre21, <span class="comment">/* Only read android:theme pre-L (L+ handles this anyway) */</span></span><br><span class="line">              <span class="literal">true</span>, <span class="comment">/* Read read app:theme as a fallback at all times for legacy reasons */</span></span><br><span class="line">              VectorEnabledTintResources.shouldBeUsed() <span class="comment">/* Only tint wrap the context if enabled */</span></span><br><span class="line">      );</span><br></pre></td></tr></table></figure><p>于是跑到AppCompatViewInflater的createView方法看，终于找到了：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// We need to &#x27;inject&#x27; our tint aware Views in place of the standard framework versions</span></span><br><span class="line">        <span class="keyword">switch</span> (name) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;TextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;ImageView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatImageView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Button&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatButton</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;EditText&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatEditText</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Spinner&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatSpinner</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;ImageButton&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatImageButton</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;CheckBox&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatCheckBox</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;RadioButton&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatRadioButton</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;CheckedTextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatCheckedTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;AutoCompleteTextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatAutoCompleteTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;MultiAutoCompleteTextView&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatMultiAutoCompleteTextView</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;RatingBar&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatRatingBar</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;SeekBar&quot;</span>:</span><br><span class="line">                view = <span class="keyword">new</span> <span class="title class_">AppCompatSeekBar</span>(context, attrs);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><p>原来在activity的oncreate一开始创建的时候，系统就自动帮我们把这些<em>色调</em>给我们换掉了所以你写在XML的控件，都会被换成AppCompat开头的兼容性的控件，当然前提是你要继承AppCompatActivity，这就是系统为我们所做的适配了，请注意，AppCompatViewInflater也给我们提供了一个热换肤的思路，下次有时间再说吧。</p><p>总结起来，这个兼容其实就是<strong>偷梁换柱</strong>，而且看源码一定不能被细枝末节影响，像我一样，如果我能做点笔记，而不是草率的开始，应该过程会更加的轻松。</p>]]></content>
     
@@ -269,16 +269,16 @@
     
     
     
-    <category term="源码分析" scheme="https://louisshark.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <category term="源码分析" scheme="https://ilouis.me/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     
-    <category term="android" scheme="https://louisshark.github.io/tags/android/"/>
+    <category term="android" scheme="https://ilouis.me/tags/android/"/>
     
   </entry>
   
   <entry>
     <title>滑动冲突的解决方式</title>
-    <link href="https://louisshark.github.io/2017/06/14/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/"/>
-    <id>https://louisshark.github.io/2017/06/14/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/</id>
+    <link href="https://ilouis.me/2017/06/14/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/"/>
+    <id>https://ilouis.me/2017/06/14/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/</id>
     <published>2017-06-14T03:04:10.000Z</published>
     <updated>2017-06-14T06:52:36.000Z</updated>
     
@@ -292,18 +292,18 @@
     
     
     
-    <category term="自定义view" scheme="https://louisshark.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
+    <category term="自定义view" scheme="https://ilouis.me/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
     
-    <category term="滑动冲突" scheme="https://louisshark.github.io/tags/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
+    <category term="滑动冲突" scheme="https://ilouis.me/tags/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
     
-    <category term="事件分发" scheme="https://louisshark.github.io/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/"/>
+    <category term="事件分发" scheme="https://ilouis.me/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>使用SVG来实现复杂的自定义View</title>
-    <link href="https://louisshark.github.io/2017/06/02/%E4%BD%BF%E7%94%A8SVG%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%A4%8D%E6%9D%82%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
-    <id>https://louisshark.github.io/2017/06/02/%E4%BD%BF%E7%94%A8SVG%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%A4%8D%E6%9D%82%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89View/</id>
+    <link href="https://ilouis.me/2017/06/02/%E4%BD%BF%E7%94%A8SVG%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%A4%8D%E6%9D%82%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
+    <id>https://ilouis.me/2017/06/02/%E4%BD%BF%E7%94%A8SVG%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%A4%8D%E6%9D%82%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89View/</id>
     <published>2017-06-02T01:48:53.000Z</published>
     <updated>2017-06-14T05:19:17.000Z</updated>
     
@@ -328,16 +328,16 @@
     
     
     
-    <category term="SVG" scheme="https://louisshark.github.io/tags/SVG/"/>
+    <category term="SVG" scheme="https://ilouis.me/tags/SVG/"/>
     
-    <category term="自定义view" scheme="https://louisshark.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
+    <category term="自定义view" scheme="https://ilouis.me/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
     
   </entry>
   
   <entry>
     <title>UI事件传递</title>
-    <link href="https://louisshark.github.io/2017/05/08/UI%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/"/>
-    <id>https://louisshark.github.io/2017/05/08/UI%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/</id>
+    <link href="https://ilouis.me/2017/05/08/UI%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/"/>
+    <id>https://ilouis.me/2017/05/08/UI%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/</id>
     <published>2017-05-08T03:46:30.000Z</published>
     <updated>2017-05-08T04:02:17.000Z</updated>
     
@@ -350,16 +350,16 @@
     
     
     
-    <category term="UI事件传递" scheme="https://louisshark.github.io/tags/UI%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/"/>
+    <category term="UI事件传递" scheme="https://ilouis.me/tags/UI%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92/"/>
     
-    <category term="android开发艺术探索" scheme="https://louisshark.github.io/tags/android%E5%BC%80%E5%8F%91%E8%89%BA%E6%9C%AF%E6%8E%A2%E7%B4%A2/"/>
+    <category term="android开发艺术探索" scheme="https://ilouis.me/tags/android%E5%BC%80%E5%8F%91%E8%89%BA%E6%9C%AF%E6%8E%A2%E7%B4%A2/"/>
     
   </entry>
   
   <entry>
     <title>ffmpeg知识点</title>
-    <link href="https://louisshark.github.io/2017/05/04/ffmpeg%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8Cwin%E7%BC%96%E8%AF%91/"/>
-    <id>https://louisshark.github.io/2017/05/04/ffmpeg%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8Cwin%E7%BC%96%E8%AF%91/</id>
+    <link href="https://ilouis.me/2017/05/04/ffmpeg%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8Cwin%E7%BC%96%E8%AF%91/"/>
+    <id>https://ilouis.me/2017/05/04/ffmpeg%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8Cwin%E7%BC%96%E8%AF%91/</id>
     <published>2017-05-03T16:00:00.000Z</published>
     <updated>2024-03-14T12:24:29.493Z</updated>
     
@@ -373,16 +373,16 @@
     
     
     
-    <category term="android" scheme="https://louisshark.github.io/tags/android/"/>
+    <category term="android" scheme="https://ilouis.me/tags/android/"/>
     
-    <category term="ffmpeg" scheme="https://louisshark.github.io/tags/ffmpeg/"/>
+    <category term="ffmpeg" scheme="https://ilouis.me/tags/ffmpeg/"/>
     
   </entry>
   
   <entry>
     <title>手动实现arraylist和hashmap</title>
-    <link href="https://louisshark.github.io/2017/05/02/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0arraylist%E5%92%8Chashmap/"/>
-    <id>https://louisshark.github.io/2017/05/02/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0arraylist%E5%92%8Chashmap/</id>
+    <link href="https://ilouis.me/2017/05/02/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0arraylist%E5%92%8Chashmap/"/>
+    <id>https://ilouis.me/2017/05/02/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0arraylist%E5%92%8Chashmap/</id>
     <published>2017-05-02T08:37:26.000Z</published>
     <updated>2017-05-02T09:51:55.000Z</updated>
     
@@ -453,9 +453,9 @@
     
     
     
-    <category term="数据结构" scheme="https://louisshark.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://ilouis.me/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-    <category term="java" scheme="https://louisshark.github.io/tags/java/"/>
+    <category term="java" scheme="https://ilouis.me/tags/java/"/>
     
   </entry>
   
